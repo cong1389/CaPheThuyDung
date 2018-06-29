@@ -1,0 +1,21 @@
+﻿<!----_Social.Youtube_Link-->
+<span id="divYoutubeLink"></span>
+
+
+<script>
+    jQuery(function () {
+        'use strict';
+
+        jQuery.post('@Url.Action("GetSettingSeo", "Summary")')
+            .done(function (data) {
+                var youtubeLink = data.response.YoutubeLink;
+                if (youtubeLink != null) {
+                    var code = '<a target="_blank" href="' + youtubeLink + '" class="si-youtube social-icon si-dark si-colored"><i class="fa fa-youtube"></i><i class="fa fa-youtube"></i></a>';
+
+                    jQuery("#divYoutubeLink").html(code);
+                }
+             });
+        })
+
+</script>
+<!----/_Social.Youtube_Link-->

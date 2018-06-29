@@ -1,0 +1,69 @@
+﻿<!----GetProductHot-->
+@using App.Aplication
+@model IEnumerable<App.Domain.Entities.Data.Post>
+
+@if (Model.IsAny())
+{
+	<div class="block left-module goweb-block">
+		<p class="title_block">Sản phẩm mới</p>
+		<div class="block_content">
+			<ul class="products-block best-sell">
+				@foreach (var post in Model)
+				{
+					<li>
+						<div class="products-block-left">
+							<a href="@Url.Action("PostDetail", "Post", new {seoUrl = post.SeoUrl, area = ""})" title="@post.Title">
+								<img class="img-responsive" alt="@post.Title" src="@post.ImageMediumSize.ValidateImage()" />
+							</a>
+						</div>
+						<div class="products-block-right">
+							<p class="product-name">
+								<a href="@Url.Action("PostDetail", "Post", new {seoUrl = post.SeoUrl, area = ""})">@post.Title</a>
+							</p>
+							<div class="content_price">
+								@if (!post.OutOfStock)
+								{
+									<span class="product-price">
+										@if (post.Price.HasValue && post.Discount.HasValue)
+										{
+											@Html.Raw((post.Price - post.Price * post.Discount / 100).FormatPrice())
+										}
+										else if (post.Price.HasValue && !post.Discount.HasValue)
+										{
+											@Html.Raw(post.Price.FormatPrice())
+										}
+										else
+										{
+											@Html.Raw("LienHeDatHang.Lable")
+										}
+									</span>
+									if (post.Discount.HasValue)
+									{
+										<span class="product-price old-price">@Html.Raw(post.Price.FormatPrice()) </span>
+									}
+								}
+								else
+								{
+									<h5 class="product-name">
+										<span class="label label-danger">Hết hàng</span>
+									</h5>
+								}
+
+							</div>
+							<p class="product-star">
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star-half-o"></i>
+							</p>
+						</div>
+					</li>
+				}
+			</ul>
+		</div>
+	</div>
+
+	@*@Html.Partial("_PartialPostItems", Model)*@
+}
+<!----/GetProductHot-->

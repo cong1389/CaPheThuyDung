@@ -1,0 +1,123 @@
+﻿<!--Account--->
+@using App.Domain.Entities.Identity
+@model App.FakeEntity.User.RegisterFormViewModel
+
+<div class="form-horizontal">
+	<div class="form-body">
+		@Html.ValidationSummary(true, "", new { @class = "text-danger col-md-offset-3" })
+		<div class="form-group">
+			@Html.Label("Họ tên", new { @class = "control-label col-md-3" })
+			<div class="col-md-5">
+				<div class="row">
+					<div class="col-md-4">
+						@Html.TextBoxFor(model => model.FirstName, new { @class = "form-control" })
+						@Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "help-block" })
+					</div>
+					<div class="col-md-4">
+						@Html.TextBoxFor(model => model.MiddleName, new { @class = "form-control" })
+						@Html.ValidationMessageFor(model => model.MiddleName, "", new { @class = "help-block" })
+					</div>
+					<div class="col-md-4">
+						@Html.TextBoxFor(model => model.LastName, new { @class = "form-control" })
+						@Html.ValidationMessageFor(model => model.LastName, "", new { @class = "help-block" })
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			@Html.LabelFor(model => model.UserName, new { @class = "control-label col-md-3" })
+			<div class="col-md-5">
+				@Html.TextBoxFor(model => model.UserName, new { @class = "form-control" })
+				@Html.ValidationMessageFor(model => model.UserName, "", new { @class = "help-block" })
+			</div>
+		</div>
+		<div class="form-group">
+			@Html.LabelFor(model => model.Password, new { @class = "control-label col-md-3" })
+			<div class="col-md-5">
+				@Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+				@Html.ValidationMessageFor(model => model.Password, "", new { @class = "help-block" })
+			</div>
+		</div>
+		<div class="form-group">
+			@Html.LabelFor(model => model.ConfirmPassword, new { @class = "control-label col-md-3" })
+			<div class="col-md-5">
+				@Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control" })
+				@Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "help-block" })
+			</div>
+		</div>
+		<div class="form-group">
+			@Html.LabelFor(model => model.IsSuperAdmin, new { @class = "control-label col-md-3" })
+			<div class="col-md-5">
+				<label class="checkbox-inline">
+					@Html.CheckBoxFor(model => model.IsSuperAdmin, new { @class = "" })
+				</label>
+				@Html.ValidationMessageFor(model => model.IsSuperAdmin, "", new { @class = "help-block" })
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-md-3">Quyền hạn</label>
+			<div class="col-md-5">
+				<div class="input-group select2-bootstrap-prepend">
+					<select id="roles" name="roles" class="form-control select2-allow-clear" multiple>
+						<option></option>
+						@if (ViewBag.Roles != null)
+						{
+							foreach (var role in (List<IdentityRole>)ViewBag.Roles)
+							{
+								<option value="@role.Name">@role.Name</option>
+							}
+						}
+					</select>
+				</div>
+			</div>
+		</div>
+		@*<div class="form-group">
+				@Html.LabelFor(model => model.Sex, new { @class = "control-label col-md-3" })
+				<div class="col-md-5">
+					@Html.DropDownList("Gender", new List<SelectListItem>
+					{
+						new SelectListItem {Text = "Nam", Value = "0"},
+						new SelectListItem {Text = "Nữ", Value = "1"},
+						new SelectListItem {Text = "Khác", Value = "2"}
+					}, new { @class = "form-control" })
+					@Html.ValidationMessageFor(model => model.Sex, "", new { @class = "help-block" })
+				</div>
+			</div>*@
+		<div class="form-group">
+			@Html.LabelFor(model => model.Email, new { @class = "control-label col-md-3" })
+			<div class="col-md-5">
+				@Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+				@Html.ValidationMessageFor(model => model.Email, "", new { @class = "help-block" })
+			</div>
+		</div>
+		<div class="form-group">
+			@Html.LabelFor(model => model.Phone, new { @class = "control-label col-md-3" })
+			<div class="col-md-5">
+				@Html.TextBoxFor(model => model.Phone, new { @class = "form-control" })
+				@Html.ValidationMessageFor(model => model.Phone, "", new { @class = "help-block" })
+			</div>
+		</div>
+		<div class="form-group">
+			@Html.LabelFor(model => model.Address, new { @class = "control-label col-md-3" })
+			<div class="col-md-5">
+				@Html.TextBoxFor(model => model.Address, new { @class = "form-control" })
+				@Html.ValidationMessageFor(model => model.Address, "", new { @class = "help-block" })
+			</div>
+		</div>
+		@*<div class="form-group">
+				@Html.LabelFor(model => model.State, new { @class = "control-label col-md-3" })
+				<div class="col-md-5">
+					@Html.TextBoxFor(model => model.State, new { @class = "form-control" })
+					@Html.ValidationMessageFor(model => model.State, "", new { @class = "help-block" })
+				</div>
+			</div>
+			<div class="form-group">
+				@Html.LabelFor(model => model.City, new { @class = "control-label col-md-3" })
+				<div class="col-md-5">
+					@Html.TextBoxFor(model => model.City, new { @class = "form-control" })
+					@Html.ValidationMessageFor(model => model.City, "", new { @class = "help-block" })
+				</div>
+			</div>*@
+	</div>
+</div>
+<!--/Account--->

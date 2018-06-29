@@ -1,0 +1,16 @@
+﻿@using App.Aplication
+@model IEnumerable<App.Domain.Entities.Ads.Banner>
+@if (Model.IsAny())
+{
+    <div class="banner-menu">
+        @foreach (var item in Model)
+        {
+            <a href="@item.WebsiteLink">
+                <img src="@item.ImgPath.ValidateImage()" alt="@item.Title" width="@item.Width" height="@item.Height" />
+                <div class="title-banner">
+                   @item.Title
+                </div>
+            </a>
+        }
+    </div>
+}

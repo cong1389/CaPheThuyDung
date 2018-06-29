@@ -1,0 +1,70 @@
+﻿<!----ContactUS--->
+@using App.Aplication.Extensions
+@using App.Domain.Entities.GlobalSetting
+@model App.Front.Models.ContactForm
+
+@{
+    <div class="columns-container" id="contact">
+        <div class="container gw-contact-shop" id="columns">
+            <div class="breadcrumb clearfix">
+                <a class="home" href="#" title="Return to Home">Home</a>
+                <span class="navigation-pipe">&nbsp;</span>
+                <span class="navigation_page">Contact</span>
+            </div>
+            <div class="row clearfix">
+                <div class="col-md-12 col-xs-12" id="layout-page">
+
+                    <span class="header-contact header-page clearfix">
+                        <h1>Liên hệ</h1>
+                    </span>
+
+                    <div class="content-contact content-page clearfix">
+
+                        <p class="text-center">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.310729061172!2d106.6539626784669!3d10.787496261978522!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752ecbb6275cc3%3A0x634b1cfb9f2ed0be!2zNTYgVsOibiBDw7RpLCBwaMaw4budbmcgNywgVMOibiBCw6xuaCwgSOG7kyBDaMOtIE1pbmgsIFZpZXRuYW0!5e0!3m2!1sen!2s!4v1446015505979" width="100%" height="500" frameborder="0" style="border: 0" allowfullscreen=""></iframe>
+                        </p>
+
+                        <div class="col-md-7" id="col-left contactFormWrapper">
+                            <h3>Viết nhận xét</h3>
+                            <hr class="line-left">
+                            <p>
+                                Nếu bạn có thắc mắc gì, có thể gửi yêu cầu cho chúng tôi, và chúng tôi sẽ liên lạc lại với bạn sớm nhất có thể .
+                            </p>
+                            @using (Html.BeginForm("SendContact", "Contact", FormMethod.Post, new { enctype = "multipart/form-data", id = "form-send-Contact" }))
+                            {
+                                @Html.ValidationSummary()
+                                <div class="form-group">
+                                    @Html.LabelFor(mode => Model.FullName, new { @class = "sr-only" })
+                                    @Html.TextBoxFor(model => model.FullName, new { @class = "form-control input-lg", required = true, autocapitalize = "words", placeholder = Html.DisplayPlaceHolderFor(m => m.FullName) })
+	                                
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(mode => Model.Email, new { @class = "sr-only" })
+                                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control input-lg", required = true, autocapitalize = "words", placeholder = Html.DisplayPlaceHolderFor(m => m.Email) })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(mode => Model.Content, new { @class = "sr-only" })
+                                    @Html.TextAreaFor(model => model.Content, new { rows = "6", @class = "form-control input-lg", required = true, autocapitalize = "words", placeholder = Html.DisplayPlaceHolderFor(m => m.Content) })
+                                </div>
+
+                                <button id="btn-send-contact" type="submit" class="btn">
+                                    <i class="glyphicon glyphicon-envelope"></i>
+                                    Gửi thông tin
+                                </button>
+                            }
+                        </div>
+
+                        <div class="col-md-5" id="col-right">
+                            @{Html.RenderPartial("_ContactPartial", (IEnumerable<ContactInformation>)ViewBag.Contact);}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+}
+
+
+
+<!----/ContactUS--->

@@ -1,0 +1,161 @@
+﻿<!----BillingAddress-->
+@using App.Aplication.Extensions
+@model App.Front.Models.Checkout.CheckoutBillingAddressModel
+
+@{
+	ViewBag.Title = "Thông tin giao hàng";
+}
+
+@if (Model != null)
+{
+	@Html.HiddenFor(model => model.NewAddress.Id)
+
+	<div class="columns-container billingaddress">
+		<div class="container clearfix" id="columns">
+			<div class="page-content page-order checkout-page">
+
+				<div class="col-sm-7">
+					<div class="row">
+						<h3 class="checkout-sep">ĐỊA CHỈ GIAO HÀNG</h3>
+
+						@foreach (var item in Model.ExistingAddresses)
+						{
+							<div class="account-detail user_box">
+								<div class="content-box-row">
+									<div class="fieldset">
+										<div class="field">
+											<div class="field-input-wrapper">
+												<strong> @item.FirstName</strong>
+												@if (item.Id == Model.CustomerInfoModel.ShippingAddressId)
+												{
+													<div class="default-address">Mặc định</div>
+												}
+
+											</div>
+										</div>
+										<div class="field field-active">
+											<div class="field-input-wrapper">
+												Địa chỉ: @item.Address1
+											</div>
+										</div>
+										<div class="field field-active">
+											<div class="field-input-wrapper">
+												Số điện thoại: @item.PhoneNumber
+											</div>
+										</div>
+									</div>
+									<button class="btn @(item.Id == Model.CustomerInfoModel.ShippingAddressId ? "btn-blue" : "btn-gray")   " onclick="setLocation('@Url.Action("SelectShippingAddress", new {addressId = item.Id})')">
+										Giao đến địa chỉ này
+										<i class="btn-spinner icon icon-button-spinner"></i>
+									</button>
+									<button class="btn btn-default" onclick="setLocation('@Url.Action("AddressDelete", new {addressId = item.Id})')">
+										<i class="fa fa-trash-o"></i>
+									</button>
+								</div>
+							</div>
+						}
+
+						<div class="line"></div>
+						<div class="create-address">
+							Bạn muốn giao hàng đến địa chỉ khác?   <a href="#" onclick="Haravan.CustomerAddress.toggleNewForm();return false;" class="add-new-address">Thêm địa chỉ giao hàng mới</a>
+						</div>
+
+						<div class="form-info">
+							<div id="add_address" class="from-create-address" style="display: none;">
+								@RenderCreateNewBillingAddress()
+							</div>
+						</div>
+						<div class="listerror">
+						</div>
+					</div>
+				</div>
+
+				<div class="col-sm-5">
+					<div id="divCart"></div>
+				</div>
+
+				<div class="cart_navigation">
+					<a class="prev-btn" href="@Url.Action("Cart", "ShoppingCart")">
+						Quay lại giỏ hàng
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+}
+
+@helper RenderCreateNewBillingAddress()
+	{
+		using (Html.BeginForm("BillingAddress", "Checkout", FormMethod.Post, new { enctype = "multipart/form-data" }))
+		{
+			@Html.AntiForgeryToken()
+			@Html.ValidationSummary()
+
+			<div class="box-border">
+
+				<div class="form-selector">
+					@Html.LabelFor(mode => mode.NewAddress.FirstName)
+					@Html.TextBoxFor(model => model.NewAddress.FirstName, new { required = true, @class = "form-control input-sm", placeholder = Html.DisplayPlaceHolderFor(m => m.NewAddress.FirstName) })
+				</div>
+
+				<div class="form-selector">
+					@Html.LabelFor(mode => mode.NewAddress.PhoneNumber)
+					@Html.TextBoxFor(model => model.NewAddress.PhoneNumber, new { @class = "form-control input-sm", size = "30", placeholder = Html.DisplayPlaceHolderFor(m => m.NewAddress.PhoneNumber), type = "tel", required = true })
+					@Html.ValidationMessageFor(model => model.NewAddress.PhoneNumber, "", new { @class = "help-block" })
+				</div>
+
+				<div class="form-selector">
+					@Html.LabelFor(mode => mode.NewAddress.Email)
+					@Html.TextBoxFor(model => model.NewAddress.Email, new { @class = "form-control input-sm", size = "30", placeholder = Html.DisplayPlaceHolderFor(m => m.NewAddress.Email), autocapitalize = "off", spellcheck = "false", type = "email", required = true })
+					@Html.ValidationMessageFor(model => model.NewAddress.Email, "", new { @class = "help-block" })
+				</div>
+
+				<div class="form-selector">
+					@Html.LabelFor(mode => mode.NewAddress.Address1)
+					@Html.TextBoxFor(model => model.NewAddress.Address1, new { @class = "form-control input-sm", size = "30", placeholder = Html.DisplayPlaceHolderFor(m => m.NewAddress.Address1), required = true })
+					@Html.ValidationMessageFor(model => model.NewAddress.Address1, "", new { @class = "help-block" })
+				</div>
+
+				<div class="form-selector">
+					@Html.Label("Ghi chú đơn hàng")
+					<textarea id="billing_note" placeholder="Ghi chú đơn hàng" name="billing_address[note]" rows="3" class="form-control input-sm"></textarea>
+				</div>
+
+				<div class="error summary">
+					(<span class="color-red ">*</span>)Vui lòng nhập đủ thông tin
+				</div>
+
+				<div class="step-footer">
+					<input type="submit" id="saveAddress" name="saveAddress" class="hidden" />
+					<button class="btn btn-blue" onclick="$('#saveAddress').trigger('click');return false;">
+						Lưu
+						<i class="btn-spinner icon icon-button-spinner"></i>
+					</button>
+				</div>
+			</div>
+		}
+}
+
+@section renderStyles
+{
+	@*<link rel="stylesheet" href="/assets/global/check_out.css">*@
+	@*<link href="/assets/255/1000074255/1000138323/check_out.css" rel="stylesheet" type="text/css" media="all" />*@
+}
+
+@section renderJQuery{
+	@*<script src="~/Scripts/jquery.validate.js"></script>*@
+}
+
+<script>
+	jQuery(function () {
+
+		jQuery.post('@Url.Action("CartByCustomer", "Checkout")')
+           .done(function (data) {
+           		jQuery("#divCart").html(data.list);
+           });
+	})
+
+</script>
+
+<!----/BillingAddress-->

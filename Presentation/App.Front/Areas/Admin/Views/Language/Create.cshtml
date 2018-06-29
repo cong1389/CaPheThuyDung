@@ -1,0 +1,14 @@
+﻿@using Resources
+@model App.FakeEntity.Language.LanguageFormViewModel
+@{
+    ViewBag.Title = FormUI.CreateNew;
+    ViewBag.Toolbar = new[] { "Save", "SaveNew", "Divider", "Back"};
+}
+
+@using (Html.BeginForm("Create", "Language", FormMethod.Post, new { data_container = ViewContext.RouteData.Values["controller"], enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+	Html.RenderPartial("_CreateOrUpdate", Model);
+}
+
+

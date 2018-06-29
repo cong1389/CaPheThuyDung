@@ -1,0 +1,49 @@
+﻿<!---GetContent--->
+@using App.Domain.Common
+
+@if (ViewBag.TemplateType != null && ViewBag.TemplateType == (int)TemplateContent.Static)
+{
+	@Html.Action("GetStaticContent", "Menu", new { menuId = ViewBag.MenuId, virtualId = ViewBag.VirtualId, title = ViewBag.Title, area = "" })
+}
+@if (ViewBag.TemplateType != null && ViewBag.TemplateType == (int)TemplateContent.FixItem)
+{
+	@Html.Action("GetStaticContentParent", "Menu", new { menuId = ViewBag.MenuId, virtualId = ViewBag.VirtualId, title = ViewBag.Title, area = ""})
+}
+else
+{
+	if (ViewBag.TemplateType != null && ViewBag.TemplateType == (int)TemplateContent.Product)
+	{
+		@section renderJQuery{
+			<script src="~/Scripts/pricerange/bootstrap-slider.js"></script>
+		}
+		@section renderScripts{
+			<script src="~/Scripts/range-price.min.js"></script>
+		}
+		@section renderStyles{
+			<link href="~/Content/pricerange/slider.css" rel="stylesheet" />
+		}
+
+		@Html.Action("PostCategories", "Post", new { virtualCategoryId = ViewBag.VirtualId, page = ViewBag.PageNumber, title = ViewBag.Title, attrs = ViewBag.Attrs, proattrs = ViewBag.ProAttrs, prices = ViewBag.Prices, keywords = ViewBag.Keywords, area = "" })
+	}
+
+	if (ViewBag.TemplateType != null && ViewBag.TemplateType == (int)TemplateContent.News)
+	{
+		@Html.Action("NewsCategories", "News", new { virtualCategoryId = ViewBag.VirtualId, menuId = ViewBag.MenuId, title = ViewBag.Title, page = ViewBag.PageNumber, area = "" })
+	}
+
+	if (ViewBag.TemplateType != null && ViewBag.TemplateType == (int)TemplateContent.SaleOff)
+	{
+		@Html.Action("GetSaleOffByCategory", "SaleOff", new { virtualCategoryId = ViewBag.VirtualId, page = ViewBag.PageNumber, title = ViewBag.Title, area = "" })
+	}
+
+	if (ViewBag.TemplateType != null && ViewBag.TemplateType == (int)TemplateContent.AboutUs)
+	{
+		@Html.Action("GetProfileCategory", "Profile", new { virtualCategoryId = ViewBag.VirtualId, page = ViewBag.PageNumber, title = ViewBag.Title, area = "" })
+	}
+
+	if (ViewBag.TemplateType != null && ViewBag.TemplateType == (int)TemplateContent.Contact)
+	{
+		@Html.Action("ContactUs", "Contact", new { Id = ViewBag.MenuId, area = "" })
+	}
+}
+<!---/GetContent--->

@@ -1,0 +1,255 @@
+/* here you can put your own css to customize and override the theme */
+.page-header .page-header-menu {
+    background: #3b5998;
+}
+
+.page-header .page-header-top .page-logo .logo-default {
+    margin: 5px;
+    width: 86px;
+    height: 63px;
+}
+
+.search-toolbar {
+    margin-bottom: 15px;
+    display: block;
+    clear: both;
+}
+
+.page-footer {
+    background: #3b5998;
+}
+/*.page-header .page-header-top .top-menu .navbar-nav > li.dropdown-custom .dropdown-menu {
+    background: #d6186f;
+}
+.page-header .page-header-top .top-menu .navbar-nav > li.dropdown-extended .dropdown-menu > li.external {
+    background: #d6186f;
+}*/
+.st-sort-ascent:after {
+    font-family: FontAwesome;
+    content: "\f106";
+}
+
+.st-sort-descent:after {
+    font-family: FontAwesome;
+    content: "\f107";
+}
+
+.page-head .page-title h3 {
+    margin: 0;
+}
+
+.page-toolbar .icon-btn {
+    margin: 5px 5px 7px 5px;
+    height: 54px;
+    min-width: 65px;
+}
+
+    .page-toolbar .icon-btn:hover {
+        text-shadow: none;
+    }
+
+    .page-toolbar .icon-btn > div {
+        margin: 0;
+        color: #fff;
+    }
+
+.page-toolbar .divider {
+    margin: 5px 5px 7px 5px;
+    height: 54px;
+    border-left: 1px solid #ddd;
+    min-width: 1px;
+}
+
+.table > tfoot.paging > tr > td,
+.table > tfoot.paging > tr > th,
+.table-bordered > tfoot.paging > tr > td,
+.table-bordered > tfoot.paging > tr > th,
+.table-striped > tfoot.paging > tr > td,
+.table-striped > tfoot.paging > tr > th,
+.table-condensed > tfoot.paging > tr > td,
+.table-condensed > tfoot.paging > tr > th {
+    border: 0 !important;
+    padding: 15px 0 0 0;
+    font-weight: normal;
+}
+
+.table tbody tr td {
+    vertical-align: middle;
+}
+
+.page-toolbar li, .page-toolbar ul {
+    padding: 0;
+    margin: 0;
+}
+
+.page-toolbar li {
+    float: left;
+}
+
+.table-color thead tr {
+    background: #4267b2;
+    color: #fff;
+}
+
+    .table-color thead tr th {
+        cursor: pointer;
+    }
+
+    .table-color thead tr.filter {
+        background: none;
+    }
+
+div.dataTables_info {
+    padding-top: 8px;
+    white-space: nowrap;
+    clear: both;
+    float: left;
+}
+
+div.dataTables_paginate {
+    margin: 0;
+    white-space: nowrap;
+    text-align: right;
+    float: right;
+    padding-top: 0.25em;
+}
+
+    div.dataTables_paginate .pagination {
+        margin: 0;
+    }
+
+.highlight {
+    background-color: #FF0;
+    /*display: inline-block;*/
+}
+
+.paging-div {
+    display: inline-block;
+}
+
+.label-pagelink {
+    display: inline-block;
+}
+
+.paged-div {
+    display: inline-block;
+    line-height: 24px;
+    text-align: right;
+}
+
+    .paged-div .label-pagelink {
+        display: inline-block;
+        vertical-align: middle;
+        padding-left: 15px;
+    }
+
+.pagelink {
+    list-style: none;
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    vertical-align: middle;
+}
+
+    .pagelink > li {
+        display: inline;
+    }
+
+        .pagelink > li a {
+            color: #757575;
+            height: 18px;
+            width: 24px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .pagelink > li.disabled a {
+            color: #BDBDBD;
+        }
+
+        .pagelink > li a > i {
+            font-size: 28px;
+            /*vertical-align: middle;*/
+        }
+
+.page-number {
+    display: inline-block;
+    vertical-align: middle;
+    padding-left: 15px;
+}
+
+input.select-page {
+    width: 28px;
+    height: 20px;
+    border: 1px solid gray;
+    text-align: center;
+}
+
+.toolbar_fixed {
+    position: fixed;
+    right: 0%;
+    /*width: 100%;*/
+    z-index: 9999;
+    background: rgb(185, 201, 234);
+    -webkit-transition: right 1s linear;
+    -moz-transition: right 1s linear;
+    -o-transition: right 1s linear;
+    transition: right 1s linear;
+}
+
+    .toolbar_fixed .page-toolbar ul li {
+        float: none !important;
+        display: block;
+    }
+
+    .toolbar_fixed .page-toolbar .divider {
+        height: 1px !important;
+        border-top: 1px solid #ddd;
+    }
+
+@media only screen and (max-width: 799px) {
+    .table thead tr th {
+        min-height: 41px;
+    }
+
+    .table tr td {
+        min-height: 41px;
+    }
+}
+
+/*style checkbox and radio button*/
+.tableSort {
+    padding-bottom: 20px !important;
+}
+
+.imgDatatable {
+    width: 30px;
+    height: 30px;
+}
+
+.page-header .page-header-menu .search-form {
+    width: 160px;
+}
+
+.colOption {
+    width: 210px;
+}
+
+.table-pager > td {
+    padding-top: 10px;
+}
+
+    .table-pager > td > a {
+        background-color: #f5f5f5;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        padding: 3px 7px;
+    }
+
+        .table-pager > td > a:hover {
+            background-color: #f0f0f0;
+        }
+
+.app-grid thead th a {
+    color: #fff !important;
+}

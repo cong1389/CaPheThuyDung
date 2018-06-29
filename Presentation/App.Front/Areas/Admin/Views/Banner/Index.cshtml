@@ -1,0 +1,59 @@
+﻿@using App.Aplication
+@using App.Domain.Common
+@using Resources
+@model IEnumerable<App.Domain.Entities.Ads.Banner>
+@{
+    ViewBag.Title = FormUI.Banner;
+    ViewBag.Toolbar = new[] {"Create", "Edit", "Delete", "Divider", "Reset"};
+}
+<table id="@ViewContext.RouteData.Values["controller"]" class="app-grid table table-color table-bordered table-striped table-condensed flip-content table-hover dataTable">
+    <thead class="flip-content">
+    <tr>
+        <th class="text-center"> &nbsp;</th>
+        <th class="text-center"> @FormUI.Title </th>
+        <th class="text-center"> @FormUI.MenuLink </th>
+        <th class="text-center"> @FormUI.PageBanner </th>
+        <th class="text-center"> @FormUI.FromDate </th>
+        <th class="text-center"> @FormUI.ToDate </th>
+        <th class="text-center"> @FormUI.OrderDisplay </th> 
+        <th class="text-center"> @FormUI.Status </th>
+        <th class="text-center">
+            <input onclick="AppCore.handleCheckAll(this) " type="checkbox">
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    @if (Model.IsAny())
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img alt="@item.Title" src="@item.ImgPath.ValidateImage()" width="80px"/>
+                </td>
+                <td>
+                    <a class="highlight0" href="@Url.Action("Edit", new {id = item.Id, ReturnUrl = Request.Url.PathAndQuery})">@item.Title</a>
+                </td>
+                <td>@Html.Raw(item.MenuId > 0 ? item.MenuLink.MenuName : "Trang chủ")</td>
+                <td>@Html.Raw(item.PageId > 0 ? item.PageBanner.PageName : string.Empty)</td>
+                <td>@Html.Raw(item.FromDate.HasValue ? string.Format("{0:dd/MM/yyyy HH:mm}", item.FromDate) : string.Empty)</td>
+                <td>@Html.Raw(item.ToDate.HasValue ? string.Format("{0:dd/MM/yyyy HH:mm}", item.ToDate) : string.Empty)</td>
+                <td>@item.OrderDisplay</td>
+                <td>@Html.Raw(item.Status == (int) Status.Disable ? "<span class='label label-sm label-warning'>" + FormUI.InActive + "</span>" : "<span class='label label-sm label-success'>" + FormUI.Active + "</span>")</td>
+                <td class="text-center">
+                    <input type="checkbox" value="@item.Id">
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr class="odd">
+            <td class="dataTables_empty text-center" colspan="9" valign="top">
+                @MessageUI.EmptyItem
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+@{ Html.RenderPartial("_PageLinks"); }

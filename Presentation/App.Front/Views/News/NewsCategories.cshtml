@@ -1,0 +1,74 @@
+﻿<!--NewsCategories---->
+@using App.Aplication
+@model IEnumerable<App.Domain.Entities.Data.News>
+@if (Model.IsAny())
+{
+	Html.RenderAction("BannerTop", "Banner", new { menuId = ViewBag.BannerId, title = ViewBag.Title });
+
+    <div class="columns-container">
+        <div class="container" id="columns">
+            @Html.Partial("_BreadCrumb")
+
+            <!-- row -->
+            <div class="row">
+                <!-- Left colunm -->
+                <div class="column col-xs-12 col-sm-3" id="left_column">
+                    @{Html.RenderAction("MenuNavNews", "MenuNav", new { virtualId = ViewBag.VirtualId, area = "" });}
+
+                </div>
+                <!-- ./left colunm -->
+                <!-- Center colunm-->
+                <div class="center_column col-xs-12 col-sm-9" id="center_column">
+                    <h2 class="page-heading">
+                        <span class="page-heading-title2">@ViewBag.Title</span>
+                    </h2>
+
+                    <ul class="blog-posts">
+                        @foreach (var item in Model)
+                        {
+                            <li class="post-item">
+                                <article class="entry">
+                                    <div class="row">
+                                        <div class="col-sm-5">
+                                            <div class="entry-thumb image-hover2">
+                                                <a href="@Url.Action("NewsDetail", "News", new {seoUrl = item.SeoUrl, area = ""})" title="@item.Title">
+                                                    <img src="@item.ImageMediumSize.ValidateImage()" alt="@item.Title">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-7">
+                                            <div class="entry-ci">
+                                                <h3 class="entry-title">
+                                                    <a href="@Url.Action("NewsDetail", "News", new {seoUrl = item.SeoUrl, area = ""})" title="@item.Title">
+                                                        @item.Title
+                                                    </a>
+                                                </h3>
+                                                <div class="entry-meta-data">
+                                                   
+                                                    <span class="date"><i class="fa fa-calendar"></i>  @item.CreatedDate.ToString("dd/MM/yyyy")</span>
+                                                </div>
+                                                
+                                                <div class="entry-excerpt">
+                                                    @Html.Raw(item.ShortDesc)                                                </div>
+                                                <div class="entry-more">
+                                                    <a href="@Url.Action("NewsDetail", "News", new {seoUrl = item.SeoUrl, area = ""})" title="@item.Title">@T("XemChiTiet")</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+                            </li>
+                        }
+
+                       
+                    </ul>
+                    @{Html.RenderPartial("_PagedLinks");}
+                </div>
+                <!-- ./ Center colunm -->
+            </div>
+            <!-- ./row-->
+        </div>
+    </div>
+
+}
+<!--/NewsCategories---->

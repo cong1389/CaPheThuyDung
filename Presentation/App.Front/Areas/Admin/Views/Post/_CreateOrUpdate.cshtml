@@ -1,0 +1,415 @@
+﻿<!---_CreateOrUpdate--->
+@using App.Domain.Common
+@using App.Framework.Utilities
+@using Resources
+@using App.Aplication
+@using App.Service.Language
+@using Attribute = App.Domain.Entities.Attribute.Attribute
+@model  App.FakeEntity.Post.PostViewModel
+
+<div class="form-horizontal">
+	<div class="form-body">
+		@Html.ValidationSummary(true, "", new { @class = "text-danger col-md-offset-3" })
+
+		<div class="tabbable-line">
+			<ul class="nav nav-tabs ">
+				<li class="active">
+					<a href="#tab_1" data-toggle="tab"><i class="fa fa-pencil fa-fw" aria-hidden="true"></i>Thông tin sản phẩm</a>
+				</li>
+				<li>
+					<a href="#tab_2" data-toggle="tab"><i class="fa fa-building-o fa-fw" aria-hidden="true"></i>Thuộc tính sản phẩm</a>
+				</li>
+				<li>
+					<a href="#tab_3" data-toggle="tab"><i class="fa fa-slideshare fa-fw" aria-hidden="true"></i>Slide hình</a>
+				</li>
+				<li>
+					<a href="#tab_4" data-toggle="tab"><i class="fa fa-list-alt fa-fw" aria-hidden="true"></i>Thuộc tính</a>
+				</li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane active" id="tab_1">
+					<div class="row">
+						<!--/span-->
+						<div class="col-md-6">
+							<div class="form-group">
+								@Html.LabelFor(model => model.Status, new { @class = "control-label col-md-2" })
+								<div class="col-md-10">
+									<div class="radio-list">
+										<label class="radio-inline">
+											@Html.RadioButtonFor(x => x.Status, (int)Status.Enable) @FormUI.Active
+										</label>
+										<label class="radio-inline">
+											@Html.RadioButtonFor(x => x.Status, (int)Status.Disable) @FormUI.InActive
+										</label>
+									</div>
+									@Html.ValidationMessageFor(model => model.Status, "", new { @class = "help-block" })
+								</div>
+							</div>
+						</div>
+						<!--/span-->
+						<div class="col-md-6">
+							<div class="form-group">
+								@Html.LabelFor(model => model.OrderDisplay, new { @class = "control-label col-md-2" })
+								<div class="col-md-5">
+									@Html.TextBoxFor(model => model.OrderDisplay, new { @class = "form-control", type = "number" })
+									@Html.ValidationMessageFor(model => model.OrderDisplay, "", new { @class = "help-block" })
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								@Html.Label(FormUI.OptionDisplay, new { @class = "control-label col-md-2" })
+								<div class="col-md-10">
+									<div class="checkbox-list">
+										<label class="checkbox-inline">
+											@Html.CheckBoxFor(x => x.ShowOnHomePage) @FormUI.ShowOnHomePage
+										</label>
+										<label class="checkbox-inline">
+											@Html.CheckBoxFor(x => x.OutOfStock) @FormUI.OutOfStock
+										</label>
+										<label class="checkbox-inline">
+											@Html.CheckBoxFor(x => x.ProductHot) @FormUI.ProductHot
+										</label>
+										<label class="checkbox-inline">
+											@Html.CheckBoxFor(x => x.ProductNew) @FormUI.ProductNew
+										</label>
+									</div>
+								</div>
+							</div>
+
+
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								@Html.Label(FormUI.OldOrNew, new { @class = "control-label col-md-2" })
+								<div class="col-md-10">
+									<div class="checkbox-list">
+										<label class="checkbox-inline">
+											@Html.CheckBoxFor(x => x.OldOrNew) @FormUI.OldOrNew
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+					<div class="row">
+						<!--/span-->
+						<div class="col-md-6">
+							<div class="form-group">
+								@Html.LabelFor(model => model.MenuId, new { @class = "control-label col-md-2" })
+								<div class="col-md-10">
+									@Html.Action("GetMenuProduct", "Category", new { selected = Model.MenuId })
+									@Html.ValidationMessageFor(model => model.MenuId, "", new { @class = "help-block" })
+									@*@Html.DropDownListFor(x => x.MenuId, new SelectList(ViewBag.MenuList ?? string.Empty, "Id", "MenuName"), "--Select--", new { @class = "form-control select2" })*@
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								@Html.LabelFor(model => model.Image, new { @class = "control-label col-md-2" })
+								<div class="col-md-5">
+									<div class="fileinput fileinput-new" data-provides="fileinput">
+										<div class="input-group input-large">
+											<div class="form-control uneditable-input input-fixed input-medium" data-trigger="fileinput">
+												<i class="fa fa-file fileinput-exists"></i>&nbsp;
+												<span class="fileinput-filename"> </span>
+											</div>
+											<span class="input-group-addon btn default btn-file">
+												<span class="fileinput-new">@FormUI.SelectFile</span>
+												<span class="fileinput-exists"> @FormUI.ChangeFile </span>
+												@Html.TextBoxFor(model => model.Image, new { type = "file" })
+											</span>
+											<a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput"> Remove </a>
+										</div>
+									</div>
+									@Html.ValidationMessageFor(model => model.Image, "", new { @class = "help-block" })
+									@if (!string.IsNullOrEmpty(Model.ImageSmallSize))
+									{
+										<img src="@Model.ImageSmallSize.ValidateImage()" width="40"  id="postAvatar"/>
+									}
+								</div>
+							</div>
+
+							<div class="form-group">
+								@Html.Label(FormUI.Manufacturer, new { @class = "control-label col-md-2" })
+								<div class="col-md-10">
+									@Html.DropDownListFor(x => x.ManufacturerId, new SelectList(ViewBag.Manufacturers ?? string.Empty, "Id", "Title"),new { @class = "form-control" })
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-md-2"></label>
+								<div class="col-md-9">
+									<div class="row">
+										<div class="col-md-6">
+											@Html.LabelFor(model => model.Price, new { @class = "control-label" })
+											@Html.TextBoxFor(model => model.Price, new { @class = "form-control", type = "number" })
+											@Html.ValidationMessageFor(model => model.Price, "", new { @class = "help-block" })
+										</div>
+										<div class="col-md-6">
+											@Html.LabelFor(model => model.Discount, new { @class = "control-label" })
+											@Html.TextBoxFor(model => model.Discount, new { @class = "form-control", type = "number" })
+											@Html.ValidationMessageFor(model => model.Discount, "", new { @class = "help-block" })
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!--Localized--->
+					<div class="tabbable-line m-heading-1 border-green m-bordered dashboard-stat grey">
+						<ul class="nav nav-tabs ">
+							@{
+								for (int i = 0; i < Model.Locales.Count; i++)
+								{
+									App.Domain.Entities.Language.Language language = DependencyResolver.Current.GetService<ILanguageService>().GetById(Model.Locales[i].LanguageId);
+
+									<li class="@(i == 0 ? "active" : "")">
+										<a href="#tab_paneSub@(i + 1)" data-toggle="tab"><img src="@language.Flag.ValidateImage()" /> @language.LanguageName</a>
+									</li>
+								}
+							}
+
+						</ul>
+						<div class="tab-content">
+
+							@{
+								for (int i = 0; i < Model.Locales.Count; i++)
+								{
+									<div class="tab-pane @(i == 0 ? "active" : "")" id="tab_paneSub@(i + 1)">
+
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													@Html.LabelFor(model => model.Locales[i].Title, new { @class = "col-md-2 control-label" })
+													<div class="col-md-10">
+														@Html.TextBoxFor(model => model.Locales[i].Title, new { @class = "form-control" })
+														@Html.ValidationMessageFor(model => model.Locales[i].Title, "", new { @class = "help-block" })
+													</div>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													@Html.LabelFor(model => model.Locales[i].ProductCode, new { @class = "col-md-2 control-label" })
+													<div class="col-md-10">
+														@Html.TextBoxFor(model => model.Locales[i].ProductCode, new { @class = "form-control" })
+														@*@Html.ValidationMessageFor(model => model.Locales[i].ProductCode, "", new { @class = "help-block" })*@
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="form-group">
+											@Html.LabelFor(model => model.Locales[i].ShortDesc, new { @class = "col-md-1 control-label" })
+											<div class="col-md-11">
+												@Html.TextAreaFor(model => model.Locales[i].ShortDesc, new { @class = "form-control" })
+												@Html.ValidationMessageFor(model => model.Locales[i].ShortDesc, "", new { @class = "help-block" })
+											</div>
+										</div>
+
+										<div class="form-group">
+											@Html.LabelFor(model => model.Locales[i].TechInfo, new { @class = "col-md-1 control-label" })
+											<div class="col-md-11">
+												@Html.TextAreaFor(model => model.Locales[i].TechInfo, new { @class = "form-control ckeditor" })
+												@Html.ValidationMessageFor(model => model.Locales[i].TechInfo, "", new { @class = "help-block" })
+											</div>
+										</div>
+
+										<div class="form-group">
+											@Html.LabelFor(model => model.Locales[i].Description, new { @class = "col-md-1 control-label" })
+											<div class="col-md-11">
+												@Html.TextAreaFor(model => model.Locales[i].Description, new { @class = "form-control ckeditor" })
+												@Html.ValidationMessageFor(model => model.Locales[i].Description, "", new { @class = "help-block" })
+											</div>
+										</div>
+
+										<div class="form-group">
+											@Html.LabelFor(model => model.Locales[i].MetaTitle, new { @class = "col-md-1 control-label" })
+											<div class="col-md-11">
+												@Html.TextBoxFor(model => model.Locales[i].MetaTitle, new { @class = "form-control" })
+												@Html.ValidationMessageFor(model => model.Locales[i].MetaTitle, "", new { @class = "help-block" })
+											</div>
+										</div>
+										<div class="form-group">
+											@Html.LabelFor(model => model.Locales[i].MetaKeywords, new { @class = "col-md-1 control-label" })
+											<div class="col-md-11">
+												@Html.TextAreaFor(model => model.Locales[i].MetaKeywords, new { @class = "form-control" })
+												@Html.ValidationMessageFor(model => model.Locales[i].MetaKeywords, "", new { @class = "help-block" })
+											</div>
+										</div>
+										<div class="form-group">
+											@Html.LabelFor(model => model.Locales[i].MetaDescription, new { @class = "col-md-1 control-label" })
+											<div class="col-md-11">
+												@Html.TextAreaFor(model => model.Locales[i].MetaDescription, new { @class = "form-control" })
+												@Html.ValidationMessageFor(model => model.Locales[i].MetaDescription, "", new { @class = "help-block" })
+											</div>
+										</div>
+									</div>
+
+									@Html.HiddenFor(model => model.Locales[i].LocalesId)
+									@Html.HiddenFor(model => model.Locales[i].LanguageId)
+								}
+
+								@Html.HiddenFor(model => model.Title, new { @class = "form-control", Value = Model.Locales[0].Title })
+								@Html.HiddenFor(model => model.ProductCode, new { @class = "form-control", Value = Model.Locales[0].ProductCode })
+								@Html.HiddenFor(model => model.MetaTitle, new { @class = "form-control", Value = Model.Locales[0].MetaTitle })
+								@Html.HiddenFor(model => model.MetaKeywords, new { @class = "form-control", Value = Model.Locales[0].MetaKeywords })
+								@Html.HiddenFor(model => model.MetaDescription, new { @class = "form-control", Value = Model.Locales[0].MetaDescription })
+
+							}
+
+						</div>
+
+					</div>
+					<!--/Localized--->
+				</div>
+				<div class="tab-pane" id="tab_2">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<div class="col-md-10 col-sm-offset-2">
+									<div id="Attributes" class="checkbox-list">
+										@if (ViewBag.Attributes != null)
+										{
+											foreach (var item in (List<Attribute>)ViewBag.Attributes)
+											{
+												<h3 class="form-section">@item.AttributeName</h3>
+
+												if (Model.AttributeValues.IsAny())
+												{
+													foreach (var att in item.AttributeValues)
+													{
+														if (Model.AttributeValues.Count(x => x.Id == att.Id) > 0)
+														{
+															if (att != null)
+															{
+																var priceValue = string.Empty;
+																var price = Model.GalleryImages.FirstOrDefault(x => x.AttributeValueId == att.Id);
+																if (price != null)
+																{
+																	priceValue = price.Price != null ? price.Price.ToString() : string.Empty;
+																}
+																<div class="value-block">
+																	<label>
+																		<input id="Values" name="Values" onclick="handleCheckAttr(this)" checked="checked" type="checkbox" value="@att.Id" class="attribute"> @att.ValueName
+																	</label>
+																	<div class="col-md-12">
+																		<div class="form-group">
+																			<label class="control-label col-sm-1" style="text-align:left">Giá: </label>
+																			<div class="col-md-3">
+																				<input type="number" class="form-control" value="@priceValue" name="@att.Id" id="more_@att.Id">
+																			</div>
+																		</div>
+																	</div>
+																	<div id="@att.Id" class="img-upload">
+																		<button type="button" attr-data="@att.Id" id="btn_upload" class="btn green">
+																			Thêm ảnh
+																		</button>
+																	</div>
+																	<div id="@Html.Raw("fileupload_" + att.Id)" class="item_upload">
+
+																	</div>
+																</div>
+															}
+														}
+														else
+														{
+															<div class="value-block">
+																<label>
+																	<input id="Values" name="Values" onclick="handleCheckAttr(this)" type="checkbox" value="@att.Id" class="attribute"> @att.ValueName
+																</label>
+																<div id="@att.Id" class="img-upload"></div>
+																<div id="@Html.Raw("fileupload_" + att.Id)" class="item_upload">
+
+																</div>
+															</div>
+														}
+													}
+												}
+												else
+												{
+													foreach (var value in item.AttributeValues)
+													{
+														<div class="value-block">
+															<label>
+																<input id="Values" name="Values" onclick="handleCheckAttr(this)" type="checkbox" value="@value.Id" class="attribute"> @value.ValueName
+															</label>
+															<div id="@value.Id" class="img-upload"></div>
+															<div id="@Html.Raw("fileupload_" + value.Id)" class="item_upload"></div>
+														</div>
+													}
+												}
+											}
+										}
+									</div>
+								</div>
+							</div>
+						</div>
+						@if (Model.GalleryImages.IsAny())
+						{
+							<div id="gallery_image" class="row">
+								@foreach (var item in Model.GalleryImages)
+								{
+									<div id="@item.Id" class="col-sm-4 col-md-2">
+										<div class="thumbnail" style="text-align: right">
+											<a class="gallery" href="@Url.Content("~/" + item.ImageBig)">
+												<img src="@item.ImageBig.ValidateImage()" style="height: 150px; width: 100%;">
+											</a>
+											<div class="caption">
+												<a data-id="@Model.Id" gallery-id="@item.Id" href="javascript:;" class="del_gallery btn btn-sm red">
+													<i class="fa fa-trash"></i>
+												</a>
+											</div>
+										</div>
+									</div>
+								}
+							</div>
+						}
+					</div>
+				</div>
+
+				<div class="tab-pane" id="tab_3">
+					<div class="row">
+						<div class="col-md-12">
+							@{Html.RenderPartial("_CreateOrUpdate.Gallery", Model);}
+						</div>
+					</div>
+				</div>
+
+				<div class="tab-pane" id="tab_4">
+					<div class="row">
+						<div class="col-md-12">
+							<div id="divAttribute">
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="@Url.FakePathAdmin("scripts/plugins/daterangepicker/moment.min.js")"></script>
+<script src="@Url.FakePathAdmin("scripts/plugins/livetime/livestamp.min.js")"></script>
+<script type="text/javascript">
+    $(function () {
+
+        var menuId =@(Model.Id > 0? Model.MenuId: -1);
+        $.post('@Url.Action("GetByMenuId", "GenericControlValue")'
+            , { "menuId": menuId, "entityId": @Model.Id }
+            ,function () {
+                    App.blockUI({
+                        target: '#divAttribute',
+                        boxed: true
+                    });
+            }).done(function (data) {
+                $("#divAttribute").html(data.list);
+            });
+    })
+</script>
+<!---/_CreateOrUpdate--->

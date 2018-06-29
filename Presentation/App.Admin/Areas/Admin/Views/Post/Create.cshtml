@@ -1,0 +1,94 @@
+﻿
+@using Resources
+@model App.FakeEntity.Post.PostViewModel
+@{
+	ViewBag.Title = FormUI.CreateNew;
+	ViewBag.Toolbar = new[] { "Save", "SaveNew", "Divider", "Back" };
+}
+@using (Html.BeginForm("Create", "Post", FormMethod.Post, new { data_container = ViewContext.RouteData.Values["controller"], enctype = "multipart/form-data" }))
+{
+	@Html.AntiForgeryToken()
+
+	Html.RenderPartial("_CreateOrUpdate", Model);
+}
+
+@section scripts{
+
+
+	<script type="text/javascript">
+        var handleCheckAttr = function (element) {
+            if (typeof element != "object" || element.type != "checkbox") {
+                return false;
+            }
+            if (element.checked) {
+                var id = $(element).val();
+                var moreproce = '<div class="col-md-12"><div class="form-group"><label class="control-label col-sm-3" style="text-align:left">Giá: </label><div class="col-md-3">' +
+                    '<input type="number" class="form-control" name="' + id + '"  id="more_' + id + '"></div></div></div>';
+                var btn = '<button type="button" attr-data="' + id + '" id="btn_upload" class="btn green">Thêm ảnh</button>';
+                $("div#" + id).append(moreproce);
+                $("div#" + id).append(btn);
+            } else {
+                var id = $(element).val();
+                $("#" + id).empty();
+                $("#fileupload_" + id).empty();
+            }
+            $.uniform.update();
+        };
+
+        $(function () {
+
+            $(document).on("click", "#btn_upload", function () {
+
+                var id = $(this).attr("attr-data");
+                var file = '<input type="file" name="' + id + '" id="file_' + id + '" multiple="multiple">';
+                $("div#fileupload_" + id).empty();
+                $("div#fileupload_" + id).append(file);
+                InitUploadFile("#file_" + id);
+            });
+
+        });
+
+        function CopyValue() {
+
+            $("#Locales_0__Title").change(function () {
+                var title = $("#Locales_0__Title").val();
+                if (title !== "") {
+
+                	//Fill product code
+	                var postCode = App.formatPostCode(title);
+	                $("#Locales_0__ProductCode").val(postCode);
+	                $("#ProductCode").val(postCode);
+
+                    //Copy value từ tên sản phẩm bỏ vào group SEO
+                    $("#Locales_0__MetaTitle").val(title);
+                    $("#Locales_0__MetaKeywords").val(title);
+                    $("#Locales_0__MetaDescription").val(title);
+
+                    //same to title default language vn
+                    $("#Title").val(title);
+                    $("#MetaTitle").val(title);
+                    $("#MetaKeywords").val(title);
+                    $("#MetaDescription").val(title);
+                }
+            });
+
+            //same to product code default language vn
+            $('#Locales_0__ProductCode').change(function () {
+                $("#ProductCode").val($("#Locales_0__ProductCode").val());
+            });
+        }
+
+        $(function () {
+            CopyValue();
+        });
+
+	</script>
+}
+
+@section style{
+	<style>
+		.img-upload button {
+			margin-bottom: 15px;
+		}
+	</style>
+}

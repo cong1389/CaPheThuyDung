@@ -1,0 +1,19 @@
+Tạo file load xml
+
+ConfirmOrder
+
+OrderPlaced.StoreOwnerNotification.xml
+
+SendOrderPlacedStoreOwnerNotification
+
+
+Services
+
+	MessageFactory Class
+		//send email notifications
+		var msg = _messageFactory.SendOrderPlacedStoreOwnerNotification(order, _localizationSettings.DefaultAdminLanguageId);
+
+	Orders Class
+		SendOrderPlacedStoreOwnerNotification
+
+

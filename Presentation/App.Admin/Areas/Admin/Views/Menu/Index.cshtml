@@ -1,0 +1,72 @@
+﻿@using App.Aplication
+@using Resources
+@using App.Framework.Utilities
+@model IEnumerable<App.FakeEntity.Menu.MenuNavViewModel>
+@{
+	ViewBag.Title = FormUI.MenuLink;
+	ViewBag.Toolbar = new[] { "Create" };
+}
+
+@if (Model.IsAny())
+{
+	<div id="tree_1" class="tree-demo">
+		<ul>
+			@foreach (var lv1 in Model)
+			{
+				<li>
+					<a href="@Url.Action("Edit", new {id = lv1.MenuId, ReturnUrl = Request.Url.PathAndQuery})" parentId="@(lv1.ParentId ?? 0)" menuId="@lv1.MenuId">@lv1.MenuName</a>
+					@if (lv1.ChildNavMenu != null)
+					{
+						<ul>
+							@foreach (var lv2 in lv1.ChildNavMenu)
+							{
+								<li data-jstree='{ "opened" : true }'>
+									<a href="@Url.Action("Edit", new {id = lv2.MenuId, ReturnUrl = Request.Url.PathAndQuery})" parentId="@(lv2.ParentId ?? 0)" menuId="@lv2.MenuId">@lv2.MenuName</a>
+									@if (lv2.ChildNavMenu != null)
+									{
+										<ul>
+											@foreach (var lv3 in lv2.ChildNavMenu)
+											{
+												<li data-jstree='{ "opened" : true }'>
+													<a href="@Url.Action("Edit", new {id = lv3.MenuId, ReturnUrl = Request.Url.PathAndQuery})" parentId="@(lv3.ParentId ?? 0)" menuId="@lv3.MenuId">@lv3.MenuName</a>
+													@if (lv3.ChildNavMenu != null)
+													{
+														<ul>
+															@foreach (var lv4 in lv3.ChildNavMenu)
+															{
+																<li data-jstree='{ "opened" : true }'>
+																	<a href="@Url.Action("Edit", new {id = lv4.MenuId, ReturnUrl = Request.Url.PathAndQuery})" parentId="@(lv4.ParentId ?? 0)" menuId="@lv4.MenuId">@lv4.MenuName</a>
+																</li>
+															}
+														</ul>
+													}
+												</li>
+											}
+										</ul>
+									}
+								</li>
+							}
+						</ul>
+					}
+				</li>
+			}
+		</ul>
+	</div>
+}
+else
+{
+	<tr class="odd">
+		<td class="dataTables_empty text-center" colspan="8" valign="top">
+			@MessageUI.EmptyItem
+		</td>
+	</tr>
+}
+@section scripts{
+	<script src="@Url.FakePathAdmin("assets/jstree/dist/jstree.min.js")"></script>
+	<script src="@Url.FakePathAdmin("assets/jstree/ui-tree.min.js")"></script>
+}
+
+@section style{
+	<link href="@Url.FakePathAdmin("assets/jstree/dist/themes/default/style.min.css")" rel="stylesheet" />
+
+}

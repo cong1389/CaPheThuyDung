@@ -1,0 +1,37 @@
+﻿@model App.Domain.Entities.Data.Repair
+@if (Model != null)
+{
+    <table class="table table-bordered">
+        <tr>
+            <td>Mã đơn hàng</td>
+            <td>Mã khách hàng</td>
+            <td>Họ tên</td>
+            <td>Dòng máy</td>
+            <td>Số seri</td>
+            <td>Tình trạng hiện tại</td>
+            <td>Ghi chú</td>
+            <td>Thời gian bảo hành</td> 
+        </tr>
+        <tr>
+            <td>@Model.RepairCode</td>
+            <td>@Model.CustomerCode</td>
+            <td>@Model.CustomerName</td>
+            <td>@Model.ModelBrand</td>
+            <td>@Model.SerialNumber</td>
+            <td>@Html.Raw(FrontHelper.GetRepairStatus(Model.Status))</td>
+            <td>@Model.Note</td>
+            <td>
+                @if (Model.WarrantyTo.HasValue && Model.WarrantyFrom.HasValue)
+                {
+                    @Html.Raw(string.Format("{0} - {1}",string.Format("{0:dd/MM/yyyy}", Model.WarrantyFrom), string.Format("{0:dd/MM/yyyy}", Model.WarrantyFrom)))
+                }
+            </td> 
+        </tr>
+    </table>
+}
+else
+{
+    <p class="text-danger">
+        Đơn hàng không tồn tại, hoặc mã đơn hàng, số điện thoại không chính xác
+    </p>
+}

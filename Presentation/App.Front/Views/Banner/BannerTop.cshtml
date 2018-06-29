@@ -1,0 +1,14 @@
+﻿<!----BannerTop-->
+@using App.Aplication
+@model IEnumerable<App.Domain.Entities.Ads.Banner>
+@if (Model.IsAny())
+{
+    foreach (var item in Model)
+    {
+        <section id="products-1">
+            <img class="hidden-xs hidden-sm hidden-md img-responsive" src="@Url.Content("~/" + item.ImgPath)" alt="@ViewBag.Title">
+        </section>
+
+    }
+}
+<!----/BannerTop-->

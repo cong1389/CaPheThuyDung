@@ -1,0 +1,53 @@
+﻿<!---MenuVerticalMega--->
+@using App.Aplication
+@model IEnumerable<App.FakeEntity.Menu.MenuNavViewModel>
+
+@if (Model != null)
+{
+	<div class="col-sm-3" id="box-vertical-megamenus">
+		<div class="box-vertical-megamenus">
+			<h4 class="title">
+				<span class="title-menu">Danh mục sản phẩm</span>
+				<span class="btn-open-mobile pull-right home-page"><i class="fa fa-bars"></i></span>
+			</h4>
+			<div class="vertical-menu-content is-home" style="display: @(Utils.IsHomePage() ? "block" : "none")">
+				@{
+					var i = 0;
+					<ul class="vertical-menu-list">
+						@foreach (var lv1 in Model)
+						{
+							<li class="@(i > 10 ? "cat-link-orther" : "")" int="@i" style="display: @(i > 10 ? "none" : "list-item");">
+								<a class="parent " href="@Url.Action("GetContent", "Menu", new {menu = lv1.SeoUrl, area = ""})" title="@lv1.MenuName">
+									<img class="icon-menu" alt="@lv1.MenuName" src="@lv1.ImageSmallSize.ValidateImage()">@lv1.MenuName
+								</a>
+								@if (lv1.ChildNavMenu.IsAny())
+								{
+									<div class="vertical-dropdown-menu">
+										<div class="vertical-groups col-sm-12">
+											<div class="mega-group col-sm-3">
+												<div class="row mega-products">
+													<ul class="group-link-default" style="padding-left: 15px;">
+														@foreach (var lv2 in lv1.ChildNavMenu)
+														{
+															<li><a href="@Url.Action("GetContent", "Menu", new {menu = lv2.SeoUrl, area = ""})" title="@lv2.MenuName">@lv2.MenuName</a></li>
+														}
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								}
+							</li>
+							i++;
+						}
+					</ul>
+					if (i > 10)
+					{
+						<div class="all-category"><span class="colse-cate">Close</span></div>
+					}
+				}
+			</div>
+		</div>
+	</div>
+}
+<!---/MenuVerticalMega--->

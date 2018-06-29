@@ -1,0 +1,72 @@
+﻿<!---ChangeInfo-->
+@model App.FakeEntity.User.RegisterFormViewModel
+
+<section id="content" class="goweb-account-order">
+
+    <div class="container clearfix">
+        <h1 class="p25 title-page"><i class="icon-aothun"></i>Đơn hàng của bạn</h1>
+
+        <div class="col-xs-12 col-sm-8">
+            <div class="row">
+                <div id="divAccount_Order"></div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+            @if (Model != null)
+            {
+                <div class="account-detail user_box">
+                    <div class="content-box-row">
+                        <div class="fieldset">
+                            @if (Model.UserName != null)
+                            {
+                                <div class="field">
+                                    <div class="field-input-wrapper">
+                                        <strong>@Html.DisplayNameFor(m => m.UserName) </strong> @Model.UserName
+                                    </div>
+                                </div>
+                            }
+                            @if (Model.Email != null)
+                            {
+                                <div class="field">
+                                    <div class="field-input-wrapper">
+                                        <strong>@Html.DisplayNameFor(m => m.Email) </strong> @Model.Email
+                                    </div>
+                                </div>
+                            }
+                            @if (Model.Address != null)
+                            {
+                                <div class="field field-active">
+                                    <div class="field-input-wrapper">
+                                        <strong>@Html.DisplayNameFor(m => m.Address) </strong> @Model.Address
+                                    </div>
+                                </div>
+                            }
+                            @if (Model.Phone != null)
+                            {
+                                <div class="field field-active">
+                                    <div class="field-input-wrapper">
+                                        <strong>@Html.DisplayNameFor(m => m.Phone) </strong> @Model.Phone
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<script>
+    jQuery(function () {
+
+        jQuery.post('@Url.Action("AccountOrder", "Account")')
+          .done(function (data) {
+              jQuery("#divAccount_Order").html(data.list);
+          });
+    })
+
+</script>
+
+
+<!---/ChangeInfo-->

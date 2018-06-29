@@ -1,0 +1,49 @@
+﻿@{
+    Layout = null;
+}
+@model App.FakeEntity.Repairs.RepairItemViewModel
+<div class="panel">
+    @if (Model.RepairId > 0)
+    {
+        @Html.HiddenFor(x=>x.RepairId)
+        @Html.HiddenFor(x=>x.Id)
+    }
+    <div class="col-sm-4">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Category, new {@class = "control-label col-md-4"})
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.Category, new {@class = "form-control"})
+                @Html.ValidationMessageFor(model => model.Category, "", new {@class = "help-block"})
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="form-group">
+            <label class="control-label col-md-4">Thời gian bảo hành</label>
+            <div class="col-md-8">
+                <div class="input-group input-large date-picker input-daterange" data-date-format="mm/dd/yyyy">
+                    @Html.TextBoxFor(model => model.WarrantyFrom, "{0:MM/dd/yyyy}", new {@class = "form-control"})
+                    <span class="input-group-addon"> đến </span>
+                    @Html.TextBoxFor(model => model.WarrantyTo, "{0:MM/dd/yyyy}", new {@class = "form-control"})
+                </div>
+                @Html.ValidationMessageFor(model => model.WarrantyFrom, "", new {@class = "help-block"})
+                @Html.ValidationMessageFor(model => model.WarrantyTo, "", new {@class = "help-block"})
+                <!-- /input-group -->
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="form-group">
+            @Html.LabelFor(model => model.FixedFee, new {@class = "control-label col-md-4"})
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.FixedFee, new {@class = "form-control number"})
+                @Html.ValidationMessageFor(model => model.FixedFee, "", new {@class = "help-block"})
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <div class="text-right">
+            <a href="javascipt:;" id="remove_items" class="btn btn-warning">Xóa</a>
+        </div>
+    </div>
+</div>

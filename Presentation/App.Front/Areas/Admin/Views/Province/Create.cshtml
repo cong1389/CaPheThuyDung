@@ -1,0 +1,14 @@
+﻿@using Resources
+@model App.FakeEntity.Location.ProvinceViewModel
+@{
+    ViewBag.Title = FormUI.CreateNew;
+    ViewBag.Toolbar = new[] { "Save", "SaveNew", "Divider", "Back" };
+}
+@using (Html.BeginForm("Create", "Province", FormMethod.Post, new { data_container = ViewContext.RouteData.Values["controller"], enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+	Html.RenderPartial("_CreateOrUpdate", Model);
+}
+
+

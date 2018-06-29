@@ -1,0 +1,140 @@
+﻿@model List<App.Domain.Entities.Data.News>
+
+<section class="block-container">
+    <div class="breadcrumb">
+        <div class="container">
+            <ul class="list-inline">
+                <li>
+                    <a href="@Url.Action("Index", "Home", new {area = ""})" class="home-link">
+                        <i class="icon-home"></i>
+                    </a>
+                </li>
+                <li class="active">
+                    <span>@ViewBag.Title</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="container">
+        <div class="content-container">
+
+
+            @for (int i = 0; i < Model.Count(); i++)
+            {
+                if (i%2 == 0)
+                {
+                    <div class="row">
+                        <div class="profile-item">
+                            <div class="col-sm-4">
+                                <div class="content-intro">
+                                    @if (!string.IsNullOrEmpty(Model[i].OtherLink))
+                                    {
+                                        <a class="link" href="@Model[i].OtherLink">
+                                            <h2>
+                                                @Model[i].Title
+                                            </h2>
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a class="link" href="@Url.Action("NewsDetail", "News", new {seoUrl = Model[i].SeoUrl, area = ""})">
+                                            <h2>
+                                                @Model[i].Title
+                                            </h2>
+                                        </a>
+                                    }
+
+                                    <div class="intro-desc">
+                                        @Model[i].ShortDesc
+                                    </div>
+                                    @if (!string.IsNullOrEmpty(Model[i].OtherLink))
+                                    {
+                                        <a href="@Model[i].OtherLink" class="btn btn-default">@T("XemThem")</a>
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Action("NewsDetail", "News", new {seoUrl = Model[i].SeoUrl, area = ""})" class="btn btn-default">@T("XemThem")</a>
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="content-img">
+                                    @if (!string.IsNullOrEmpty(Model[i].OtherLink))
+                                    {
+                                        <a href="@Model[i].OtherLink">
+                                            <img src="@Url.Content("~/" + Model[i].ImageBigSize)" alt="@Model[i].Title">
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Action("NewsDetail", "News", new {seoUrl = Model[i].SeoUrl, area = ""})">
+                                            <img src="@Url.Content("~/" + Model[i].ImageBigSize)" alt="@Model[i].Title">
+                                        </a>
+                                    } 
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                }
+                else
+                {
+                    <div class="row">
+                        <div class="profile-item">
+                            <div class="col-sm-8">
+                                <div class="content-img">
+                                    @if (!string.IsNullOrEmpty(Model[i].OtherLink))
+                                    {
+                                        <a href="@Model[i].OtherLink">
+                                            <img src="@Url.Content("~/" + Model[i].ImageBigSize)" alt="@Model[i].Title">
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Action("NewsDetail", "News", new {seoUrl = Model[i].SeoUrl, area = ""})">
+                                            <img src="@Url.Content("~/" + Model[i].ImageBigSize)" alt="@Model[i].Title">
+                                        </a>
+                                    } 
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="content-intro">
+                                    @if (!string.IsNullOrEmpty(Model[i].OtherLink))
+                                    {
+                                        <a class="link" href="@Model[i].OtherLink">
+                                            <h2>
+                                                @Model[i].Title
+                                            </h2>
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a class="link" href="@Url.Action("NewsDetail", "News", new {seoUrl = Model[i].SeoUrl, area = ""})">
+                                            <h2>
+                                                @Model[i].Title
+                                            </h2>
+                                        </a>
+                                    }
+                                    
+                                    <div class="intro-desc">
+                                        @Model[i].ShortDesc
+                                    </div>
+                                    @if (!string.IsNullOrEmpty(Model[i].OtherLink))
+                                    {
+                                        <a href="@Model[i].OtherLink" class="btn btn-default">@T("XemThem")</a>
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Action("NewsDetail", "News", new {seoUrl = Model[i].SeoUrl, area = ""})" class="btn btn-default">@T("XemThem")</a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+
+        </div>
+        @{ Html.RenderPartial("_PagedLinks"); }
+    </div>
+</section>

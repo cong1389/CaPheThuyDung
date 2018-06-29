@@ -1,0 +1,25 @@
+﻿<!---ShippingMethod-->
+@model App.Front.Models.Checkout.CheckoutShippingMethodModel
+
+@if (Model != null)
+{
+    <div class="row">
+        <h3 class="checkout-sep">3. Chọn hình thức giao hàng</h3>
+        <div class="box-border">
+            <ul class="shipping_method">
+                @foreach (var item in Model.ShippingMethods)
+                {
+                    <li>
+                        <label class="lb-method">
+                            <input id="shipping_rate_id@(item.Id)" class="input-method" type="radio" value="@item.Name" checked="@item.Selected" name="shipping_rate_id" >
+                            <span class="label-radio"> @item.Name</span>
+                        </label>
+                        <span class="desc" style="display: block;"></span>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+}
+
+<!---/ShippingMethod-->

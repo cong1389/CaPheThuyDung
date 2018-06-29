@@ -1,0 +1,21 @@
+[
+  {
+    "outputFileName": "Themes/Basic/Content/_social.min.min.css",
+    "inputFiles": [
+      "Themes/Basic/Content/_social.min.css"
+    ]
+  },
+  {
+    "outputFileName": "Themes/Basic/Content/theme.min.css",
+    "inputFiles": [
+      "Themes/Basic/Content/theme.css"
+    ]
+  },
+  {
+    "outputFileName": "Themes/Basic/Content/_social.min.css",
+    "inputFiles": [
+      "Themes/Basic/Content/_social.css"
+    ]
+
+  }
+]

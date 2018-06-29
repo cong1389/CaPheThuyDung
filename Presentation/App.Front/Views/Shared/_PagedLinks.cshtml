@@ -1,0 +1,260 @@
+﻿@using App.Framework.Utilities
+@{
+    Helper.PageInfo pi = Model is Helper.PageInfo ? Model : ViewBag.PageInfo as Helper.PageInfo;
+    if (pi == null)
+    {
+        return;
+    }
+    var total = pi.ItemsPerPage > 0 ? (int)Math.Ceiling((decimal)pi.TotalItems / pi.ItemsPerPage) : 0;
+}
+
+@if (pi.TotalPage > 1)
+{
+    <div class='pagination_wrapper'>
+
+        <ul class="pagination ajax-pagination ">
+            @if (pi.CurrentPage > 1)
+                {
+                <li>
+                    <a href="@pi.Url(pi.CurrentPage - 1)" title="Trang @pi.CurrentPage" >
+                        Trang trước
+                    </a>
+                </li>
+            }
+            @for (var i = 1; i <= total; i++)
+            {
+                if (pi.CurrentPage > pi.Leave && pi.CurrentPage <= total - pi.Leave)
+                {
+                    if (i == pi.Leave - 1 || i == total)
+                    {
+                        <li>
+                            <a href="#" title="...">
+                                ...
+                            </a>
+                        </li>
+                    }
+                    if ((i > 1 && i < pi.CurrentPage - 1) || (i > pi.CurrentPage + pi.Leave - 1 && i < total))
+                    {
+                        continue;
+                    }
+                }
+                else
+                {
+                    if ((pi.CurrentPage <= pi.Leave && i > pi.Leave + 1) || (pi.CurrentPage > total - pi.Leave && i < total - pi.Leave))
+                    {
+                        if (i == pi.Leave - 1 || i == total)
+                        {
+                            <li>
+                                <a href="#" title="...">
+                                    ...
+                                </a>
+                            </li>
+                        }
+                        if (i > 1 && i < total)
+                        {
+                            continue;
+                        }
+                    }
+                }
+                if (i == pi.CurrentPage)
+                {
+                    <li class="active">
+                        <a rel="nofollow" href="javascript:void(0)" title="Trang @i">
+                            @i
+                        </a>
+                    </li>
+                }
+                else
+                {
+                    <li>
+                        <a href="@pi.Url(i)" title="Trang @i">
+                            @i
+                        </a>
+                    </li>
+                }
+            }
+            @if (pi.CurrentPage < total)
+            {
+                <li>
+                    <a href="@pi.Url(pi.CurrentPage + 1)" title="Trang @(pi.CurrentPage + 1)" class="next">
+                        Trang kế
+                    </a>
+                </li>
+
+            }
+        </ul>
+
+        <!-- BEGIN: AJAX-FILTER -->
+        <script>
+            $(".resetButton").click(function (e) {
+                e.preventDefault();	// không tự nhảy lên đầu trang
+                $(':input[filtertype=search]:checked').each(function () {
+                    this.checked = false;
+                    var searchString = getStringFilter($(this));
+                    var urlFinal = '/' + searchString; //+'&view=grid_and_control';
+                    //loadResultBy(url_final,$("#results"));
+                });
+            });
+
+            function getStringFilter(currentSelected) {
+                var vendor = "", productType = "", price = "", color = '', tagCustom1 = "", tagCustom2 = "", tagCustom3 = "";
+                var tagPrefix1 = 'size',
+                        tagPrefix2 = 'chatlieu',
+                        tagPrefix3 = 'xuatxu';
+                //var searchString = "search?q=";
+                var searchString = '';
+                var searchHrv = "search?type=product&q=";
+                // if current page is search
+                if ($("#collection_id").val() == ">=0") {
+                    searchString += $("#search_term").val() + "&";
+                }
+                searchString += "filter=(";
+                // BEGIN: Filter
+                var collectionFilter = "";
+                if ($("#collection_id").val() != ">=0") {
+                    if ($("#collection_id").val() != "=0") {
+                        collectionFilter += "(collectionid:product" + $("#collection_id").val() + ")";
+                    }
+                    else {
+                        collectionFilter = "(collectionid:product>=0)";
+                    }
+                }
+                else {
+                    collectionFilter = "(collectionid:product>=0)";
+                }
+
+
+
+                // BEGIN: GET All checked filter string
+                // standard filter
+                vendor = getCheckedBy("vendor", vendor);
+                productType = getCheckedBy("product_type", productType);
+                price = getCheckedBy("price", price);
+                // custom filer
+
+                color = getCheckedBy("mausac", color);
+
+                tagCustom1 = (tagPrefix1 != '') ? getCheckedBy(tagPrefix1, tagCustom1) : getCheckedBy('a', tagCustom1);
+                tagCustom2 = (tagPrefix2 != '') ? getCheckedBy(tagPrefix2, tagCustom2) : getCheckedBy('a', tagCustom2);
+                tagCustom3 = (tagPrefix3 != '') ? getCheckedBy(tagPrefix3, tagCustom3) : getCheckedBy('a', tagCustom3);
+                // END: GET FILTER
+
+                //console.log(vendor);
+                //console.log(color);
+                // BEGIN: MERGE all filter string
+                collectionFilter = mergeFilterWith(vendor, collectionFilter);
+                collectionFilter = mergeFilterWith(productType, collectionFilter);
+                collectionFilter = mergeFilterWith(price, collectionFilter);
+
+                collectionFilter = mergeFilterWith(color, collectionFilter);
+                collectionFilter = mergeFilterWith(tagCustom1, collectionFilter);
+                collectionFilter = mergeFilterWith(tagCustom2, collectionFilter);
+                collectionFilter = mergeFilterWith(tagCustom3, collectionFilter);
+
+                searchString += collectionFilter;
+                searchString += ')';
+                // END: MERGE
+
+                // BEGIN: Sorting
+                /*
+                if ($( "#sortControl option:selected" ).val() != "" && $( "#sortControl option:selected" ).val() != "manual") {
+                    searchString += "&sortby="+$( "#sortControl option:selected" ).attr('sort_by');
+                }
+                else{
+                }
+                // END: Sorting
+                return searchString;
+            */
+
+                searchString = encodeURIComponent(searchString);
+                if ((typeof $("#sortControl option:selected").val() == "undefined") || ($("#sortControl option:selected").val() == 'manual')) { }
+                else {
+                    searchString += "&sortby=" + $("#sortControl option:selected").attr('sort_by');
+                }
+                searchHrv += searchString;
+                return searchHrv;
+            }
+
+            function getCheckedBy(filterKey, filterOption) {
+                $(':input[class^=' + filterKey + ']:checked').each(function () {
+                    if (filterOption == "") {
+                        filterOption = $(this).val();
+                    }
+                    else {
+                        filterOption = filterOption + '||' + $(this).val();
+                    }
+                });
+                return filterOption;
+            }
+
+            function mergeFilterWith(filterCondition, currCollectionFilter) {
+                if (filterCondition != "") {
+                    filterCondition = '(' + filterCondition + ')';
+                    currCollectionFilter += '&&' + filterCondition;
+                }
+                return currCollectionFilter;
+            }
+
+            function mapData(data, positionLoad) {
+                var currentList = $(positionLoad),
+                        productList = $(data).find(positionLoad);
+                currentList.replaceWith(productList);
+            }
+            function loadResultBy(urlBuilding, positionLoad) {
+                $.ajax({
+                    'url': urlBuilding,
+                    'type': 'POST',
+                    'beforeSend': function () {
+                        $('body').removeClass('loaded');
+                    },
+                    'success': function (data) {
+                        mapData(data, positionLoad);
+                    },
+                    'complete': function () {
+                        EGA.init();
+                        $('body').addClass('loaded');
+                    }
+                });
+            }
+
+            // ajax sorting
+
+            jQuery('#sortControl').val('created-descending')
+            .bind('change', function () {
+                Haravan.queryParams.sort_by = $(this).val();
+                location.search = $.param(Haravan.queryParams);
+            })
+
+
+            // ajax pagination
+            $('.ajax-pagination li a').click(function (e) {
+
+            });
+
+            function scrollToShop(margin) {
+                var locate = parseInt($('#content').offset().top) + margin;
+                $('html, body').animate({
+                    scrollTop: locate
+                }, 1000);
+                return false;
+            }
+            // end scroll
+
+            //$('.pagination li a').click(function() {scrollToShop(0)});
+
+
+            /** align single element ***/
+            $(document).ready(function () {
+                align_single_element();
+            });
+            var align_single_element = function () {
+                var numPro = $('#shop .product').length;
+                if (numPro % 2 == 1) {
+                    $('#shop .product').last().addClass('product-last');
+                }
+            }
+
+        </script>
+        <!-- END: AJAX-FILTER -->
+    </div>    
+}

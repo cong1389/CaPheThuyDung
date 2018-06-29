@@ -1,0 +1,11 @@
+﻿    @font-face {
+    font-family: 'utm_fb';
+    src: url('fonts/utm-fb.eot');
+    src: url('fonts/utm-fb.eot?#iefix') format('embedded-opentype'),
+         url('fonts/utm-fb.woff') format('woff'),
+         url('fonts/utm-fb.ttf') format('truetype'),
+         url('fonts/utm-fb.svg#utm_fb_ktregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}

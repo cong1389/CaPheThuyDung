@@ -1,0 +1,76 @@
+﻿@using App.Framework.Utilities
+@{
+    ViewBag.Title = "Admin Page";
+}
+<div class="row">
+    <div class="col-md-6 col-sm-6">
+        <div class="portlet light ">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-share font-blue"></i>
+                    <span class="caption-subject font-blue bold uppercase">Sản phẩm mới đăng</span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div id="postDashBoard" class="scroller" style="height: 300px;" data-always-visible="1" data-rail-visible="0">
+
+                </div>
+                <div class="scroller-footer">
+                    <div class="btn-arrow-link pull-right">
+                        <a href="@Url.Action("Index","Post")">Xem tất cả</a>
+                        <i class="icon-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-6">
+        <div class="portlet light ">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-share font-blue"></i>
+                    <span class="caption-subject font-blue bold uppercase">Tin tức mới nhất</span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div id="newsDashBoard" class="scroller" style="height: 300px;" data-always-visible="1" data-rail-visible="0">
+
+                </div>
+                <div class="scroller-footer">
+                    <div class="btn-arrow-link pull-right">
+                        <a href="@Url.Action("Index","News")">Xem tất cả</a>
+                        <i class="icon-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="@Url.FakePathAdmin("scripts/plugins/daterangepicker/moment.min.js")"></script>
+    <script src="@Url.FakePathAdmin("scripts/plugins/livetime/livestamp.min.js")"></script>
+    <script type="text/javascript">
+        $(function () {
+            $.post('@Url.Action("GetPostRealtime","DashBoard")',
+                    function() {
+                        App.blockUI({
+                            target: '#postDashBoard',
+                            boxed: true
+                        });
+                    })
+                .done(function(data) {
+                    $("#postDashBoard").html(data.list);
+                });
+            $.post('@Url.Action("GetNewRealtime","DashBoard")',
+                    function () {
+                        App.blockUI({
+                            target: '#newsDashBoard',
+                            boxed: true
+                        });
+                    })
+                .done(function (data) {
+                    $("#newsDashBoard").html(data.list);
+                });
+        })
+    </script>
+}

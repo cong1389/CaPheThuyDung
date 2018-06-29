@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Nội dung không tìm thấy.";
+}
+
+<div class="page-404">
+    <div class="number font-red"> 404 </div>
+    <div class="details">
+        <h3>Oops! Nội dung mà bạn tìm kiếm không tồn tại, hoặc đã có lỗi xảy ra.</h3>
+        <p>
+            Chúng tôi sẽ sớm cập nhật, hoặc sữa chữa nó, rất xin lỗi vì sự bất tiện này dành cho quý khách.
+            <br>
+        </p>
+        <p>
+            <a href="@Url.Action("Index", "Home", new {area = ""})" class="btn red btn-outline"><i class="fa fa-reply"></i> Về trang chủ </a>
+            <br>
+        </p>
+    </div>
+</div>
+<div class="clear"></div>
+@section renderStyles
+{
+    <link href="~/Content/404.css" rel="stylesheet" />
+}
+@section renderJQuery
+{
+    <script type="text/javascript">
+       $(function() {
+           $('#SiteLeft').remove();
+           $('#SiteRight').remove();
+       })
+    </script>
+}

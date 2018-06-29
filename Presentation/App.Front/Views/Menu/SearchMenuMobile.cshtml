@@ -1,0 +1,28 @@
+﻿<!---SearchMenuMobile-->
+@model App.Front.Models.SeachConditions
+
+<div class="advanced-search-mobile houzez-adv-price-range" data-sticky="0" style="">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                @using (Html.BeginForm("Search", "Menu", FormMethod.Get))
+                {
+                    <div class="single-search-wrap">
+
+                        <div class="single-search-inner single-search">
+                            @Html.TextBoxFor(model => model.Keywords, new { @class = "form-control", @placeholder = T("Search.PlaceHolder") })
+
+                            <div class="auto-complete"></div>
+                        </div>
+                        <div class="single-search-inner single-seach-btn">
+                            <button class="table-cell text-right" type="submit"><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+
+
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<!---/SearchMenuMobile-->

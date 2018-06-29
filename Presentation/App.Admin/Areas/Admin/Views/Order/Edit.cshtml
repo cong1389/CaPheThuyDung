@@ -1,0 +1,19 @@
+﻿
+@using Resources
+@model  App.FakeEntity.Orders.OrderViewModel
+@{
+    ViewBag.Title = FormUI.Edit;
+    ViewBag.Toolbar = new[] { "Save", "SaveNew", "Divider", "DeleteOne", "Back" };
+}
+@using (Html.BeginForm("Edit", "Menu", FormMethod.Post, new { data_container = ViewContext.RouteData.Values["controller"], enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.Id)
+
+    Html.RenderPartial("_CreateOrUpdate", Model);
+
+}
+
+@section scripts{
+    
+}

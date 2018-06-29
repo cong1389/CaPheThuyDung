@@ -1,0 +1,19 @@
+﻿ <!---GetLogo--->
+@using App.Aplication
+@model App.Domain.Entities.GlobalSetting.SystemSetting
+
+@if (Model != null)
+{
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#w2-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="@Url.Action("Index", "Home", new { area = "" })" title='@Model.Title' >
+            <img src="@Model.LogoImage.ValidateImage()" alt="@Model.Title">
+        </a>
+    </div>
+}
+<!---/GetLogo--->

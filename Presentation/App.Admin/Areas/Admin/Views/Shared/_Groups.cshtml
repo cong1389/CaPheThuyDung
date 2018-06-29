@@ -1,0 +1,35 @@
+﻿@helper selected()
+{
+    @:checked="checked"
+}
+<h3 class="form-section">Cấp quyền cho tài khoản</h3>
+@if (ViewBag.Groups != null)
+{
+    var list= (List<GroupRole>) ViewBag.GroupsChoice;
+    <div class="form-group">
+        <div class="col-md-offset-1 col-md-9">
+            <div class="checkbox-list">
+                @foreach (var item in (List<GroupRole>)ViewBag.Groups)
+                {
+                    <label class="checkbox-inline tooltips" data-original-title="@item.Description">
+                        @if (list != null && list.Any())
+                        {
+                            if (list.Exists(x => x.GroupId == item.GroupId))
+                            {
+                                <input id="GroupId" name="GroupId" type="checkbox" @selected() value="@item.GroupId"> @item.GroupName
+                            }
+                            else
+                            {
+                                <input id="GroupId" name="GroupId" type="checkbox" value="@item.GroupId"> @item.GroupName
+                            }
+                        }
+                        else
+                        {
+                            <input id="GroupId" name="GroupId" type="checkbox" value="@item.GroupId"> @item.GroupName
+                        } 
+                    </label>
+                }
+            </div>
+        </div>
+    </div>
+} 

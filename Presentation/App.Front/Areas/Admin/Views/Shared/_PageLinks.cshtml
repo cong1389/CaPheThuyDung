@@ -1,0 +1,73 @@
+﻿@using App.Framework.Utilities
+
+@{
+   Helper.PageInfo pi = Model is Helper.PageInfo ? Model : ViewBag.PageInfo as Helper.PageInfo;
+    if (pi == null)
+    {
+        return;
+    }
+    var total = pi.ItemsPerPage > 0 ? (int)Math.Ceiling((decimal)pi.TotalItems / pi.ItemsPerPage) : 0;
+}
+@*@if (total > ExtentionUtils.PageSize)
+    {*@
+<div class="row">
+    <div class="col-md-3 col-sm-4">
+        <div class="dataTables_info" role="status" aria-live="polite">Trang thứ  @pi.CurrentPage của <span class="totalpages">@total</span> trang.</div>
+    </div>
+    <div class="col-md-9 col-sm-8">
+        <div class="dataTables_paginate">
+            <ul class="pagination">
+                @if (pi.CurrentPage > 1)
+                {
+                    <li class="prev">
+                        <a href="@pi.Url(pi.CurrentPage - 1)">
+                            <i class="fa fa-angle-left"></i>
+                        </a>
+                    </li>
+                }
+                else
+                {
+                    <li class="prev disabled">
+                        <a href="javascript:void(0);">
+                            <i class="fa fa-angle-left"></i>
+                        </a>
+                    </li>
+                }
+                @for (var i = 1; i <= total; i++)
+                {
+                    <li>
+                        <a href="@pi.Url(i)">@i</a>
+                    </li>
+                }
+                @if (pi.CurrentPage < total)
+                {
+                    <li class="next">
+                        <a href="@pi.Url(pi.CurrentPage + 1)">
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </li>
+                }
+                else
+                {
+                    <li class="next disabled">
+                        <a href="javascript:void(0);">
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </li>
+                }
+                @*<li class="limit">
+                        Trang thứ  @pi.CurrentPage của <span class="totalpages">@total</span> trang.
+                    </li>*@
+                @*@if (!pi.HideLimitBox)
+                    {
+                        <li class="limit">View <select class="input width-0" size="1"><option>20</option><option>50</option><option>100</option><option>200</option></select> per page</li>
+                    }*@
+                @*<li class="limit">Total @pi.TotalItems records found</li>*@
+                @* } *@
+            </ul>
+
+        </div>
+    </div>
+</div>
+
+@* } *@

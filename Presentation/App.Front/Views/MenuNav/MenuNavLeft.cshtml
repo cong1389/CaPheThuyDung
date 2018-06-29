@@ -1,0 +1,15 @@
+﻿<!----MenuNavLeft--->
+@using App.Aplication
+@model IEnumerable<App.FakeEntity.Menu.MenuNavViewModel>
+
+@if (Model.IsAny())
+{
+    <ul class="sub-category-list">
+        @foreach (var item in Model)
+        {
+            <li><a href="@Url.Action("GetContent", "Menu", new {menu = item.SeoUrl, area = ""})">@item.MenuName</a></li>
+        }
+    </ul>
+
+}
+<!----/MenuNavLeft--->

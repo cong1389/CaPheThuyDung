@@ -1,0 +1,28 @@
+﻿@using App.Aplication
+@model IEnumerable<App.Domain.Entities.Menu.MenuLink>
+@if (Model.IsAny())
+{
+    int j = 0;
+    <ul class="list-inline">
+        @foreach (var child in Model)
+        {
+            if (j == 0)
+            {
+                <li>
+                    <a href="#" data-id="@child.Id" class="active" rel="nofollow">
+                        @child.MenuName
+                    </a>
+                </li>
+            }
+            else
+            {
+                <li>
+                    <a href="javascipt:void(0)" data-id="@child.Id" rel="nofollow">
+                        @child.MenuName
+                    </a>
+                </li>
+            }
+            j++;
+        }
+    </ul>
+}

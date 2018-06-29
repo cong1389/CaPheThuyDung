@@ -1,0 +1,12 @@
+﻿<!---Header--->
+<header class="clearfix">
+    <nav id="w2" class="navbar no-margin no-border">
+        <div class="container">
+            @{
+                Html.RenderAction("GetLogo", "Summary");
+                Html.RenderAction("TopMenu", "MenuNav");
+            }
+        </div>
+    </nav>
+</header>
+<!---/Header--->

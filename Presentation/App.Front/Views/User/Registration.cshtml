@@ -1,0 +1,149 @@
+﻿<!---Registration-->
+@using App.Aplication.Extensions
+@model App.FakeEntity.User.RegisterFormViewModel
+
+<div class="columns-container">
+    <div class="container reg-shop" id="columns">
+        <div class="row clearfix">
+            <div id="layout-page" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                <span class="header-contact header-page clearfix text-center">
+                    <h1>Tạo tài khoản</h1>
+                </span>
+                <div class="userbox">
+                    @using (Html.BeginForm("Registration", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger col-md-offset-3" })
+                        @Html.AntiForgeryToken()
+
+                        <div id="last_name" class="clearfix large_form">
+                            @Html.LabelFor(mode => mode.UserName, new { @class = "label icon-field" })
+                            @Html.TextBoxFor(mode => mode.UserName, new { required = true, @class = "text", placeholder = Html.DisplayPlaceHolderFor(m => m.UserName) })
+                            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "required require_symbol" })
+                        </div>
+
+                        <div id="last_name" class="clearfix large_form">
+                            @Html.LabelFor(mode => mode.LastName, new { @class = "label icon-field" })
+                            @Html.TextBoxFor(mode => mode.LastName, new { required = true, @class = "text", placeholder = Html.DisplayPlaceHolderFor(m => m.LastName) })
+                            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "required require_symbol" })
+                        </div>
+
+                        <div id="last_name" class="clearfix large_form">
+                            @Html.LabelFor(mode => mode.FirstName, new { @class = "label icon-field" })
+                            @Html.TextBoxFor(mode => mode.FirstName, new { required = true, @class = "text", placeholder = Html.DisplayPlaceHolderFor(m => m.FirstName) })
+                            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "required require_symbol" })
+                        </div>
+
+                        <div id="last_name" class="clearfix large_form">
+                            @Html.LabelFor(mode => mode.Email, new { @class = "label icon-field" })
+                            @Html.TextBoxFor(mode => mode.Email, new { type = "email", required = true, @class = "text", placeholder = Html.DisplayPlaceHolderFor(m => m.Email) })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "required require_symbol" })
+                        </div>
+
+                        <div id="last_name" class="clearfix large_form">
+                            @Html.LabelFor(mode => mode.Password, new { @class = "label icon-field" })
+                            @Html.TextBoxFor(mode => mode.Password, new { type = "password", required = true, @class = "password text", placeholder = Html.DisplayPlaceHolderFor(m => m.Password) })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "required require_symbol" })
+                        </div>
+
+                        <div id="last_name" class="clearfix large_form">
+                            @Html.LabelFor(mode => mode.ConfirmPassword, new { @class = "label icon-field" })
+                            @Html.TextBoxFor(mode => mode.ConfirmPassword, new { type = "password", required = true, @class = "password text", placeholder = Html.DisplayPlaceHolderFor(m => m.ConfirmPassword) })
+                            @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "required require_symbol" })
+                        </div>
+
+                        <div class="action_bottom">
+                            <input class="btn" type="submit" value="Đăng ký">
+                        </div>
+                        <div class="req_pass">
+                            <a class="come-back" href="@Url.Action("Login", "User", new { area = "" })">Quay về</a>
+                        </div>
+                    }
+
+                </div>
+
+            </div><!-- #register -->
+        </div>
+    </div>
+</div>
+
+@*<section id="content">
+        <div class="container clearfix">
+            <div class="accordion accordion-md divcenter nobottommargin clearfix" style="max-width: 550px;">
+                <!-- register -->
+                <div id='register'>
+                    <div class="acctitle"><i class="acc-closed fa fa-user"></i><i class="acc-open fa fa-check-circle"></i>Người dùng mới? Đăng ký tài khoản</div>
+                    <div class="acc_content clearfix">
+
+                        @using (Html.BeginForm("Registration", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger col-md-offset-3" })
+                            @Html.AntiForgeryToken()
+
+                            <input name='form_type' type='hidden' value='create_customer'>
+                            <input name='utf8' type='hidden' value='✓'>
+
+
+                            <div class="form-group">
+                                @Html.LabelFor(mode => mode.FirstName)<span class="required require_symbol">*</span>
+                                @Html.TextBoxFor(mode => mode.FirstName, new { required = true, @class = "input-sm form-control" })
+                                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "required require_symbol" })
+
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(mode => mode.LastName)<span class="required require_symbol">*</span>
+                                @Html.TextBoxFor(mode => mode.LastName, new { required = true, @class = "input-sm form-control" })
+                                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "required require_symbol" })
+
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(mode => mode.UserName)<span class="required require_symbol">*</span>
+                                @Html.TextBoxFor(mode => mode.UserName, new { required = true, @class = "input-sm form-control" })
+                                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "required require_symbol" })
+
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(mode => mode.Email)<span class="required require_symbol">*</span>
+                                @Html.TextBoxFor(mode => mode.Email, new { required = true, @class = "input-sm form-control" })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "required require_symbol" })
+
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(mode => mode.Password)<span class="required require_symbol">*</span>
+                                @Html.PasswordFor(mode => mode.Password, new { required = true, @class = "input-sm form-control" })
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "required require_symbol" })
+
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(mode => mode.ConfirmPassword)<span class="required require_symbol">*</span>
+                                @Html.PasswordFor(mode => mode.ConfirmPassword, new { required = true, @class = "input-sm form-control" })
+                                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "required require_symbol" })
+                            </div>
+                            <div class="col_full nobottommargin">
+                                <button class="button button-black nomargin" name="register-form-submit" type='submit'>Đăng ký</button>
+                            </div>
+
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- check password confirm -->
+        <script>
+            $(document).ready(function () {
+                $('.repassword_warning').hide();
+            });
+            $('#register-form-password, #register-form-repassword').on('keyup', function () {
+                if (($('#register-form-password').val() !== '') && ($('#register-form-password').val() !== $('#register-form-repassword').val())) {
+                    $('.repassword_warning').show();
+                    $('#register-form-submit').prop('disabled', true);
+                }
+                else {
+                    $('.repassword_warning').hide();
+                    $('#register-form-submit').prop('disabled', false);
+                }
+            })
+        </script>
+        <!-- end check password confirm -->
+        <!-- #content end -->
+    </section>*@
+<!---/Registration-->

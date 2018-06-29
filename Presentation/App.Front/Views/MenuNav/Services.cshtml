@@ -1,0 +1,33 @@
+﻿<!----Services-->
+@using App.Aplication
+@model IEnumerable<App.FakeEntity.Menu.MenuNavViewModel>
+@if (Model != null)
+{
+	<div class="services2">
+		<ul>
+			@foreach (var item in Model)
+			{
+				<li class="col-xs-6 col-sm-4 col-md-3 services2-item">
+					<div class="service-wapper">
+						<div class="row">
+							<a href="@Url.Action("GetContent", "Menu", new {menu = item.SeoUrl, area = ""})">
+								<div class="col-sm-6 image">
+									<div class="icon">
+										<img src="@item.ImageMediumSize.ValidateImage()" alt="@item.MenuName" />
+									</div>
+									<h3 class="title">
+										@Html.Raw(item.MenuName)
+									</h3>
+								</div>
+								<div class="col-sm-6 text">
+									@*@Html.Raw(item.ShortDesc)*@
+								</div>
+							</a>
+						</div>
+					</div>
+				</li>
+			}
+		</ul>
+	</div>
+}
+<!----/ Services-->

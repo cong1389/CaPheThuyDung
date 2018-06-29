@@ -1,0 +1,65 @@
+﻿@model IEnumerable<App.Domain.Entities.GlobalSetting.ContactInformation>
+
+@if (Model != null)
+{
+    var contact = Model.SingleOrDefault(x => x.Type == 1);
+
+    <h3>Chúng tôi ở đây</h3>
+    <hr class="line-right">
+    <h3 class="name-company">@contact.Title</h3>
+    <ul class="info-address">
+        @if (!string.IsNullOrEmpty(contact.Address))
+        {
+            <li>
+                <i class="glyphicon glyphicon-map-marker"></i>
+                <span>@contact.Address</span>
+            </li>
+        }
+
+        @if (!string.IsNullOrEmpty(contact.Email))
+        {
+            <li>
+                <i class="glyphicon glyphicon-envelope"></i>
+                <span>@contact.Email</span>
+            </li>
+        }
+
+        @if (!string.IsNullOrEmpty(contact.MobilePhone))
+        {
+            <li>
+                <i class="glyphicon glyphicon-phone-alt"></i>
+                <span>@contact.MobilePhone</span>
+            </li>
+        }
+
+    </ul>
+
+    foreach (var item in Model.Where(x => x.Type == 0))
+    {
+        <ul class="info-address">
+            <li><strong>@item.Title:</strong> </li>
+            @if (!string.IsNullOrEmpty(item.Address))
+            {
+                <li>
+                    <i class="glyphicon glyphicon-map-marker"></i>
+                    <span> @T("Address.Lable"): @item.Address</span>
+                </li>
+            }
+            @if (!string.IsNullOrEmpty(item.MobilePhone))
+            {
+                <li>
+                    <i class="glyphicon glyphicon-envelope"></i>
+                    <span> @T("DienThoai.Lable"): @item.MobilePhone</span>
+                </li>
+
+            }
+            @if (!string.IsNullOrEmpty(item.Email))
+            {
+                <li>
+                    <i class="glyphicon glyphicon-phone-alt"></i>
+                    <span> Email: @item.Email</span>
+                </li>
+            }
+        </ul>
+    }
+}

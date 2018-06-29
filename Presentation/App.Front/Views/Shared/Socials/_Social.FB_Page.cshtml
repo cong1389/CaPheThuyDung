@@ -1,0 +1,32 @@
+﻿<!---_Social.FB_Page-->
+
+<div id="divFBFanPage" class="scroller" data-always-visible="1" data-rail-visible="0"></div>
+
+<script>
+
+    //(function (d, s, id) {
+    //    var js, fjs = d.getElementsByTagName(s)[0];
+    //    if (d.getElementById(id)) return;
+    //    js = d.createElement(s); js.id = id;
+    //    js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11&appId=202388200323611';
+    //    fjs.parentNode.insertBefore(js, fjs);
+    //}(document, 'script', 'facebook-jssdk'))
+
+    jQuery(function () {
+        'use strict';
+
+        jQuery.post('@Url.Action("GetSettingSeo", "Summary")')
+            .done(function (data) {
+                var fbLink = data.response.FbLink;
+                if (fbLink != null) {
+                    var code = '<div class="fb-page" data-href="' + fbLink + '" data-tabs="timeline" data-height="250" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="true"><blockquote cite="' + fbLink + '" class="fb-xfbml-parse-ignore"><a href="' + fbLink + '"></a></blockquote></div>';
+
+                    jQuery("#divFBFanPage").html(code);
+                }
+
+                    });
+        })
+
+</script>
+
+<!---/_Social.FB_Page-->

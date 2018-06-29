@@ -1,0 +1,41 @@
+﻿<!--Province--->
+@using App.Aplication
+@using App.Domain.Common
+@using App.Service.Language
+@using Resources
+@model App.FakeEntity.Location.ProvinceViewModel
+
+<div class="form-horizontal">
+	<div class="form-body">
+		@Html.ValidationSummary(true, "", new { @class = "text-danger col-md-offset-3" })
+		<div class="form-group">
+			@Html.LabelFor(model => model.Name, new {@class = "control-label col-md-3"})
+			<div class="col-md-5">
+				@Html.TextBoxFor(model => model.Name, new {@class = "form-control"})
+				@Html.ValidationMessageFor(model => model.Name, "", new {@class = "help-block"})
+			</div>
+		</div> 
+		<div class="form-group">
+			@Html.LabelFor(model => model.OrderDisplay, new { @class = "control-label col-md-3" })
+			<div class="col-md-5">
+				@Html.TextBoxFor(model => model.OrderDisplay, new { @class = "form-control", type = "number" })
+				@Html.ValidationMessageFor(model => model.OrderDisplay, "", new { @class = "help-block" })
+			</div>
+		</div> 
+		<div class="form-group">
+			@Html.LabelFor(model => model.Status, new { @class = "control-label col-md-3" })
+			<div class="col-md-5">
+				<div class="radio-list">
+					<label class="radio-inline">
+						@Html.RadioButtonFor(x => x.Status, (int)Status.Enable, new {@checked="checked"}) @FormUI.Active
+					</label>
+					<label class="radio-inline">
+						@Html.RadioButtonFor(x => x.Status, (int)Status.Disable) @FormUI.InActive
+					</label>
+				</div>
+				@Html.ValidationMessageFor(model => model.Status, "", new { @class = "help-block" })
+			</div>
+		</div>
+	</div>
+</div>
+<!--/Province--->

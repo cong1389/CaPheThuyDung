@@ -1,0 +1,429 @@
+﻿<!---PostDetail--->
+@using App.Aplication
+@using App.Domain.Common
+@using App.Domain.Entities.Data
+@model Post
+
+@if (Model != null)
+{
+	<div class="post-detail columns-container">
+		<div class="container" id="columns">
+			@{
+				Html.RenderPartial("_BreadCrumb");
+			}
+
+			<!-- row -->
+			<div class="row">
+				<!-- Left colunm -->
+				<div class="column col-xs-12 col-sm-3" id="left_column">
+					<!-- block best sellers -->
+					@{
+						Html.RenderAction("PostHot", "Post");
+					}
+					<!-- ./block best sellers  -->
+					<!-- block category -->
+					<div class="block left-module">
+						<p class="title_block">Danh mục</p>
+						<div class="block_content">
+							<!-- layered -->
+							<div class="layered layered-category">
+								<div class="layered-content">
+									@Html.Action("MenuLinkSideBar", "MenuNav", new { area = "", virtualId = Model.MenuLink.VirtualId, proAttrs = ViewBag.ProAttrs })
+								</div>
+							</div>
+							<!-- ./layered -->
+						</div>
+					</div>
+					<!-- ./block category  -->
+					@{
+						Html.RenderAction("PostDiscountBlock", "Post");
+					}
+
+				</div>
+				<!-- ./left colunm -->
+				<!-- Center colunm-->
+				<div class="center_column col-xs-12 col-sm-9" id="center_column">
+					<!-- Product -->
+					<div id="product">
+						<form method="post" id="ProductDetailsForm" action="" crossorigin="anonymous">
+							<div class="primary-box row">
+								<div class="pb-left-column col-xs-12 col-sm-6">
+									<!-- product-imge-->
+									<div class="product-image text-center">
+										<div id="gallery" class="royalSlider rsDefault">
+											@if (Model.GalleryImages.IsAny())
+											{
+												foreach (var item in Model.GalleryImages)
+												{
+													<a class="rsImg" data-rsBigImg="@Url.Content("~/" + item.ImageBig)" href="@Url.Content("~/" + item.ImageBig)">
+														<img height="350" class="rsTmb" src="@item.ImageBig.ValidateImage()" />
+													</a>
+												}
+											}
+											else
+											{
+												<a class="rsImg" data-rsBigImg="@Url.Content("~/" + Model.ImageMediumSize)" href="@Url.Content("~/" + Model.ImageMediumSize)">
+													<img width="195" height="350" class="rsTmb" src="@Model.ImageMediumSize.ValidateImage()" alt="@Model.Title" />
+												</a>
+											}
+										</div>
+
+									</div>
+									<!-- product-imge-->
+								</div>
+								<div class="pb-right-column col-xs-12 col-sm-6">
+									<h1 class="product-name">@Model.Title</h1>
+									<p class="sku">Mã sản phẩm:@Model.ProductCode</p>
+									<p class="sku">Nhà sản xuất:@Model.Manufacturer.Title</p>
+									@RenderPrice(Model)
+
+									<div class="info-orther">
+
+										<p class="tt">
+											Tình trạng:
+											@if (Model.OutOfStock)
+											{
+												<span class="label label-danger">Hết hàng</span>
+											}
+											else
+											{
+												<span class="label label-success">Còn hàng</span>
+											}
+										</p>
+									</div>
+
+									@if (Model.MenuLink.TemplateType == (int)TemplateContent.Product)
+									{
+										int i = 0;
+										<div class="product-attr">
+											@foreach (var item in Model.AttributeValues.Select(x => x.Attribute).Distinct().ToList())
+											{
+												<div class="action product-desc">
+													<label>@item.AttributeName</label>
+													<div class="conten-attr">
+														@foreach (var at in Model.AttributeValues.Where(x => x.AttributeId == item.Id))
+														{
+															string activeClass = "active";
+															if (i > 0)
+															{
+																activeClass = string.Empty;
+															}
+															i += 1;
+															<div class="item @activeClass">
+																@if (!string.IsNullOrEmpty(at.ColorHex))
+																{
+																	<div class="select-item">
+																		<label>
+																			<input data-post="@Model.Id" type="checkbox" name="color" value="@at.Id" data-id="@Model.Id" />
+																			<span class="bg" style="background-color: @at.ColorHex"></span>
+																			<span>@at.ValueName</span>
+																		</label>
+																	</div>
+																}
+																else
+																{
+																	<div class="select-item size">
+																		<label>
+																			<input data-post="@Model.Id" type="checkbox" name="color" value="@at.Id" data-id="@Model.Id" />
+																			<span>@at.ValueName</span>
+																		</label>
+																	</div>
+																}
+															</div>
+														}
+													</div>
+												</div>
+											}
+										</div>
+									}
+									@if (!Model.OutOfStock)
+									{
+										<div class="action product-desc">
+											<div class="select-wrapper">
+												<label>Số lượng</label>
+												<input id="quantity" type="number" name="quantity" min="1" value="1" class="tc item-quantity">
+											</div>
+										</div>
+
+										<div class="form-action">
+											<div class="button-group"><a href="javascript:;" class="addToCart btn-add-cart">Thêm vào giỏ</a></div>
+										</div>
+									}
+									else
+									{
+										<div class="form-action">
+											<div class="button-group"><a href="javascript:;" class="addToCart btn-add-cart">Vui lòng liên hệ</a></div>
+										</div>
+									}
+									<div class="action product-desc">
+										<div class="sendtofriend-print">
+											<div class="post-detail__social">
+												@{Html.RenderPartial("Socials/_Social.FB_Share");}
+											</div>
+											<div class="post-detail__social">
+												@{Html.RenderPartial("Socials/_Social.FB_like");}
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+
+						<!-- tab product -->
+						<div class="product-tab">
+							<ul class="nav-tab">
+								<li class="active">
+									<a aria-expanded="false" data-toggle="tab" href="#product-detail">Chi tiết sản phẩm</a>
+								</li>
+
+								<li>
+									<a aria-expanded="true" data-toggle="tab" href="#information">Bình luận</a>
+								</li>
+
+							</ul>
+							<div class="tab-container">
+								<div id="product-detail" class="tab-panel active">
+									<div id="divAttribute"></div>
+
+									<h2>THÔNG TIN CHI TIẾT</h2>
+									@Html.Raw(Model.Description)
+
+								</div>
+
+								<div id="information" class="tab-panel">
+									<div id="binhluan">
+										<div class="container-fluid">
+											@{Html.RenderPartial("Socials/_Social.FB_Comment");}
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+						<!-- ./tab product -->
+						<!-- box product -->
+						@Html.Action("PostRelative", "Post", new { area = "", virtualId = Model.MenuLink.VirtualId, productId = Model.Id })
+					</div>
+					<!-- Product -->
+				</div>
+				<!-- ./ Center colunm -->
+			</div>
+			<!-- ./row-->
+		</div>
+	</div>
+}
+
+@helper RenderPrice(Post post)
+	{
+		if (post.OutOfStock)
+		{
+			return;
+		}
+
+		var galleryImages = post.GalleryImages;
+		if (!galleryImages.IsAny())
+		{
+			<div class="product-price-group">
+				<span class="price"> @post.Price.FormatPrice()</span>
+			</div>
+			@Html.Hidden("hddPrice", post.Price.ToString())
+			return;
+		}
+
+		var attrid = post.AttributeValues.FirstOrDefault();
+		if (attrid != null)
+		{
+			var gallery = post.GalleryImages.FirstOrDefault(x =>
+			 x.AttributeValueId == attrid.Id);
+			decimal? price = null;
+			<div class="product-price-group">
+				@if (gallery != null && gallery.Price != null)
+				{
+					if (post.Price.HasValue && post.Discount.HasValue)
+					{
+						price = gallery.Price - gallery.Price * post.Discount / 100;
+						<span class="price"> @Html.Raw((gallery.Price - gallery.Price * post.Discount / 100).FormatPrice())</span>
+					}
+					else if (post.Price.HasValue && !post.Discount.HasValue)
+					{
+						price = gallery.Price;
+						<span class="price"> @Html.Raw(price.FormatPrice())</span>
+					}
+				}
+				else
+				{
+					<span class="text text-danger">@T("LienHeDatHang.Lable")</span>
+				}
+				@Html.Hidden("hddPrice", price.ToString())
+
+				@if (post.Price.HasValue && post.Discount.HasValue)
+				{
+					<div style="" class="saleoff-price-item">
+						<span class="price-label">Tiết kiệm:</span>
+						<span id="product-discount" class="product-discount">@post.Discount%</span>
+						<span id="span-saving-price" class="discount">
+							@if (gallery != null)
+							{
+								@Html.Raw((gallery.Price * post.Discount / 100).FormatPrice())
+								@:</span>
+								@:</div>
+								@:<div class="old-price-item">
+								<span class="price-label">Giá thị trường:</span>
+								@:<span id="span-list-price"> @gallery.Price.FormatPrice()
+							}
+						</span>
+					</div>
+				}
+			</div>
+		}
+
+}
+
+@section renderStyles
+{
+	<link href="~/Content/royalslider/royalslider.min.css" rel="stylesheet" />
+	<link href="~/Content/royalslider/rs-default.css" rel="stylesheet" />
+}
+
+@section renderJQuery{
+	<script src="~/Scripts/royalslider/jquery.royalslider.min.js"></script>
+	<script type="text/javascript">
+
+        jQuery(function() {
+            'use strict';
+
+            //Get attribute
+            var menuId = @(Model.Id > 0? Model.MenuId: -1);
+
+            jQuery.post('@Url.Action("GetByMenuId", "Post")', { "menuId": menuId, "entityId": @Model.Id })
+                .done(function(data) {
+                    if (data.success === true) {
+                        jQuery("#divAttribute").html(data.list);
+                    }
+                });
+        });
+
+        function initGallery() {
+            $('#gallery')
+                .royalSlider({
+                    fullscreen: {
+                        enabled: true,
+                        nativeFS: true
+                    },
+                    controlNavigation: 'thumbnails',
+                    loop: false,
+                    imageScaleMode: 'fit',
+                    autoScaleSliderHeight: 450,
+                    autoScaleSliderWidth: 490,
+                    slidesSpacing: 5,
+                    autoHeight: false,
+                    autoScaleSlider: false,
+                    imageAlignCenter: true,
+                    numImagesToPreload: 2,
+                    arrowsNav: true,
+                    arrowsNavAutoHide: true,
+                    arrowsNavHideOnTouch: true,
+                    keyboardNavEnabled: true,
+                    fadeinLoadedSlide: true,
+                    globalCaption: false,
+                    globalCaptionInside: false,
+                    thumbs: {
+                        //orientation: 'vertical',
+                        appendSpan: true,
+                        firstMargin: false,
+                        paddingTop: 15,
+                        spacing: 15,
+                        autoCenter: false
+                    }
+                });
+            $('.rsContainer').on('touchmove touchend', function() {});
+        }
+
+        $(function() {
+
+            initGallery();
+
+            var slider = $('#gallery').data('royalSlider');
+            slider.ev.on('rsSlideClick',
+                function() {
+                    if (slider.isFullscreen) {
+                        slider.next();
+                    } else {
+                        slider.enterFullscreen();
+                    }
+                });
+        });
+
+        function CartNotification() {
+            jQuery.post('@Url.Action("OrderNotification", "ShoppingCart")')
+                .done(function(data) {
+                    setTimeout(function() {
+                        $.jGrowl(data.list, { life: 5000 });
+                    });
+                });
+        }
+
+
+        //add to cart
+        $(".addToCart").on('click',
+            function(e) {
+                e.preventDefault();
+                var formId = $(this).closest('form').attr('id');
+
+                var dataParam = {
+                    postId: @Model.Id,
+                    quantity: parseInt($('#quantity').val()),
+                    price: parseInt($('#hddPrice').val()),
+                    form: jQuery('#' + formId).serialize()
+                };
+
+                var param = {
+                    type: 'POST',
+                    url: '@Url.Action("AddProduct", "ShoppingCart")',
+                    data: dataParam,
+                    dataType: 'json',
+                    success: function(response) {
+                        AddItemSuccess(response);
+                        CartNotification();
+                    },
+                    error: function(xmlHttpRequest, textStatus) {
+                        Haravan.onError(xmlHttpRequest, textStatus);
+                    }
+                }
+                jQuery.ajax(param);
+
+            });
+
+        function AddItemSuccess(data) {
+        	jQuery("#top-cart").html(data.list);
+	        jQuery(".cart-block .cart-empty").remove();
+        };
+
+        function addItem(formId) {
+            Haravan.addItemFromForm(formId, EGA.product.addItemSuccess);
+        };
+
+	</script>
+}
+
+@section facebook
+{
+	@*<div id="fb-root"></div>
+		<script>
+			(function (d, s, id) {
+				var js, fjs = d.getElementsByTagName(s)[0];
+				if (d.getElementById(id)) return;
+				js = d.createElement(s);
+				js.id = id;
+				js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&appId=743590089013725&version=v2.0";
+				fjs.parentNode.insertBefore(js, fjs);
+			}(document, 'script', 'facebook-jssdk'));
+		</script>*@
+}
+
+@section google
+{
+	@*<script src="https://apis.google.com/js/platform.js" async defer></script>*@
+}
+
+<!---/PostDetail---->

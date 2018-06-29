@@ -1,0 +1,59 @@
+﻿<!--NewsDetail---->
+@using App.Aplication
+@model App.Domain.Entities.Data.News
+
+@if (Model != null)
+{
+	Html.RenderAction("BannerTop", "Banner", new { menuId = ViewBag.BannerId, title = ViewBag.Title });
+	<div class="columns-container">
+		<div class="container" id="columns">
+			@Html.Partial("_BreadCrumb")
+			<!-- row -->
+			<div class="row">
+				<!-- Left colunm -->
+				<div class="column col-xs-12 col-sm-3" id="left_column">
+					@{
+						Html.RenderAction("MenuNavNews", "MenuNav", new { virtualId = ViewBag.VirtualId, area = "" });
+						Html.RenderAction("NewsTimeLine", "News", new { area = "" });
+						Html.RenderAction("PostHot", "Post", new { area = "" });
+					}
+
+				</div>
+				<!-- ./left colunm -->
+				<!-- Center colunm-->
+				<div class="center_column col-xs-12 col-sm-9" id="center_column">
+					<h1 class="page-heading">
+						<span class="page-heading-title2">@Model.Title</span>
+					</h1>
+					<article class="entry-detail">
+						<div class="entry-meta-data">
+							<span class="author">
+								<i class="fa fa-user"></i>
+								by: <a href="#">@Model.CreatedBy</a>
+							</span>
+
+							<span class="date"><i class="fa fa-calendar"></i> @Model.CreatedDate.ToString("dd/MM/yyyy")</span>
+
+						</div>
+						<div class="entry-photo">
+							<img src="@Model.ImageBigSize.ValidateImage()" alt="@Model.Title" title="@Model.Title">
+						</div>
+						<div class="content-text clearfix">
+							@Html.Raw(Model.Description)
+						</div>
+
+					</article>
+					@{
+
+						Html.RenderAction("NewsRelative", "News", new { virtualId = Model.MenuLink.VirtualId, newsId = Model.Id, area = "" });
+					}
+
+				</div>
+				<!-- ./ Center colunm -->
+			</div>
+			<!-- ./row-->
+		</div>
+	</div>
+}
+
+<!--/NewsDetail---->

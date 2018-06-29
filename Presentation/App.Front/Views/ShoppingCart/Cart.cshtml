@@ -1,0 +1,98 @@
+﻿<!---Cart-->
+@using App.Aplication
+@model App.Front.Models.ShoppingCart.MiniShoppingCartModel
+
+@{
+	ViewBag.Title = "Giỏ hàng";
+}
+
+<section id="content" class="cart goweb-cart">
+
+    <div class="container clearfix">
+        @if (Model.Items.IsAny())
+        {
+            <h1 class="p25 title-page"><i class="icon-aothun"></i>Giỏ hàng của bạn</h1>
+
+            <form action="/cart" method="post" id="cartformpage">
+                <div class="table-responsive">
+                    <table class="table table-bordered cart cart_summary">
+                        <thead>
+                            <tr>
+                                <th class="cart-product-thumbnail">&nbsp;</th>
+                                <th class="cart-product-name">Sản phẩm</th>
+                                <th class="cart-product-price">Đơn giá</th>
+                                <th class="cart-product-quantity">Số lượng</th>
+                                <th class="cart-product-subtotal">Thành tiền</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bodyCart">
+                            @Html.Action("CartItem", "ShoppingCart", new { area = "", model = Model })
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-6 col-sm-6 col-xs-12 pull-right  text-right">
+                        <input type="submit" name="startcheckout" value="startcheckout" id="startcheckout" class="hidden" />
+                        <button name="checkout" class="button button-3d  fright" onclick="$('#startcheckout').trigger('click'); return false;">
+                            Tiến hành đặt hàng
+                        </button>
+                    </div>
+                </div>
+            </form>
+        }
+        else
+        {
+            Html.RenderPartial("Messages/_MessageEmtyData");
+        }
+    </div>
+</section>
+
+<script>
+
+    function MinusQuantity(postid) {
+        var quantity = parseInt($('#product_quantity_' + postid).val());
+        if (quantity > 0) {
+            quantity -= 1;
+        }
+        else {
+            quantity = 0;
+        }
+        UpdateCartItem(postid, quantity);
+    }
+
+    function PlusQuantity(postid) {
+        var quantity = parseInt($('#product_quantity_' + postid).val());
+        if (quantity < 100) {
+            quantity += 1
+        }
+        else {
+            quantity = 100;
+        }
+        UpdateCartItem(postid, quantity);
+    }
+
+    function UpdateCartItem(postid, quantity) {
+
+        var dataParam = {
+            postId: postid,
+            quantity: parseInt(quantity),
+            price: parseInt($('#hddPrice' + postid).val())
+        };
+        var param = {
+            type: 'POST',
+            url: '@Url.Action("UpdateCartItem", "ShoppingCart")',
+            data: dataParam,
+            dataType: 'json',
+            success: function (response) {
+                jQuery("#bodyCart").html(response.list);
+            },
+            error: function (xmlHttpRequest, textStatus) {
+                Haravan.onError(xmlHttpRequest, textStatus);
+            }
+        }
+        jQuery.ajax(param);
+    }
+</script>
+
+<!---/Cart-->

@@ -1,0 +1,31 @@
+﻿@{
+    Layout = null; 
+}
+<style>
+    #map_canvas {
+        min-height: 600px;
+        width: 100%;
+    }
+</style>
+@model App.Domain.Entities.GlobalSetting.ContactInformation
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRQ1sJOBf7ZBQuAFZK-Oq9e5a1aVZrpbY"></script>
+<script src="~/Scripts/jquery.min.js"></script>
+<script src="~/Scripts/googlemap.js"></script>
+@if (Model != null)
+{
+    <script type="text/javascript">
+        function ShowMap() {
+            initMap('@Model.Lat',
+                '@Model.Lag',
+                '<h2>@Model.Title<h2><p>Hotline: @Model.Hotline</p><p>Điện thoại: @Model.MobilePhone</p><p>@Model.Email</p><p>Địa chỉ: @Model.Address</p>',
+                'map_canvas');
+        }
+
+        $(function() {
+            ShowMap();
+        });
+    </script>
+}
+<div id="map_canvas">
+
+</div>

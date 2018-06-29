@@ -1,0 +1,136 @@
+﻿<!-- Order Items -->
+<table class="w-100 brd order-items" cellpadding="10">
+    <thead>
+        <tr>
+            <th style="padding-right: 0" nowrap>Tên sản phẩm</th>
+            <th style="padding-right: 0" nowrap>Số lượng</th>
+            <th style="padding-right: 0" nowrap>Đơn giá</th>
+            <th nowrap>Thành tiền</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in Order.Items %}
+        <tr>
+            <td style="border-top: 1px solid #eceeef; padding-right: 0; line-height: 1.3em" width="70%">
+                {{ item.PostName }}
+            </td>
+            <td class="text-sm" style="border-top: 1px solid #eceeef; padding-right: 0" nowrap>
+                {{ item.Qty }}
+            </td>
+            <td class="text-sm" style="border-top: 1px solid #eceeef; padding-right: 0" nowrap>
+                {{ item.UnitPrice }}
+            </td>
+            <td class="text-sm" style="border-top: 1px solid #eceeef" class="text-right" nowrap>
+                <b>{{ item.LineTotal }}</b>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<!-- Order Summary -->
+{% assign totals = Order.Totals %}
+<table class="w-100 brd bg-light order-summary mb-4" cellpadding="10" style="border-top: 0">
+    <tr>
+        <td class="text-sm" width="50%">
+            {% if Order.CheckoutAttributes %}
+            {{ Order.CheckoutAttributes }}
+            {% endif %}
+        </td>
+        <!-- Totals -->
+        <td width="50%">
+            <table class="w-100">
+                <!-- Subtotal -->
+                <tr>
+                    <td class="text-sm" width="60%" nowrap>Tạm tính:</td>
+                    <td class="text-sm" width="40%" align="right" nowrap>{{ totals.SubTotal }}</td>
+                </tr>
+
+                <!-- Subtotal Discount -->
+                {% if totals.SubTotalDiscount %}
+                <tr>
+                    <td class="text-sm" width="60%" style="padding-top: 5px" nowrap>{{ 'Order.SubTotalDiscount' | T }}:</td>
+                    <td class="text-sm text-success" width="40%" style="padding-top: 5px" align="right" nowrap>{{ totals.SubTotalDiscount }}</td>
+                </tr>
+                {% endif %}
+
+                <!-- Shipping -->
+                {% if totals.Shipping %}
+                <tr>
+                    <td class="text-sm" width="60%" style="padding-top: 5px" nowrap>{{ 'Order.Shipping' | T }}:</td>
+                    <td class="text-sm text-danger" width="40%" style="padding-top: 5px" align="right" nowrap>{{ totals.Shipping }}</td>
+                </tr>
+                {% endif %}
+
+                <!-- Payment -->
+                {% if totals.Payment %}
+                <tr>
+                    <td class="text-sm" width="60%" style="padding-top: 5px" nowrap>{{ 'Order.PaymentMethodAdditionalFee' | T }}:</td>
+                    <td class="text-sm text-danger" width="40%" style="padding-top: 5px" align="right" nowrap>{{ totals.Payment }}</td>
+                </tr>
+                {% endif %}
+
+                <!-- Tax Rates -->
+                {% if totals.TaxRates %}
+                {% for rate in totals.TaxRates %}
+                <tr>
+                    <td class="text-sm" width="60%" style="padding-top: 5px" nowrap>{{ rate.Rate }}:</td>
+                    <td class="text-sm" width="40%" style="padding-top: 5px" align="right" nowrap>{{ rate.Value }}</td>
+                </tr>
+                {% endfor %}
+                {% endif %}
+            </table>
+    </tr>
+
+    <!-- Tax -->
+    {% if totals.Tax %}
+    <tr>
+        <td class="text-sm" width="60%" style="padding-top: 5px" nowrap>{{ 'Order.Tax' | T }}:</td>
+        <td class="text-sm" width="40%" style="padding-top: 5px" align="right" nowrap>{{ totals.Tax }}</td>
+    </tr>
+    {% endif %}
+
+    <!-- Order Total Discount -->
+    {% if totals.Discount %}
+    <tr>
+        <td class="text-sm" width="60%" style="padding-top: 5px" nowrap>{{ 'Order.TotalDiscount' | T }}:</td>
+        <td class="text-sm text-success" width="40%" style="padding-top: 5px" align="right" nowrap>{{ totals.Discount }}</td>
+    </tr>
+    {% endif %}
+
+    <!-- Gift Cards -->
+    {% if totals.GiftCardUsage %}
+    {% for gc in totals.GiftCardUsage %}
+    <tr>
+        <td class="text-sm" width="60%" style="padding-top: 5px" nowrap>{{ gc.GiftCard }}:</td>
+        <td class="text-sm" width="40%" style="padding-top: 5px" align="right" nowrap>{{ gc.UsedAmount }}</td>
+    </tr>
+    {% endfor %}
+    {% endif %}
+
+
+    <!-- Redeemed Reward Points-->
+    {% if totals.RedeemedRewardPoints %}
+    {% for rp in totals.RedeemedRewardPoints %}
+    <tr>
+        <td class="text-sm" width="60%" style="padding-top: 5px" nowrap>{{ rp.Title }}:</td>
+        <td class="text-sm" width="40%" style="padding-top: 5px" align="right" nowrap>{{ rp.Amount }}</td>
+    </tr>
+    {% endfor %}
+    {% endif %}
+
+
+    <!-- Rounding Difference -->
+    {% if totals.RoundingDiff %}
+    <tr>
+        <td class="text-sm" width="60%" style="padding-top: 5px" nowrap>{{ 'ShoppingCart.Totals.Rounding' | T }}:</td>
+        <td class="text-sm" width="40%" style="padding-top: 5px" align="right" nowrap>{{ totals.RoundingDiff }}</td>
+    </tr>
+    {% endif %}
+
+    <!-- TOTAL -->
+    <tr>
+        <td width="60%" style="padding-top: 5px" nowrap><b>Tổng cộng:</b></td>
+        <td width="40%" style="padding-top: 5px" align="right" nowrap><b>{{ totals.Total }}</b></td>
+    </tr>
+</table>
+

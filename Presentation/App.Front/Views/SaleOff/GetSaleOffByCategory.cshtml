@@ -1,0 +1,34 @@
+﻿@using App.Aplication
+@model IEnumerable<App.Domain.Entities.Data.News>
+@if (Model.IsAny())
+{
+    <div class="breadcrumb">
+        <div class="container">
+            <ul class="list-inline">
+                <li>
+                    <a href="@Url.Action("Index", "Home", new {area = ""})" class="home-link">
+                        <i class="icon-home"></i>
+                    </a>
+                </li>
+                <li class="active">
+                    <span>@ViewBag.Title</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="container">
+        <div class="saleoff animatedParent">
+            @foreach (var item in Model)
+            {
+                <div class="khuyen-mai animated growIn">
+                    <img src="@Url.Content("~/" + item.ImageBigSize)" alt="@item.Title">
+                    <a href="@Url.Action("NewsDetail", "News", new {seoUrl = item.SeoUrl, area = ""})" class="btn btn-primary den-ngay">Đến ngay </a>
+                </div>
+            }
+        </div>
+    </div> 
+
+}
+
+
+

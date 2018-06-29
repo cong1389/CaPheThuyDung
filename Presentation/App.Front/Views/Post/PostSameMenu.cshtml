@@ -1,0 +1,67 @@
+﻿@using App.Aplication
+@model IEnumerable<App.Domain.Entities.Data.Post>
+@if (Model.IsAny())
+{
+    int i = 1;
+    foreach (var item in Model)
+    {
+        if (i % 2 == 0)
+        {
+            <div class="pd-other-unit pd-other-r">
+                <div class="unittitle">
+                    <a title="@item.Title" href="@Url.Action("PostDetail","Post",new {seoUrl =item.SeoUrl, area=""})">@item.Title</a>
+                </div>
+                <div class="unitimg">
+                    <a href="@Url.Action("PostDetail","Post",new {seoUrl =item.SeoUrl, area=""})" title="@Url.Action("PostDetail","Post",new {seoUrl =item.SeoUrl, area=""})">
+                        <img src="@item.ImageSmallSize.ValidateImage()" alt="@item.Title">
+                    </a>
+                </div>
+                <div class="divtext">
+                    <div>
+                        <label>Địa điểm:</label>
+                        <span>
+                            @item.District.Name - @item.District.Province.Name
+                        </span>
+                    </div>
+                    <div>
+                        <label>Ngày đăng:</label>
+                        @string.Format("{0:dd/MM/yyyy}", item.CreatedDate)
+                    </div>
+                    <div>
+                        <label>Loại tin:</label><a href="@Url.Action("GetContent", "Menu", new { menu = item.MenuLink.SeoUrl, area = "" })">@item.MenuLink.MenuName</a>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="pd-other-unit ">
+                <div class="unittitle">
+                    <a title="@item.Title" href="@Url.Action("PostDetail","Post",new {seoUrl =item.SeoUrl, area=""})">@item.Title</a>
+                </div>
+                <div class="unitimg">
+                    <a href="@Url.Action("PostDetail","Post",new {seoUrl =item.SeoUrl, area=""})" title="@item.Title">
+                        <img src="@Url.Content("~/"+item.ImageSmallSize)" alt="@item.Title">
+                    </a>
+                </div>
+                <div class="divtext">
+                    <div>
+                        <label>Địa điểm:</label>
+                        <span>
+                            @item.District.Name - @item.District.Province.Name
+                        </span>
+                    </div>
+                    <div>
+                        <label>Ngày đăng:</label>
+                        @string.Format("{0:dd/MM/yyyy}", item.CreatedDate)
+                    </div>
+                    <div>
+                        <label>Loại tin:</label><a href="@Url.Action("GetContent", "Menu", new { menu = item.MenuLink.SeoUrl, area = "" })">@item.MenuLink.MenuName</a>
+                    </div>
+                </div>
+            </div>
+        }
+        i++;
+    }
+
+}

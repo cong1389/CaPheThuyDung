@@ -1,0 +1,69 @@
+﻿@using App.Framework.Utilities
+
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <meta charset="utf-8"/>
+    <title>Thành viên đăng nhập</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <meta content="" name="description"/>
+    <meta content="" name="author"/>
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/>
+    <link href="@Url.FakePathAdmin("content/plugins/font-awesome/css/font-awesome.min.css")" rel="stylesheet"/>
+    <link href="@Url.FakePathAdmin("content/plugins/simple-line-icons/simple-line-icons.min.css")" rel="stylesheet"/>
+    <link href="@Url.FakePathAdmin("content/plugins/bootstrap/css/bootstrap.min.css")" rel="stylesheet"/>
+    <link href="@Url.FakePathAdmin("content/global/layout.min.css")" rel="stylesheet"/>
+    <link href="@Url.FakePathAdmin("content/plugins/uniform/css/uniform.default.css")" rel="stylesheet"/>
+    <link href="@Url.FakePathAdmin("content/global/components.min.css")" rel="stylesheet"/>
+    <link href="@Url.FakePathAdmin("content/global/plugins.min.css")" rel="stylesheet"/>
+    <!-- BEGIN PAGE LEVEL STYLES -->
+    <link href="@Url.FakePathAdmin("content/global/login.min.css")" rel="stylesheet"/>
+    <!-- END PAGE LEVEL STYLES -->
+    <!-- BEGIN THEME LAYOUT STYLES -->
+    <!-- END THEME LAYOUT STYLES -->
+    <link rel="shortcut icon" href="~/favicon.ico"/>
+</head>
+<!-- END HEAD -->
+<body class="login">
+<div class="menu-toggler sidebar-toggler"></div>
+<!-- END SIDEBAR TOGGLER BUTTON -->
+<!-- BEGIN LOGO -->
+<div class="logo">
+    <a href="" target="_blank">
+        <img src="~/images/logo.png" alt=""/>
+    </a>
+</div>
+<!-- END LOGO -->
+<!-- BEGIN LOGIN -->
+<div class="content">
+    <!-- BEGIN LOGIN FORM -->
+    @RenderBody()
+</div>
+<div class="copyright hidden">
+    2017 &copy;
+    <a href="" target="_blank"></a>. 
+</div>
+<!--[if lt IE 9]>
+    <script src="@Url.FakePathAdmin("scripts/respond.min.js")"></script>
+    <script src="@Url.FakePathAdmin("scripts/excanvas.min.js")"></script>
+<![endif]-->
+<script src="@Url.FakePathAdmin("scripts/jquery.min.js")"></script>
+<script src="@Url.FakePathAdmin("scripts/jquery.cookie.min.js")"></script>
+<script src="@Url.FakePathAdmin("scripts/plugins/bootstrap/bootstrap.min.js")"></script>
+<script src="@Url.FakePathAdmin("scripts/plugins/uniform/jquery.uniform.min.js")"></script>
+<script src="@Url.FakePathAdmin("scripts/jquery.blockui.min.js")"></script>
+<script src="@Url.FakePathAdmin("scripts/plugins/validation/jquery.validate.min.js")"></script>
+<script src="@Url.FakePathAdmin("scripts/plugins/validation/jquery.validate.unobtrusive.min.js")"></script>
+<script src="@Url.FakePathAdmin("scripts/plugins/validation/jquery.validate.unobtrusive.bootstrap.min.js")"></script>
+@*<script src="@Url.FakePathAdmin("scripts/app.js")"></script>*@
+<script src="@Url.FakePathAdmin("scripts/app.account.min.js")"></script>
+@RenderSection("scripts", false)
+</body>
+</html>

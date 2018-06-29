@@ -1,0 +1,22 @@
+﻿<!---PaymentMethodFooter-->
+@using App.Aplication
+@model IEnumerable<App.FakeEntity.Payments.PaymentMethodViewModel>
+
+@if (Model.IsAny())
+{
+    <div id="trademark-box" class="row">
+        <div class="col-sm-12">
+            <ul id="trademark-list">
+                <li id="payment-methods">Phương thức thanh toán</li>
+                @foreach (var item in Model)
+                {
+                    <li>
+                        <img src="@item.ImageUrl.ValidateImage()" alt='@item.PaymentMethodSystemName'>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+}
+
+<!---/PaymentMethodFooter-->

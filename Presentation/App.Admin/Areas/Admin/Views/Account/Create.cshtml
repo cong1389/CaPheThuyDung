@@ -1,0 +1,11 @@
+﻿@model App.FakeEntity.User.RegisterFormViewModel
+@{
+    ViewBag.Title = "Tạo mới tài khoản.";
+    ViewBag.Toolbar = new[] { "Save", "SaveNew", "Divider", "Back" };
+}
+@using (Html.BeginForm("Create", "Account", FormMethod.Post, new { data_container = ViewContext.RouteData.Values["controller"] }))
+{
+    @Html.AntiForgeryToken()
+	Html.RenderPartial("_CreateOrUpdate", Model);
+
+}

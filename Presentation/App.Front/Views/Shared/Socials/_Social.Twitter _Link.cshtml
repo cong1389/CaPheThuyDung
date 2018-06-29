@@ -1,0 +1,20 @@
+﻿<!----_Social.Twitter _Link-->
+<span id="divTwitterLink"></span>
+<script>
+    jQuery(function () {
+        'use strict';
+
+        jQuery.post('@Url.Action("GetSettingSeo", "Summary")')
+            .done(function (data) {
+                var twiiterLink = data.response.TwitterLink;
+                if (twiiterLink != null) {
+                    var code = '<a target="_blank" href="' + twiiterLink + '" class="si-twitter social-icon si-dark si-colored"><i class="fa fa-twitter"></i><i class="fa fa-twitter"></i></a>';
+
+                    jQuery("#divTwitterLink").html(code);
+                }
+
+            });
+        })
+
+</script>
+<!----/_Social.Twitter _Link-->

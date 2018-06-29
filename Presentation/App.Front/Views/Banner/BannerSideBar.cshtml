@@ -1,0 +1,26 @@
+﻿<!----BannerSideBar-->
+@using App.Aplication
+@model IEnumerable<App.Domain.Entities.Ads.Banner>
+@if (Model.IsAny())
+{
+	<div id="divAdv" class="row fadeOut owl-carousel owl-theme center-block img-center" style="opacity: 1; display: block;">
+
+		<div class="owl-wrapper-outer">
+			<div class="owl-wrapper" style="width: 8890px; left: 0px; display: block; transition: all 800ms ease; transform: translate3d(-1905px, 0px, 0px);">
+				@foreach (var item in Model)
+				{
+					<div class="owl-item" style="width: 635px;">
+						<div class="item">
+							<a href="@item.WebsiteLink" rel="nofollow " target="@item.Target">
+								<img src="@item.ImgPath.ValidateImage()" class="attachment-slicetheme-small size-slicetheme-small wp-post-image">
+							</a>
+						</div>
+					</div>
+				}
+
+			</div>
+		</div>
+	</div>
+}
+
+<!----/BannerSideBar-->

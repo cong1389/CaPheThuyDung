@@ -1,0 +1,295 @@
+﻿<!---_CreateOrUpdate--->
+@using App.Aplication
+@using App.Domain.Common
+@using Resources
+@using App.Service.Language
+@model  App.FakeEntity.Menu.MenuLinkViewModel
+
+<div class="form-horizontal">
+	<div class="form-body">
+		@Html.ValidationSummary(true, "", new { @class = "text-danger col-md-offset-3" })
+
+		<div class="form-group">
+			@Html.LabelFor(model => model.Status, new { @class = "control-label col-md-3" })
+			<div class="col-md-8">
+				<div class="radio-list">
+					<label class="radio-inline">
+						@Html.RadioButtonFor(x => x.Status, (int)Status.Enable, new { @checked = "checked" }) @FormUI.Active
+					</label>
+					<label class="radio-inline">
+						@Html.RadioButtonFor(x => x.Status, (int)Status.Disable) @FormUI.InActive
+					</label>
+				</div>
+				@Html.ValidationMessageFor(model => model.Status, "", new { @class = "help-block" })
+			</div>
+		</div>
+		<div class="form-group">
+			@Html.LabelFor(model => model.ParentId, new { @class = "control-label col-md-3" })
+			<div class="col-md-5">
+				@Html.DropDownListFor(x => x.ParentId, new SelectList(ViewBag.MenuList, "Id", "MenuName"), "--Select--", new { @class = "form-control select2-allow-clear" })
+			</div>
+		</div>
+		<div class="form-group">
+			@Html.LabelFor(model => model.Position, new { @class = "control-label col-md-3" })
+			<div class="col-md-8">
+				<div class="radio-list">
+					<label class="radio-inline">
+						@Html.RadioButtonFor(x => x.Position, (int)Position.Top, new { @checked = "checked" }) @Position.Top.ToString()
+					</label>
+					<label class="radio-inline">
+						@Html.RadioButtonFor(x => x.Position, (int)Position.TopHead) @Position.TopHead.ToString()
+					</label>
+					<label class="radio-inline">
+						@Html.RadioButtonFor(x => x.Position, (int)Position.Footer) @Position.Footer.ToString()
+					</label>
+					<label class="radio-inline">
+						@Html.RadioButtonFor(x => x.Position, (int)Position.SiderBar) @Position.SiderBar.ToString()
+					</label>
+					<label class="radio-inline">
+						@Html.RadioButtonFor(x => x.Position, (int)Position.Right) @Position.Right.ToString()
+					</label>
+					<label class="radio-inline">
+						@Html.RadioButtonFor(x => x.Position, (int)Position.Left) @Position.Left.ToString()
+					</label>
+				</div>
+				@Html.ValidationMessageFor(model => model.Position, "", new { @class = "help-block" })
+			</div>
+		</div>
+		<div class="form-group">
+			@Html.LabelFor(model => model.TypeMenu, new { @class = "control-label col-md-3" })
+			<div class="col-md-8">
+				<div class="radio-list">
+					<label class="radio-inline">
+						@Html.RadioButtonFor(x => x.TypeMenu, (int)TypeMenu.ShowContent) @FormUI.ShowContent
+					</label>
+					<label class="radio-inline">
+						@Html.RadioButtonFor(x => x.TypeMenu, (int)TypeMenu.DisplayListItem, new { @checked = "checked" }) @FormUI.DisplayListItem
+					</label>
+				</div>
+				@Html.ValidationMessageFor(model => model.TypeMenu, "", new { @class = "help-block" })
+			</div>
+		</div>
+		<div class="form-group">
+			@Html.LabelFor(model => model.TemplateType, new { @class = "control-label col-md-3" })
+			<div class="col-md-8">
+				<div class="radio-list">
+					<label class="radio-inline">
+						@Html.RadioButtonFor(x => x.TemplateType, (int)TemplateContent.Product) @FormUI.TemplateProduct
+					</label>
+					<label class="radio-inline">
+						@Html.RadioButtonFor(x => x.TemplateType, (int)TemplateContent.News) @FormUI.TemplateNews
+					</label>
+					<label class="radio-inline">
+						@Html.RadioButtonFor(x => x.TemplateType, (int)TemplateContent.Contact) Contact
+					</label>
+					<label class="radio-inline">
+						@Html.RadioButtonFor(x => x.TemplateType, (int)TemplateContent.FixItem) FixItem
+					</label>
+					<label class="radio-inline">
+						@Html.RadioButtonFor(x => x.TemplateType, (int)TemplateContent.AboutUs) AboutUs
+					</label>
+					<label class="radio-inline">
+						@Html.RadioButtonFor(x => x.TemplateType, (int)TemplateContent.SaleOff) SaleOff
+					</label>
+					<label class="radio-inline">
+						@Html.RadioButtonFor(x => x.TemplateType, (int)TemplateContent.Static) @FormUI.TemplateStatic
+					</label>
+				</div>
+				@Html.ValidationMessageFor(model => model.TemplateType, "", new { @class = "help-block" })
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label col-md-3"></label>
+			<div class="col-md-8">
+				<div class="row">
+					<div class="col-md-2">
+						@Html.LabelFor(model => model.DisplayOnHomePage, new { @class = "control-label" })
+						@Html.CheckBoxFor(model => model.DisplayOnHomePage, new { @class = "" })
+					</div>
+					<div class="col-md-2">
+						@Html.LabelFor(model => model.DisplayOnMenu, new { @class = "control-label" })
+						@Html.CheckBoxFor(model => model.DisplayOnMenu, new { @class = "" })
+					</div>
+					<div class="col-md-2">
+						@Html.LabelFor(model => model.DisplayOnSearch, new { @class = "control-label" })
+						@Html.CheckBoxFor(model => model.DisplayOnSearch, new { @class = "" })
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			@Html.LabelFor(model => model.ColorHex, new { @class = "control-label col-md-3" })
+			<div class="col-md-5">
+				@Html.TextBoxFor(model => model.ColorHex, new { @class = "form-control color-picker" })
+				@Html.ValidationMessageFor(model => model.ColorHex, "", new { @class = "help-block" })
+			</div>
+		</div>
+
+
+		<div class="form-group">
+			@Html.LabelFor(model => model.ImageBigSizeFile, new { @class = "control-label col-md-3" })
+			<div class="col-md-8">
+				<div class="fileinput fileinput-new" data-provides="fileinput">
+					<div class="input-group input-large">
+						<div class="form-control uneditable-input input-fixed input-medium" data-trigger="fileinput">
+							<i class="fa fa-file fileinput-exists"></i>&nbsp;
+							<span class="fileinput-filename"> </span>
+						</div>
+						<span class="input-group-addon btn default btn-file">
+							<span class="fileinput-new">@FormUI.SelectFile</span>
+							<span class="fileinput-exists"> @FormUI.ChangeFile </span>
+							@Html.TextBoxFor(model => model.ImageBigSizeFile, new { type = "file" })
+						</span>
+						<a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput"> Remove </a>
+					</div>
+				</div>
+				@Html.ValidationMessageFor(model => model.ImageBigSizeFile, "", new { @class = "help-block" })
+			</div>
+			<div class="col-md-8 col-md-offset-3">
+				<img src="@Model.ImageBigSize.ValidateImage()" width="40px" />
+			</div>
+		</div>
+		<div class="form-group">
+			@Html.LabelFor(model => model.ImageMediumSizeFile, new { @class = "control-label col-md-3" })
+			<div class="col-md-8">
+				<div class="fileinput fileinput-new" data-provides="fileinput">
+					<div class="input-group input-large">
+						<div class="form-control uneditable-input input-fixed input-medium" data-trigger="fileinput">
+							<i class="fa fa-file fileinput-exists"></i>&nbsp;
+							<span class="fileinput-filename"> </span>
+						</div>
+						<span class="input-group-addon btn default btn-file">
+							<span class="fileinput-new">@FormUI.SelectFile</span>
+							<span class="fileinput-exists"> @FormUI.ChangeFile </span>
+							@Html.TextBoxFor(model => model.ImageMediumSizeFile, new { type = "file" })
+						</span>
+						<a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput"> Remove </a>
+					</div>
+				</div>
+				@Html.ValidationMessageFor(model => model.ImageMediumSizeFile, "", new { @class = "help-block" })
+			</div>
+			<div class="col-md-8 col-md-offset-3">
+				<img src="@Model.ImageMediumSize.ValidateImage()" width="40px" />
+			</div>
+		</div>
+		<div class="form-group">
+			@Html.LabelFor(model => model.ImageSmallSizeFile, new { @class = "control-label col-md-3" })
+			<div class="col-md-8">
+				<div class="fileinput fileinput-new" data-provides="fileinput">
+					<div class="input-group input-large">
+						<div class="form-control uneditable-input input-fixed input-medium" data-trigger="fileinput">
+							<i class="fa fa-file fileinput-exists"></i>&nbsp;
+							<span class="fileinput-filename"> </span>
+						</div>
+						<span class="input-group-addon btn default btn-file">
+							<span class="fileinput-new">@FormUI.SelectFile</span>
+							<span class="fileinput-exists"> @FormUI.ChangeFile </span>
+							@Html.TextBoxFor(model => model.ImageSmallSizeFile, new { type = "file" })
+						</span>
+						<a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput"> Remove </a>
+					</div>
+				</div>
+				@Html.ValidationMessageFor(model => model.ImageSmallSizeFile, "", new { @class = "help-block" })
+			</div>
+			<div class="col-md-8 col-md-offset-3">
+				<img src="@Model.ImageSmallSize.ValidateImage()" width="40px" />
+			</div>
+		</div>
+
+		<div class="form-group">
+			@Html.LabelFor(model => model.OrderDisplay, new { @class = "control-label col-md-3", type = "number" })
+			<div class="col-md-5">
+				@Html.TextBoxFor(model => model.OrderDisplay, new { @class = "form-control", type = "number" })
+				@Html.ValidationMessageFor(model => model.OrderDisplay, "", new { @class = "help-block" })
+			</div>
+		</div>
+		<div class="form-group">
+			@Html.LabelFor(model => model.SourceLink, new { @class = "control-label col-md-3" })
+			<div class="col-md-5">
+				@Html.TextBoxFor(model => model.SourceLink, new { @class = "form-control" })
+				@Html.ValidationMessageFor(model => model.SourceLink, "", new { @class = "help-block" })
+			</div>
+		</div>
+
+		<div class="tabbable-line m-heading-1 border-green m-bordered dashboard-stat grey">
+			<ul class="nav nav-tabs ">
+				@{
+					for (int i = 0; i < Model.Locales.Count; i++)
+					{
+						App.Domain.Entities.Language.Language language = DependencyResolver.Current.GetService<ILanguageService>().GetById(Model.Locales[i].LanguageId);
+
+						<li class="@(i == 0 ? "active" : "")">
+							<a href="#tab_@(i + 1)" data-toggle="tab"><img src="@language.Flag.ValidateImage()" /> @language.LanguageName</a>
+						</li>
+					}
+				}
+			</ul>
+
+			<div class="tab-content">
+
+				@{
+					for (int i = 0; i < Model.Locales.Count; i++)
+					{
+						<div class="tab-pane @(i == 0 ? "active" : "")" id="tab_@(i+1)">
+							<div class="row">
+								<div class="form-group">
+									@Html.LabelFor(model => model.Locales[i].MenuName, new { @class = "control-label col-md-3" })
+									<div class="col-md-8">
+										@Html.TextBoxFor(model => model.Locales[i].MenuName, new { @class = "form-control" })
+										@Html.ValidationMessageFor(model => model.Locales[i].MenuName, "", new { @class = "help-block" })
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="form-group">
+									@Html.LabelFor(model => model.Locales[i].MetaTitle, new { @class = "control-label col-md-3" })
+									<div class="col-md-8">
+										@Html.TextBoxFor(model => model.Locales[i].MetaTitle, new { @class = "form-control" })
+										@*@Html.ValidationMessageFor(model => model.Locales[i].MetaTitle, "", new { @class = "help-block" })*@
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="form-group">
+									@Html.LabelFor(model => model.Locales[i].MetaKeywords, new { @class = "control-label col-md-3" })
+									<div class="col-md-8">
+										@Html.TextBoxFor(model => model.Locales[i].MetaKeywords, new { @class = "form-control" })
+										@*@Html.ValidationMessageFor(model => model.Locales[i].MetaKeywords, "", new { @class = "help-block" })*@
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="form-group">
+									@Html.LabelFor(model => model.Locales[i].MetaDescription, new { @class = "control-label col-md-3" })
+									<div class="col-md-8">
+										@Html.TextBoxFor(model => model.Locales[i].MetaDescription, new { @class = "form-control" })
+										@*@Html.ValidationMessageFor(model => model.Locales[i].MetaDescription, "", new { @class = "help-block" })*@
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+						@Html.HiddenFor(model => model.Locales[i].LocalesId)
+						@Html.HiddenFor(model => model.Locales[i].LanguageId)
+					}
+
+					@Html.HiddenFor(model => model.MenuName, new { @class = "form-control", Value = Model.Locales[0].MenuName })
+					@Html.HiddenFor(model => model.MetaTitle, new { @class = "form-control", Value = Model.Locales[0].MetaTitle })
+					@Html.HiddenFor(model => model.MetaKeywords, new { @class = "form-control", Value = Model.Locales[0].MetaKeywords })
+					@Html.HiddenFor(model => model.MetaDescription, new { @class = "form-control", Value = Model.Locales[0].MetaDescription })
+
+				}
+
+			</div>
+		</div>
+
+
+	</div>
+</div>
+
+<!---/_CreateOrUpdate--->

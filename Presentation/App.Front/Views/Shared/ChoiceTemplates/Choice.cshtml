@@ -1,0 +1,46 @@
+﻿@using App.Aplication
+@model App.Domain.Entities.GenericControl.GenericControl
+
+@{
+    string templateSuffix = null;
+    switch (Model.ControlTypeId)
+    {
+        case (int)GenericControlType.DropdownList:
+            {
+                @Html.Label("DropdownList");
+                break;
+            }
+        case (int)GenericControlType.RadioList:
+        case (int)GenericControlType.Checkboxes:
+            {
+                templateSuffix = "CheckRadio";
+                break;
+            }
+        case (int)GenericControlType.TextBox:
+            {
+                @Html.Label("TextBox");
+                break;
+            }
+        case (int)GenericControlType.MultilineTextbox:
+            {
+                @Html.Label("MultilineTextbox");
+                break;
+            }
+        case (int)GenericControlType.Datepicker:
+            {
+                @Html.Label("Datepicker");
+                break;
+            }
+        case (int)GenericControlType.Boxes:
+            {
+                @Html.Label("Boxes");
+                break;
+            }
+    }
+}
+
+<div class="choice-control">
+    @{    
+        Html.RenderPartial("ChoiceTemplates/Choice." + templateSuffix, Model);
+    }
+</div>

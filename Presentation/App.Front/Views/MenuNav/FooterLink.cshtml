@@ -1,0 +1,30 @@
+﻿<!----FooterLink-->
+
+@using App.Aplication
+@using App.FakeEntity.Menu
+@model IEnumerable<MenuNavViewModel>
+@if (Model.IsAny())
+{
+    foreach (MenuNavViewModel lv1 in Model)
+    {
+        <div id="col-1" class="col-xs-3 col-md-3 padding-top-10-xs padding-top-10-sm">
+
+            <h6><a href="@Url.Action("GetContent", "Menu", new {menu = lv1.SeoUrl, area = ""})"> @lv1.MenuName</a></h6>
+            <ul class="list-unstyled no-padding margin-bottom-15">
+                @foreach (var lv2 in lv1.ChildNavMenu)
+                {
+                    if (!string.IsNullOrEmpty(lv2.OtherLink))
+                    {
+                        <li><a href="@lv2.OtherLink">@lv2.MenuName</a></li>
+                    }
+                    else
+                    {
+                        <li><a href="@Url.Action("GetContent", "Menu", new { menu = lv2.SeoUrl, area = "" })">@lv2.MenuName</a></li>
+                    }
+                }
+            </ul>
+        </div>
+    }
+}
+
+<!----/FooterLink-->

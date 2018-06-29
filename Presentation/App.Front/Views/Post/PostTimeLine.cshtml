@@ -1,0 +1,85 @@
+﻿    <!----GetProductTimeLine-->
+@using App.Aplication
+@model IEnumerable<App.Domain.Entities.Data.Post>
+@if (Model.IsAny())
+{
+    var post1 = Model.Where(m => m.Id % 2 == 0);
+    var post2 = Model.Where(m => m.Id % 2 != 0);
+
+    <div class="vc_row wpb_row vc_row-fluid vc_custom_1471198040046 wpb_section wpb_padding divNews">
+        <div class="container">
+            <div class="row">
+                <div class="wpb_column vc_column_container vc_col-sm-12">
+                    <div class="vc_column-inner ">
+                        <div class="wpb_wrapper">
+                            <div class="st-heading style-1 text-left clearfix	">
+                                <h3 class="box-title pull-left">
+                                    <a id="A1" runat="server">
+                                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                        <asp:Literal runat="server" ID="Literal2">
+                                            Dự án đã thực hiện
+                                        </asp:Literal>
+                                    </a>
+                                </h3>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="st-blog divTimeLine">
+                                <div class="widget widget_nav_menu">
+                                    <div class="menu-widget-menu-container">
+                                        <div class="col-sm-6">
+                                            <ul id="menu-widget-menu1" class="menu">
+                                                @foreach (var item in post1)
+                                                {
+                                                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2520">
+                                                        <a href="@Url.Action("PostDetail","Post", new {seoUrl =item.SeoUrl,area=""})">
+                                                            @item.Title
+                                                        </a>
+                                                    </li>
+                                                }
+                                            </ul>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <ul id="menu-widget-menu" class="menu">
+                                                @foreach (var item in post2)
+                                                {
+                                                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2520">
+                                                        <a href="@Url.Action("PostDetail","Post", new {seoUrl =item.SeoUrl,area=""})">
+                                                           @item.Title
+                                                        </a>
+                                                    </li>
+                                                }
+                                            </ul>
+                                        </div>
+
+                                    </div>
+                                    <div class="hidden vc_general vc_tta vc_tta-tabs vc_tta-color-grey vc_tta-style-classic vc_tta-shape-square vc_tta-spacing-3 vc_tta-gap-3 vc_tta-tabs-position-top vc_tta-controls-align-left">
+                                        <div class="vc_tta-tabs-container">
+                                            <ul class="vc_tta-tabs-list">
+
+                                                <asp:Literal runat="server" ID="ltrYear"></asp:Literal>
+
+                                            </ul>
+                                        </div>
+                                        <div class="vc_tta-panels-container">
+                                            <div class="vc_tta-panels">
+
+                                                <asp:Literal runat="server" ID="ltrYearContent"></asp:Literal>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+<!----GetProductTimeLine-->

@@ -1,0 +1,28 @@
+﻿@using App.Framework.Utilities
+@using Resources
+@model App.FakeEntity.Ads.BannerViewModel
+@{
+    ViewBag.Title = FormUI.Edit;
+    ViewBag.Toolbar = new[] { "Save", "SaveNew", "Divider", "Back" };
+}
+
+@using (Html.BeginForm("Edit", "Banner", FormMethod.Post, new { data_container = ViewContext.RouteData.Values["controller"], enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x=>x.Id)
+    @Html.HiddenFor(x=>x.ImgPath)
+
+    Html.RenderPartial("_CreateOrUpdate", Model);
+}
+
+@section scripts{
+    <script src="@Url.FakePathAdmin("scripts/plugins/daterangepicker/moment.min.js")"></script>
+    <script src="@Url.FakePathAdmin("scripts/plugins/daterangepicker/daterangepicker.js")"></script>
+    <script src="@Url.FakePathAdmin("scripts/plugins/daterangepicker/bootstrap-datepicker.js")"></script>
+    <script src="@Url.FakePathAdmin("scripts/components-date-time-pickers.js")"></script>
+}
+@section style{
+    <link href="@Url.FakePathAdmin("content/plugins/daterangepicker/daterangepicker-bs3.css")" rel="stylesheet" />
+}
+
+

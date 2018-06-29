@@ -1,0 +1,233 @@
+﻿@using Resources
+@using App.Domain.Entities.Language
+@using App.Aplication.WebGrid
+@model IEnumerable<LocaleStringResource>
+
+@{
+	ViewBag.Title = FormUI.LanguageManagement;
+	var grid = new WebGrid((IEnumerable<LocaleStringResource>)ViewBag.Localization, rowsPerPage: 50);
+}
+
+<div class="navbar navbar-default" role="search">
+	<ul class="nav navbar-nav navbar-form">
+		<li>
+			<a class="btn btn-default btn-sm" id="hypCreate"><i class="fa fa-plus"></i>@FormUI.CreateNew</a>
+		</li>
+	</ul>
+	<div class="col-sm-5">
+		<div class="form-body">
+			<div class="form-group">
+				<label class="control-label col-md-4" for="ParentId">@FormUI.SelectLanguage</label>
+				<div class="col-md-6">
+
+					@Html.DropDownList("drpLanguage", new SelectList(ViewBag.AllLanguage, "Id", "LanguageName", ViewBag.LanguageSelected != null ? ViewBag.LanguageSelected : 1)
+							 , new { @class = "form-control", onChange = "searchForLocale();" })
+
+					<script>
+                        function searchForLocale() {
+                            window.location = '@Url.Action("Index", "LocaleResource")?languageId=' + $("#drpLanguage").val() + '&keywords=' + $('#txtSearch').val();
+                        }
+					</script>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-sm-5">
+		<div class="form-body">
+			<div class="form-group">
+
+				<div class="col-md-11">
+					<div class="form-group">
+						<input id="txtSearch" dir="@Url.Action("Index")" type="text" name="search" class="form-control" value="@ViewBag.keywords" placeholder="@FormUI.Search" />
+					</div>
+				</div>
+				<div class="control-label col-md-1">
+					<button type="submit" value="Search" class="btn btn-success" onclick="searchForLocale();">@FormUI.Search</button>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+</div>
+
+@using (Html.BeginForm("CreateOrSave", "LocaleResource", FormMethod.Post, new { data_container = ViewContext.RouteData.Values["controller"], enctype = "multipart/form-data" }))
+{
+	@MvcHtmlString.Create(
+				grid.GetHtml(
+					htmlAttributes: new
+					{
+						id = "grid",
+						@class = "app-grid table table-color table-bordered table-striped table-condensed flip-content table-hover dataTable"
+					},
+					emptyRowCellValue: "No Records Found",
+					headerStyle: "grid-header",
+					footerStyle: "table-pager",
+					columns: grid.Columns(
+
+						grid.Column(null, null,
+							format: @<text><input id="hddId" name="hddId" type="hidden" value="@item.Value.Id" />
+									<input id="hddLanguageId" name="hddLanguageId" type="hidden" value="@item.Value.LanguageId" />
+									<input id="hddIsFromPlugin" name="hddIsFromPlugin" type="hidden" value="@item.Value.IsFromPlugin" /></text>
+																						),
+
+																					grid.Column("Resource Name",
+																						format: item
+																							=> Html.EditableTextBox(((LocaleStringResource)item.Value).ResourceName
+																								, "ResourceName", ((LocaleStringResource)item.Value).Id.ToString()))
+
+																					, grid.Column("Resource Value",
+																						format: item
+																							=> Html.EditableTextBox(((LocaleStringResource)item.Value).ResourceValue
+																								, "ResourceValue", ((LocaleStringResource)item.Value).Id.ToString()))
+
+																					, grid.Column("Options",
+																						format: item => Html.DisplayRecordOptions(), canSort: false, style: "colOption")
+
+																					)
+																				)
+																				.ToString()
+																				.Replace("{CheckBoxHeading}", "<div class='text-center'><input type='checkbox' id='allBox'/></div>")
+																			)
+}
+
+@Html.Hidden("dir", grid.SortDirection)
+@Html.Hidden("col", grid.SortColumn)
+
+<script src="~/Scripts/jquery.signalR-2.2.2.js"></script>
+<script src="/signalr/hubs"></script>
+
+<script>
+
+	$(function() {
+		try {
+			var dir = $('#dir').val();
+			var col = $('#col').val();
+			var header = $("th a[href*=" + col + "]");
+			if (dir === "Ascending") {
+				header.text(header.text() + "  ▲");
+			}
+			if (dir === "Descending") {
+				header.text(header.text() + "  ▼");
+			}
+
+		} catch (e) {
+
+		}
+
+		$("#txtSearch").focus();
+		$("#txtSearch").keypress(function (event) {
+			var keycode = (event.keyCode ? event.keyCode : event.which);
+			if (keycode === 13) {
+				var url = $(this).attr("dir");
+				var keywords = $(this).val();
+				App.blockUI({
+					target: "body",
+					boxed: true
+				});
+				window.location.href = url + "?languageId="+$("#drpLanguage").val() +"&keywords=" + keywords;
+			}
+		});
+
+		$(".edit-button").on("click",
+			function() {
+				var row = $(this).closest("tr");
+				$(".record-toolbar li", row).toggleClass("hide");
+				$("input, select, textarea", row).toggleClass("hide");
+				$("td", row).each(function() {
+					var cell = $(this, row);
+					var cellValue = $(".cell-value", cell);
+					if (cellValue.length > 0) {
+						$("input", cell).val(cellValue.text());
+					}
+				});
+				$(".cell-value", row).toggleClass("hide");
+			});
+
+		$(".cancel-button").on("click",
+			function() {
+				var row = $(this).closest("tr");
+				$(".record-toolbar li", row).toggleClass("hide");
+				$(".cell-value", row).toggleClass("hide");
+				$("input, select, textarea", row).toggleClass("hide");
+			});
+
+		$(".save-button").on("click",
+			function() {
+				var row = $(this).closest("tr");
+				var record = getRecord(row);
+
+				$.ajax({
+					url: '@Url.Action("CreateOrSave","LocaleResource")',
+					data: JSON.stringify(record),
+					type: 'POST',
+					contentType: 'application/json; charset=utf-8',
+					success: function() {
+						tr.find('.edit-mode, .display-mode').toggle();
+					}
+				});
+
+				//webGridHubClient.server.saveRecord(record);
+				$("td", row).each(function() {
+					var cell = $(this, row);
+					var inputValue = $("input", cell);
+					$(".cell-value", cell).text(inputValue.val());
+				});
+				$(".record-toolbar li", row).toggleClass("hide");
+				$("input, select, textarea", row).toggleClass("hide");
+				$(".cell-value", row).toggleClass("hide");
+			});
+
+		//isCreate: nếu isCreate ==1: set id = '' để insert
+		function getRecord(row) {
+			return {
+				id: row.find("#hddId").val(),
+				resourceName: row.find(":nth-child(2)").find("input").val(),
+				resourceValue: row.find(":nth-child(3)").find("input").val(),
+				languageId: row.find('#hddLanguageId').val(),
+				isFromPlugin: row.find('#hddIsFromPlugin').val()
+			};
+		};
+
+		$.connection.hub.start();
+
+	});
+
+	$("#hypCreate").on("click",
+		function() {
+			var data = {"languageId": @ViewBag.LanguageSelected};
+
+			$.ajax({
+				url: '@Url.Action("NewRow", "LocaleResource")',
+				data: data,
+				type: "POST",
+				contentType: 'application/json; charset=utf-8',
+				success: function(response) {
+					if ($("#grid tbody").length > 0) {
+						$("#grid tbody").before(response.data);
+					} else {
+						$("#grid tbody tr:first").before(response.data);
+					}
+				}
+			});
+		});
+
+    $(".remove-button").on("click", function () {
+        var row = $(this).closest("tr");
+        var id = row.find("#hddId").val();
+
+        var data = {"id": id};
+        $.ajax({
+            url: '@Url.Action("Delete", "LocaleResource")',
+            data: data,
+            type: 'GET',
+            contentType: 'application/json; charset=utf-8',
+            success: function () {
+                location.reload();
+            }
+        });
+    });
+
+</script>

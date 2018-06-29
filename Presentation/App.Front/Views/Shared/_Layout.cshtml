@@ -1,0 +1,90 @@
+﻿@using App.Aplication
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>@ViewBag.Title </title>
+    <meta name="keywords" content="@ViewBag.KeyWords" />
+    <meta name="description" content="@ViewBag.Description" />
+    <meta name="generator" content="" />
+    <link rel="canonical" href="@Html.Raw(Request.Url.AbsoluteUri)" />
+    <link rel="alternate" hreflang="vi_vn" href="@ViewBag.SiteUrl" />
+    <meta name="robots" content="index, follow, noodp" />
+    <meta name="googlebot" content="index,archive,follow,noodp" />
+    <meta name="msnbot" content="all,index,follow" />
+    <meta name="copyright" content="@Utils.CurrentHost" />
+    <meta property="og:locale" content="vi_VN">
+    <meta property="og:site_name" content="@ViewBag.Title" />
+    <meta property="og:title" content="@ViewBag.Title" />
+    <meta property="og:description" content="@ViewBag.Description" />
+
+    <!-- You can use Open Graph tags to customize link previews.-->
+    <meta property="og:url" content="@(string.Concat(Utils.CurrentHost,ViewBag.Image))">
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="@(string.Concat(Utils.CurrentHost,ViewBag.Image))" />
+    <link href="@ViewBag.Favicon" rel="shortcut icon" type="image/x-icon" />
+
+    @{Html.RenderAction("GetMeta", "Summary"); }
+    @{Html.RenderAction("GetMetaTagsSeo", "Summary");}
+
+    @{Html.RenderPartial("_StyleSheet");}
+
+    @RenderSection("renderStyles", false)
+
+    @{Html.RenderPartial("_Scripts"); }
+
+</head>
+<body class="site-index">
+
+    @{
+        Html.RenderAction("Header", "MenuNav", new { area = "" });}
+
+    @RenderBody()
+
+    @{Html.RenderAction("Footer", "Summary", new { area = "" }); }
+
+    
+   
+    <script type="text/javascript">
+        var krajeeDialogDefaults_1a27c43d = { "alert": { "type": "type-danger", "title": "Thông báo", "buttonLabel": "<span class=\"glyphicon glyphicon-ok\"></span> Ok" }, "confirm": { "type": "type-danger", "title": "Xác nhận", "btnOKClass": "btn-warning", "btnOKLabel": "<span class=\"glyphicon glyphicon-ok\"></span> Ok", "btnCancelLabel": "<span class=\"glyphicon glyphicon-ban-circle\"></span> Cancel" }, "prompt": { "draggable": false, "title": "Information", "buttons": [{ "label": "Cancel", "icon": "glyphicon glyphicon-ban-circle" }, { "label": "Ok", "icon": "glyphicon glyphicon-ok", "cssClass": "btn-primary" }], "closable": false }, "dialog": { "draggable": true, "title": "Information", "buttons": [{ "label": "Cancel", "icon": "glyphicon glyphicon-ban-circle" }, { "label": "Ok", "icon": "glyphicon glyphicon-ok", "cssClass": "btn-primary" }] } };
+        var krajeeDialog_f6619723 = { "id": "w7" };
+        var krajeeDialog = new KrajeeDialog(true, krajeeDialog_f6619723, krajeeDialogDefaults_1a27c43d);
+        var krajeeDialogDefaults_7b6cf2d3 = { "alert": { "type": "type-danger", "title": "Thông báo", "buttonLabel": "<span class=\"glyphicon glyphicon-ok\"></span> Ok" }, "confirm": { "type": "type-danger", "title": "Xác nhận", "btnOKClass": "btn-warning", "btnOKLabel": "<span class=\"glyphicon glyphicon-ok\"></span> Ok", "btnCancelLabel": "<span class=\"glyphicon glyphicon-ban-circle\"></span> Cancel", "btnCancelClass": "hidden" }, "prompt": { "draggable": false, "title": "Information", "buttons": [{ "label": "Cancel", "icon": "glyphicon glyphicon-ban-circle" }, { "label": "Ok", "icon": "glyphicon glyphicon-ok", "cssClass": "btn-primary" }], "closable": false }, "dialog": { "draggable": true, "title": "Information", "buttons": [{ "label": "Cancel", "icon": "glyphicon glyphicon-ban-circle" }, { "label": "Ok", "icon": "glyphicon glyphicon-ok", "cssClass": "btn-primary" }] } };
+        var krajeeDialog_5b425928 = { "id": "w8" };
+        var gggDialog = new KrajeeDialog(true, krajeeDialog_5b425928, krajeeDialogDefaults_7b6cf2d3);</script>
+    <script type="text/javascript">
+        jQuery(function ($) {
+            jQuery('#w0 .owl-carousel').owlCarousel({ "items": 1, "nav": false, "dots": true, "loop": true, "autoplay": true, "navText": ["<i class=\"fa fa-angle-left\" aria-hidden=\"true\"></i>", "<i class=\"fa fa-angle-right\" aria-hidden=\"true\"></i>"] });
+            jQuery('#w1 .owl-carousel').owlCarousel({ "items": 3, "nav": true, "dots": false, "loop": true, "autoplay": false, "navText": ["<i class=\"fa fa-angle-left\" aria-hidden=\"true\"></i>", "<i class=\"fa fa-angle-right\" aria-hidden=\"true\"></i>"], "responsiveClass": true, "responsive": { "0": { "items": 1 }, "576": { "items": 2 }, "768": { "items": 3 } } });
+            krajeeYiiConfirm('krajeeDialog');
+            krajeeYiiConfirm('gggDialog');
+            jQuery('#modal-cart').modal({ "show": false });
+        });</script>
+
+
+
+
+
+
+    <!--Fane page FB-->
+    <div id="fb-root"></div>
+    <script>
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.10&appId=333261973802232";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+    @RenderSection("renderJQuery", false)
+    @RenderSection("renderScripts", false)
+    @RenderSection("google", false)
+    @RenderSection("facebook", false)
+
+</body>
+</html>

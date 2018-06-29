@@ -1,0 +1,9 @@
+﻿FriendlyName: Shout
+Description: Provides shipping methods for fixed rate shipping and computation based on weight.
+SystemName: App.Shout
+Group: Shout
+Version: 1.0.0.0
+MinAppVersion:1.0.0.0
+DisplayOrder: 1
+FileName: App.Shout.dll
+ResourceRootKey: Plugins.App.Shout

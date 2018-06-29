@@ -1,0 +1,77 @@
+﻿@mixin old-price() {
+    text-decoration: line-through;
+    margin-left: 11px;
+    line-height: 35px;
+    color: #666;
+}
+
+.goweb-block {
+    .discount {
+        font-size: 11px;
+        color: #f36;
+    }
+
+   
+
+    .product-star {
+        color: #ff9900;
+    }
+}
+
+.product-list {
+    .price-percent {
+        width: 52px;
+        height: 44px;
+        background: url(/Themes/Basic/Content/images/price-percent.png) no-repeat center center;
+        color: #fff;
+        line-height: normal;
+        text-align: center;
+        font-size: 14px;
+        position: absolute;
+        top: 10px;
+        right: 0;
+        font-family: 'Arial Narrow', Arial, sans-serif;
+        padding-left: 5px;
+        padding-top: 2px;
+    }
+
+    .old-price {
+        @include old-price();
+    }
+}
+
+.post-detail {
+    &__social {
+        float: left;
+    }
+
+    .price {
+        font-size: 18px;
+        font-weight: bold;
+        color: #ff3366;
+    }
+
+    .product-name {
+        font-size: 24px;
+    }
+
+    .product-tab {
+        margin-top: 30px;
+    }
+
+    .product-desc {
+        line-height: 24px;
+        border-top: 1px solid #eaeaea;
+        padding: 10px 0;
+    }
+
+    .form-action {
+        padding: 0;
+        padding-bottom: 5px;
+
+        .button-group {
+            margin-top: 15px;
+            overflow: hidden;
+        }
+    }
+}

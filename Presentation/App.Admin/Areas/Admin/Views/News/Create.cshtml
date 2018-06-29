@@ -1,0 +1,40 @@
+﻿@using Resources
+@model App.FakeEntity.News.NewsViewModel
+@{
+    ViewBag.Title = FormUI.CreateNew;
+    ViewBag.Toolbar = new[] { "Save", "SaveNew", "Divider", "Back" };
+}
+@using (Html.BeginForm("Create", "News", FormMethod.Post, new { data_container = ViewContext.RouteData.Values["controller"], enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    Html.RenderPartial("_CreateOrUpdate", Model);
+
+}
+@section scripts{   
+
+    <script>
+        //Copy value từ tên sản phẩm bỏ vào group SEO
+        function CopyValue() {
+            $("#Locales_0__Title").change(function () {
+                var name = $("#Locales_0__Title").val();
+                if (name != "") {
+                    $("#Locales_0__MetaTitle").val(name);
+                    $("#Locales_0__MetaKeywords").val(name);
+                    $("#Locales_0__MetaDescription").val(name);
+
+                    $("#Title").val(name);
+                    $("#MetaTitle").val(name);
+                    $("#MetaKeywords").val(name);
+                    $("#MetaDescription").val(name);
+                }
+            });
+        }
+
+        $(function () {
+            CopyValue();
+        });
+    </script>
+}
+
+

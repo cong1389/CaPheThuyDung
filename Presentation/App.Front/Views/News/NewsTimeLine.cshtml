@@ -1,0 +1,35 @@
+﻿<!----NewsTimeLine-->
+@using App.Aplication
+@using App.Domain.Entities.Data
+@model IEnumerable<News>
+
+@if (Model.IsAny())
+{
+    <div class="block left-module">
+        <p class="title_block">@T("DanhMuc")</p>
+        <div class="block_content">
+            <!-- layered -->
+            <div class="layered layered-category">
+                <div class="layered-content">
+                    <ul class="tree-menu">
+                        @foreach (var item in Model)
+                        {
+                            <li>
+                                <span></span>
+                                <a href="@Url.Action("GetContent", "Menu", new {menu = "tin-tuc", month = item.CreatedDate.Month, year = item.CreatedDate.Year, area = ""})">
+                                    @string.Format("Tháng {0} - năm {1}", item.CreatedDate.Month, item.CreatedDate.Year)
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <!-- ./layered -->
+        </div>
+    </div>
+
+
+
+}
+
+<!----/NewsTimeLine-->

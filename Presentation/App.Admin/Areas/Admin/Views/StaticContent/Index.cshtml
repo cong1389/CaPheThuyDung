@@ -1,0 +1,51 @@
+﻿@using App.Aplication
+@using App.Domain.Common
+@using Resources
+@model IEnumerable<App.Domain.Entities.Data.StaticContent>
+@{
+    ViewBag.Title = FormUI.StaticContent;
+    ViewBag.Toolbar = new[] {"Create", "Edit", "Delete", "Divider", "Reset"};
+}
+<table id="@ViewContext.RouteData.Values["controller"]" class="app-grid table table-color table-bordered table-striped table-condensed flip-content table-hover dataTable">
+    <thead class="flip-content">
+    <tr>
+        <th class="text-center"> &nbsp;</th>
+        <th class="text-center"> @FormUI.Title </th>
+        <th class="text-center"> @FormUI.MenuLink </th>
+        <th class="text-center"> @FormUI.Status </th>
+        <th class="text-center">
+            <input onclick="AppCore.handleCheckAll(this) " type="checkbox">
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    @if (Model.Any())
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img alt="@item.MetaTitle" src="@item.ImagePath.ValidateImage()" width="80px"/>
+                </td>
+                <td>
+                    <a class="highlight0" href="@Url.Action("Edit", new {id = item.Id, ReturnUrl = Request.Url.PathAndQuery})">@item.Title</a>
+                </td>
+                <td>@Html.Raw(item.MenuId > 0 ? item.MenuLink.MenuName : string.Empty)</td>
+                <td>@Html.Raw(item.Status == (int) Status.Disable ? "<span class='label label-sm label-warning'>" + FormUI.InActive + "</span>" : "<span class='label label-sm label-success'>" + FormUI.Active + "</span>")</td>
+                <td class="text-center">
+                    <input type="checkbox" value="@item.Id">
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr class="odd">
+            <td class="dataTables_empty text-center" colspan="5" valign="top">
+                @MessageUI.EmptyItem
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+@{ Html.RenderPartial("_PageLinks"); }

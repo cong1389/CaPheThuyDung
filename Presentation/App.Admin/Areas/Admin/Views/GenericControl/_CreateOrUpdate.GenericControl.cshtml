@@ -1,0 +1,61 @@
+﻿
+<!-----_CreateOrUpdate.GenericControl-->
+@model IEnumerable<App.Domain.Entities.GenericControl.GenericControl>
+
+@using (Ajax.BeginForm("UpdateGenericControlValue", "GenericControl", new AjaxOptions { UpdateTargetId = "AllTweets" }, new { id = "frmUpdate" }))
+{
+    @Html.AntiForgeryToken()
+
+
+    <div id="AllTweets">
+        <div id="tab_images_uploader_container" class="text-align-reverse margin-bottom-10">
+            <button id="1stButton" type="button" class="btn btn-success"> <i class="fa fa-plus"></i> Save</button>
+        </div>
+
+        @foreach (var genericControl in Model)
+        {
+            int i = 0;
+            <div class="form-group">
+                @foreach (var genericControlValues in genericControl.GenericControlValues)
+                {
+
+                    <div class="form-group">
+                        @Html.Label(genericControlValues.ValueName, new { @class = "control-label col-md-3" })
+                        <div class="col-md-5">
+                            <input type="hidden" name="GenericControlValue[@i].Id" value="@genericControlValues.Id" />
+                            <input type="hidden" name="GenericControlValue[@i].GenericControlId" value="@genericControlValues.GenericControlId" />
+                            <input type="hidden" name="GenericControlValue[@i].ValueName" value="@genericControlValues.ValueName" />
+                            <input type="text" name="GenericControlValue[@i].ColorHex" class="form-control" value="@genericControlValues.ColorHex" />
+                        </div>
+                    </div>
+                    i++;
+
+                }
+            </div>
+        }
+    </div>
+}
+
+<script>
+    $(document).ready(function () {
+
+        var form = $('#frmUpdate');
+        $('#1stButton').click(function (event) {
+            //var data = form.serialize();
+            //var data1 = form.serializeArray();
+            var data3 = form.serializeToJSON({ associativeArrays: false });
+            var param = { "param": JSON.stringify(data3),  "entityId": $("#Id").val() };
+            $.ajax({
+                type: "POST",
+                datatype: "html",
+                url: "@Url.Action("InsertGenericControlValue", "GenericControlValue")",
+                data: param,
+                success: function (response) {
+                    console.log(response);
+                }
+            });
+
+        });
+    });
+</script>
+<!-----/_CreateOrUpdate.GenericControl-->

@@ -1,0 +1,75 @@
+﻿<!--PaymentMethod; _CreateOrUpdate--->
+@using App.Aplication
+@using App.Service.Language
+@model App.FakeEntity.Shippings.ShippingMethodViewModel
+
+<div class="form-horizontal">
+    <div class="form-body">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger col-md-offset-3" })
+        
+        
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.OrderDisplay, new { @class = "control-label col-md-3" })
+            <div class="col-md-5">
+                @Html.TextBoxFor(model => model.OrderDisplay, new { @class = "form-control", type = "number" })
+                @Html.ValidationMessageFor(model => model.OrderDisplay, "", new { @class = "help-block" })
+            </div>
+        </div>
+        
+        <div class="tabbable-line m-heading-1 border-green m-bordered dashboard-stat grey">
+            <ul class="nav nav-tabs ">
+                @{
+                    for (int i = 0; i < Model.Locales.Count; i++)
+                    {
+                        App.Domain.Entities.Language.Language language = DependencyResolver.Current.GetService<ILanguageService>().GetById(Model.Locales[i].LanguageId);
+
+                        <li class="@(i == 0 ? "active" : "")">
+                            <a href="#tab_@(i + 1)" data-toggle="tab"><img src="@language.Flag.ValidateImage()"/> @language.LanguageName</a>
+                        </li>
+                    }
+                }               
+            </ul>
+
+            <div class="tab-content">
+
+                @{
+                    for (int i = 0; i < Model.Locales.Count; i++)
+                    {
+                        <div class="tab-pane @(i == 0 ? "active" : "")" id="tab_@(i+1)">
+                            <div class="row">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Locales[i].Name, new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.TextBoxFor(model => model.Locales[i].Name, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Locales[i].Name, "", new { @class = "help-block" })
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Locales[i].Description, new { @class = "control-label col-md-3" })
+                                    <div class="col-md-8">
+                                        @Html.TextAreaFor(model => model.Locales[i].Description, new { @class = "form-control ckeditor" })
+                                        @Html.ValidationMessageFor(model => model.Locales[i].Description, "", new { @class = "help-block" })
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        @Html.HiddenFor(model => model.Locales[i].LocalesId)
+                        @Html.HiddenFor(model => model.Locales[i].LanguageId)
+                    }
+
+                    @Html.HiddenFor(model => model.Name, new { @class = "form-control", Value = Model.Locales[0].Name }) 
+
+                }
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<!--/PaymentMethod; _CreateOrUpdate--->

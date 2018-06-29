@@ -1,0 +1,154 @@
+﻿<!---_CreateOrUpdate--->
+@using App.Aplication
+@using App.Domain.Common
+@using Resources
+@using App.Service.Language
+@model App.FakeEntity.ContactInformation.ContactInformationViewModel
+
+<div class="form-horizontal">
+    <div class="form-body">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger col-md-offset-3" })
+
+        <div class="tabbable-line m-heading-1 border-green m-bordered dashboard-stat grey">
+            <ul class="nav nav-tabs ">
+                @{
+                    for (int i = 0; i < Model.Locales.Count; i++)
+                    {
+                        App.Domain.Entities.Language.Language language = DependencyResolver.Current.GetService<ILanguageService>().GetById(Model.Locales[i].LanguageId);
+
+                        <li class="@(i == 0 ? "active" : "")">
+                            <a href="#tab_@(i + 1)" data-toggle="tab"><img src="@language.Flag.ValidateImage()" /> @language.LanguageName</a>
+                        </li>
+                    }
+                }
+            </ul>
+
+            <div class="tab-content">
+                @{
+                    for (int i = 0; i < Model.Locales.Count; i++)
+                    {
+                        <div class="tab-pane @(i == 0 ? "active" : "")" id="tab_@(i+1)">
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Locales[i].Title, new { @class = "control-label col-md-3" })
+                                <div class="col-md-5">
+                                    @Html.TextBoxFor(model => model.Locales[i].Title, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Locales[i].Title, "", new { @class = "help-block" })
+                                </div>
+                            </div>                            
+                           
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Locales[i].Address, new { @class = "control-label col-md-3" })
+                                <div class="col-md-5">
+                                    @Html.TextBoxFor(model => model.Locales[i].Address, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Locales[i].Address, "", new { @class = "help-block" })
+                                </div>
+                            </div>
+
+                        </div>
+
+                        @Html.HiddenFor(model => model.Locales[i].LocalesId)
+                        @Html.HiddenFor(model => model.Locales[i].LanguageId)
+                    }
+
+                    @Html.HiddenFor(model => model.Title, new { @class = "form-control", Value = Model.Locales[0].Title })
+                    @Html.HiddenFor(model => model.Address, new { @class = "form-control", Value = Model.Locales[0].Address })
+
+                }
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Hotline, new { @class = "control-label col-md-3" })
+            <div class="col-md-5">
+                @Html.TextBoxFor(model => model.Hotline, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Hotline, "", new { @class = "help-block" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.MobilePhone, new { @class = "control-label col-md-3" })
+            <div class="col-md-5">
+                @Html.TextBoxFor(model => model.MobilePhone, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MobilePhone, "", new { @class = "help-block" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label(FormUI.GoogleMap, new { @class = "control-label col-md-3" })
+            <div class="col-md-5">
+                <a id="mapmarker" class="btn btn-sm btn-primary">@FormUI.SelectMap</a>
+                @Html.HiddenFor(model => model.Lag)
+                @Html.HiddenFor(model => model.Lat)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Fax, new { @class = "control-label col-md-3" })
+            <div class="col-md-5">
+                @Html.TextBoxFor(model => model.Fax, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Fax, "", new { @class = "help-block" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-3" })
+            <div class="col-md-5">
+                @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "help-block" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProvinceId, new { @class = "control-label col-md-3" })
+            <div class="col-md-5">
+                @Html.DropDownListFor(x => x.ProvinceId, new SelectList(ViewBag.Provinces ?? string.Empty, "Id", "Name"), "--Select--", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ProvinceId, "", new { @class = "help-block" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.NumberOfStore, new { @class = "control-label col-md-3" })
+            <div class="col-md-5">
+                @Html.TextBoxFor(model => model.NumberOfStore, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.NumberOfStore, "", new { @class = "help-block" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.OrderDisplay, new { @class = "control-label col-md-3" })
+            <div class="col-md-5">
+                @Html.TextBoxFor(model => model.OrderDisplay, new { @class = "form-control", type = "number" })
+                @Html.ValidationMessageFor(model => model.OrderDisplay, "", new { @class = "help-block" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Type, new { @class = "control-label col-md-3" })
+            <div class="col-md-5">
+                <div class="radio-list">
+                    <label class="radio-inline">
+                        @Html.RadioButtonFor(x => x.Type, (int)TypeAdress.Current, new { @checked = "checked" }) @FormUI.CurrentAddress
+                    </label>
+                    <label class="radio-inline">
+                        @Html.RadioButtonFor(x => x.Type, (int)TypeAdress.Other) @FormUI.OtherAddress
+                    </label>
+                </div>
+                @Html.ValidationMessageFor(model => model.Type, "", new { @class = "help-block" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Status, new { @class = "control-label col-md-3" })
+            <div class="col-md-5">
+                <div class="radio-list">
+                    <label class="radio-inline">
+                        @Html.RadioButtonFor(x => x.Status, (int)Status.Enable, new { @checked = "checked" }) @FormUI.Active
+                    </label>
+                    <label class="radio-inline">
+                        @Html.RadioButtonFor(x => x.Status, (int)Status.Disable) @FormUI.InActive
+                    </label>
+                </div>
+                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "help-block" })
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!---/_CreateOrUpdate--->

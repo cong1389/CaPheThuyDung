@@ -1,0 +1,17 @@
+﻿@model App.Domain.Entities.GlobalSetting.SettingSeoGlobal
+
+@if (Model != null)
+{
+    if (!string.IsNullOrEmpty(Model.SnippetGoogleAnalytics))
+    {
+        @Html.Raw(Model.SnippetGoogleAnalytics)
+    }
+    if (!string.IsNullOrEmpty(Model.GoogleRetargetSnippet))
+    {
+        @Html.Raw(Model.GoogleRetargetSnippet)
+    }
+    if (!string.IsNullOrEmpty(Model.FacebookRetargetSnippet))
+    {
+        @Html.Raw(Model.FacebookRetargetSnippet)
+    }
+}

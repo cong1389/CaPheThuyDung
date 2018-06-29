@@ -1,0 +1,473 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0F272637-1E29-4573-9F6E-D0543A14CEBA}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>App.Admin</RootNamespace>
+    <AssemblyName>App.Admin</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper, Version=6.2.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.2.2\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.2\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.2\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.0.0\lib\net451\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.4.0.0\lib\net451\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.4.0.0\lib\net451\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.2.4\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.2.4\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.ApplicationInsights">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.2.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.2.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.2.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.2.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.2.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.2.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AttributeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AttributeValueController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BannerController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BaseAccountController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BaseAdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BaseAdminUploadController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BaseDefaultIdentity.cs" />
+    <Compile Include="Areas\Admin\Controllers\BaseIdentityController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BrandController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ContactInformationController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DashBoardController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ExtentionsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PaymentMethodController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ManufacturerController.cs" />
+    <Compile Include="Areas\Admin\Controllers\GenericControlController.cs" />
+    <Compile Include="Areas\Admin\Controllers\GenericControlValueController.cs" />
+    <Compile Include="Areas\Admin\Controllers\GenericControlValueItemController.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\LandingPageController.cs" />
+    <Compile Include="Areas\Admin\Controllers\LanguageController.cs" />
+    <Compile Include="Areas\Admin\Controllers\LocaleResourceController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MailSettingController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MenuController.cs" />
+    <Compile Include="Areas\Admin\Controllers\NewsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\OrderController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PageBannerController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PluginController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PostController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PrintController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProvinceController.cs" />
+    <Compile Include="Areas\Admin\Controllers\RepairController.cs" />
+    <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SecurityController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SeoSettingController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SettingController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ShippingMethodController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SlideShowController.cs" />
+    <Compile Include="Areas\Admin\Controllers\StaticContentController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SystemSettingController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UserController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UtilityController.cs" />
+    <Compile Include="Areas\Admin\Extensions\MappingExtensions.cs" />
+    <Compile Include="Areas\Admin\Helpers\AuthorizeCustom.cs" />
+    <Compile Include="Areas\Admin\Helpers\CalculateTime.cs" />
+    <Compile Include="Areas\Admin\Helpers\Common.cs" />
+    <Compile Include="Areas\Admin\Helpers\ImageSize.cs" />
+    <Compile Include="Areas\Admin\Helpers\LandingPageExport.cs" />
+    <Compile Include="Areas\Admin\Helpers\MenuNav.cs" />
+    <Compile Include="Areas\Admin\Helpers\RequiredPermisson.cs" />
+    <Compile Include="Areas\Admin\Model\Plugins\LocalPluginsModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\content\global\components.min.css" />
+    <Content Include="Areas\Admin\content\global\custom.css" />
+    <Content Include="Areas\Admin\content\global\default.css" />
+    <Content Include="Areas\Admin\content\global\error.min.css" />
+    <Content Include="Areas\Admin\content\global\font.css" />
+    <Content Include="Areas\Admin\content\global\fonts\utm-fb.svg" />
+    <Content Include="Areas\Admin\content\global\layout.min.css" />
+    <Content Include="Areas\Admin\content\global\login.min.css" />
+    <Content Include="Areas\Admin\content\global\plugins.min.css" />
+    <Content Include="Areas\Admin\content\global\print.css" />
+    <Content Include="Areas\Admin\content\plugins\bootstrap-fileinput\bootstrap-fileinput.css" />
+    <Content Include="Areas\Admin\content\plugins\bootstrap-tagsinput\bootstrap-tagsinput.css" />
+    <Content Include="Areas\Admin\content\plugins\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Areas\Admin\content\plugins\bootstrap\fonts\bootstrap\glyphicons-halflings-regular.svg" />
+    <Content Include="Areas\Admin\content\plugins\colorbox\colorbox.css" />
+    <Content Include="Areas\Admin\content\plugins\colorbox\images\border.png" />
+    <Content Include="Areas\Admin\content\plugins\colorbox\images\controls.png" />
+    <Content Include="Areas\Admin\content\plugins\colorbox\images\loading.gif" />
+    <Content Include="Areas\Admin\content\plugins\colorbox\images\loading_background.png" />
+    <Content Include="Areas\Admin\content\plugins\daterangepicker\daterangepicker-bs3.css" />
+    <Content Include="Areas\Admin\content\plugins\dropzone\basic.css" />
+    <Content Include="Areas\Admin\content\plugins\dropzone\dropzone.min.css" />
+    <Content Include="Areas\Admin\content\plugins\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Areas\Admin\content\plugins\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Areas\Admin\content\plugins\jquery-minicolors\jquery.minicolors.css" />
+    <Content Include="Areas\Admin\content\plugins\jquery-notific8\jquery.notific8.min.css" />
+    <Content Include="Areas\Admin\content\plugins\select2\select2-bootstrap.min.css" />
+    <Content Include="Areas\Admin\content\plugins\select2\select2.min.css" />
+    <Content Include="Areas\Admin\content\plugins\simple-line-icons\fonts\Simple-Line-Icons.dev.svg" />
+    <Content Include="Areas\Admin\content\plugins\simple-line-icons\fonts\Simple-Line-Icons.svg" />
+    <Content Include="Areas\Admin\content\plugins\simple-line-icons\simple-line-icons.min.css" />
+    <Content Include="Areas\Admin\content\plugins\uniform\css\uniform.default.css" />
+    <Content Include="Areas\Admin\content\plugins\uniform\images\bg-input-focus.png" />
+    <Content Include="Areas\Admin\content\plugins\uniform\images\bg-input.png" />
+    <Content Include="Areas\Admin\content\plugins\uniform\images\sprite.png" />
+    <Content Include="Areas\Admin\content\plugins\uniform\images\sprite_original.png" />
+    <Content Include="Areas\Admin\content\plugins\uploafile\jquery.filer-icons\jquery-filer-preview.html" />
+    <Content Include="Areas\Admin\content\plugins\uploafile\jquery.filer-icons\jquery-filer.css" />
+    <Content Include="Areas\Admin\content\plugins\uploafile\jquery.filer-icons\jquery-filer.svg" />
+    <Content Include="Areas\Admin\content\plugins\uploafile\jquery.filer.css" />
+    <Content Include="Areas\Admin\content\plugins\uploafile\themes\jquery.filer-dragdropbox.css" />
+    <Content Include="Areas\Admin\scripts\app.core.min.js" />
+    <Content Include="Areas\Admin\scripts\app.js" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\Banner\_CreateOrUpdate.cshtml" />
+    <Content Include="Areas\Admin\Views\PaymentMethod\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\PaymentMethod\_CreateOrUpdate.cshtml" />
+    <Content Include="Areas\Admin\Views\PaymentMethod\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\PaymentMethod\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Setting\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Setting\_NewRow.cshtml" />
+    <Content Include="Areas\Admin\content\global\fonts\utm-fb.eot" />
+    <Content Include="Areas\Admin\content\global\fonts\utm-fb.ttf" />
+    <Content Include="Areas\Admin\content\global\fonts\utm-fb.woff" />
+    <Content Include="Areas\Admin\content\plugins\bootstrap\fonts\bootstrap\glyphicons-halflings-regular.eot" />
+    <Content Include="Areas\Admin\content\plugins\bootstrap\fonts\bootstrap\glyphicons-halflings-regular.ttf" />
+    <Content Include="Areas\Admin\content\plugins\bootstrap\fonts\bootstrap\glyphicons-halflings-regular.woff" />
+    <Content Include="Areas\Admin\content\plugins\bootstrap\fonts\bootstrap\glyphicons-halflings-regular.woff2" />
+    <Content Include="Areas\Admin\content\plugins\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Areas\Admin\content\plugins\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Areas\Admin\content\plugins\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Areas\Admin\content\plugins\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Areas\Admin\content\plugins\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="Areas\Admin\content\plugins\simple-line-icons\fonts\Simple-Line-Icons.eot" />
+    <Content Include="Areas\Admin\content\plugins\simple-line-icons\fonts\Simple-Line-Icons.ttf" />
+    <Content Include="Areas\Admin\content\plugins\simple-line-icons\fonts\Simple-Line-Icons.woff" />
+    <Content Include="Areas\Admin\content\plugins\uploafile\jquery.filer-icons\jquery-filer.eot" />
+    <Content Include="Areas\Admin\content\plugins\uploafile\jquery.filer-icons\jquery-filer.ttf" />
+    <Content Include="Areas\Admin\content\plugins\uploafile\jquery.filer-icons\jquery-filer.woff" />
+    <Content Include="Areas\Admin\Views\GenericControlValue\_CreateOrUpdate.cshtml" />
+    <Content Include="Areas\Admin\Views\MailSetting\_CreateOrUpdate.cshtml" />
+    <Content Include="Areas\Admin\Views\Language\_CreateOrUpdate.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\_CreateOrUpdate.cshtml" />
+    <Content Include="Areas\Admin\Views\Attribute\_CreateOrUpdate.cshtml" />
+    <Content Include="Areas\Admin\Views\AttributeValue\_CreateOrUpdate.cshtml" />
+    <Content Include="Areas\Admin\Views\Brand\_CreateOrUpdate.cshtml" />
+    <Content Include="Areas\Admin\Views\PageBanner\_CreateOrUpdate.cshtml" />
+    <Content Include="Areas\Admin\Views\Province\_CreateOrUpdate.cshtml" />
+    <Content Include="Areas\Admin\Views\ShippingMethod\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ShippingMethod\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\ShippingMethod\_CreateOrUpdate.cshtml" />
+    <Content Include="Areas\Admin\Views\Plugin\Index.cshtml" />
+    <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\Admin_Front.pubxml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Libraries\App.Aplication\App.Aplication.csproj">
+      <Project>{4145f94e-d953-47db-a33e-102b26692790}</Project>
+      <Name>App.Aplication</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\App.Core\App.Core.csproj">
+      <Project>{22ebd28a-55c0-4d91-ab94-3b75a40584de}</Project>
+      <Name>App.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\App.Domain\App.Domain.csproj">
+      <Project>{396ff6df-0f55-4c8f-9b2f-233f439da8f6}</Project>
+      <Name>App.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\App.FakeEntity\App.FakeEntity.csproj">
+      <Project>{2205e10f-f6de-43c5-a39d-e9458639d0d5}</Project>
+      <Name>App.FakeEntity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\App.Framework\App.Framework.csproj">
+      <Project>{d57a5702-7595-4360-a5e0-bdb36bba8a25}</Project>
+      <Name>App.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\App.Service\App.Service.csproj">
+      <Project>{66967df3-d493-4c60-ade9-b3f616f83b8d}</Project>
+      <Name>App.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\Resources\Resources.csproj">
+      <Project>{17a1e462-f7a9-4729-82e0-d0674f125863}</Project>
+      <Name>Resources</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Areas\Admin\packages.config" />
+    <Content Include="Areas\Admin\Views\Account\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\AttributeValue\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\AttributeValue\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\AttributeValue\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Attribute\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Attribute\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Attribute\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Banner\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Banner\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Banner\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Brand\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Brand\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Brand\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\GetMenu.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\GetMenuProduct.cshtml" />
+    <Content Include="Areas\Admin\Views\ContactInformation\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\ContactInformation\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\ContactInformation\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ContactInformation\_CreateOrUpdate.cshtml" />
+    <Content Include="Areas\Admin\Views\Extentions\ResourceScript.cshtml" />
+    <Content Include="Areas\Admin\Views\Manufacturer\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Manufacturer\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Manufacturer\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Manufacturer\_CreateOrUpdate.cshtml" />
+    <Content Include="Areas\Admin\Views\GenericControlValue\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\GenericControlValue\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\GenericControlValue\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\GenericControlValue\_CreateOrUpdate.GenericControlValue.cshtml" />
+    <Content Include="Areas\Admin\Views\GenericControl\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\GenericControl\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\GenericControl\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\GenericControl\_CreateOrUpdate.cshtml" />
+    <Content Include="Areas\Admin\Views\GenericControl\_CreateOrUpdate.GenericControl.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\LandingPage\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Language\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Language\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Language\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\LocaleResource\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\LocaleResource\_NewRow.cshtml" />
+    <Content Include="Areas\Admin\Views\MailSetting\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\MailSetting\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\MailSetting\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Menu\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Menu\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Menu\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Menu\_CreateOrUpdate.cshtml" />
+    <Content Include="Areas\Admin\Views\News\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\News\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\News\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\News\_CreateOrUpdate.cshtml" />
+    <Content Include="Areas\Admin\Views\Order\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Order\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Order\_CreateOrUpdate.cshtml" />
+    <Content Include="Areas\Admin\Views\PageBanner\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\PageBanner\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\PageBanner\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Post\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Post\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Post\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Post\_CreateOrUpdate.cshtml" />
+    <Content Include="Areas\Admin\Views\Post\_CreateOrUpdate.Gallery.cshtml" />
+    <Content Include="Areas\Admin\Views\Print\Bill.cshtml" />
+    <Content Include="Areas\Admin\Views\Print\Warranty.cshtml" />
+    <Content Include="Areas\Admin\Views\Province\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Province\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Province\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Repair\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Repair\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Repair\EditorTemplates\RepairItemViewModel.cshtml" />
+    <Content Include="Areas\Admin\Views\Repair\EditorTemplates\RepairViewModel.cshtml" />
+    <Content Include="Areas\Admin\Views\Repair\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Repair\WarrantyForm.cshtml" />
+    <Content Include="Areas\Admin\Views\Role\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Security\AccessDined.cshtml" />
+    <Content Include="Areas\Admin\Views\SeoSetting\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\SeoSetting\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\SeoSetting\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\SeoSetting\_CreateOrUpdate.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\Category\_PartialMenu.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\Error.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\Message\_SaveBefore.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_AngularScripts.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_BreadCrumb.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_DashBoardNews.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_DashBoardPost.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Groups.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_LayoutLogin.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_PageHeader.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_PageLinks.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_PageTitle.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_PartialMenuLink.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Scripts.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_StyleSheet.cshtml" />
+    <Content Include="Areas\Admin\Views\SlideShow\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\SlideShow\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\SlideShow\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\SlideShow\_CreateOrUpdate.cshtml" />
+    <Content Include="Areas\Admin\Views\StaticContent\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\StaticContent\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\StaticContent\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\StaticContent\_CreateOrUpdate.cshtml" />
+    <Content Include="Areas\Admin\Views\SystemSetting\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\SystemSetting\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\SystemSetting\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\SystemSetting\_CreateOrUpdate.cshtml" />
+    <Content Include="Areas\Admin\Views\User\ChangePassword.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Login.cshtml" />
+    <Content Include="Areas\Admin\Views\Utility\GoogleMap.cshtml" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Views\GenericControlValueItem\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>65129</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:21434/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

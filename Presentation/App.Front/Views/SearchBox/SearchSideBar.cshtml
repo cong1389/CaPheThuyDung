@@ -1,0 +1,62 @@
+﻿@using App.Aplication
+<!----SearchSideBar-->
+
+<div class="block left-module">
+	<p class="title_block">Danh mục sản phẩm</p>
+	<div class="block_content">
+		<!-- layered -->
+		<div class="layered layered-category">
+			<div class="layered-content">
+				@{Html.RenderAction("MenuLinkSideBar", "MenuNav", new { area = "", virtualId = ViewBag.VirtualId, proAttrs = ViewBag.ProAttrs });}
+			</div>
+		</div>
+		<!-- ./layered -->
+	</div>
+</div>
+<!-- ./block category  -->
+<!-- block filter -->
+<div class="block left-module">
+	<p class="title_block">Bộ lọc sản phẩm</p>
+	<div class="block_content">
+		<div class="layered layered-filter-price">
+			<!-- filter price -->
+
+			<div class="layered_subtitle">Giá</div>
+			<div class="range-block layered-content filter-color conten-attr" id="filter_group_4">
+				<div class="text">
+					<span>50.000</span>
+					<span>50.000.000</span>
+				</div>
+				@{
+					decimal fromPrice = 50000;
+					decimal toPrice = 50000000;
+					var prices = (List<decimal>)ViewBag.Prices;
+
+					if (prices.IsAny())
+					{
+						fromPrice = prices.FirstOrDefault();
+						toPrice = prices.LastOrDefault();
+					}
+				}
+				<input type="text" id="block-slider" value="" data-slider-tooltip="hide" data-slider-min="50000" data-slider-max="50000000" data-slider-step="1000000" data-slider-value="[@fromPrice,@toPrice]">
+				<div class="show-range">
+					<div class="s-control">
+						<input id="from-price" type="number" class="form-control" value="@fromPrice" />
+					</div>
+					<span>–</span>
+					<div class="s-control">
+						<input id="to-price" type="number" class="form-control" value="@toPrice" />
+					</div>
+				</div>
+			</div>
+
+			@{Html.RenderAction("SearchAttribute", "SearchBox", new { area = "", ViewBag.Attributes });}
+
+		</div>
+	</div>
+</div>
+
+<input type="hidden" id="attribute" />
+<input type="hidden" id="proattribute" />
+<input type="hidden" id="price" />
+<!----/SearchSideBar-->

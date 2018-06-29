@@ -1,0 +1,13 @@
+﻿@using App.Aplication
+@model IEnumerable<App.Domain.Entities.Ads.Banner>
+@if (Model.IsAny())
+{
+    <div class="banner-bottom">
+        @foreach (var item in Model)
+        {
+            <a href="@item.WebsiteLink" target="@item.Target" rel="nofollow">
+                <img src="@item.ImgPath.ValidateImage()" alt="@item.Title" width="@item.Width" height="@item.Height"/>
+            </a>
+        }
+    </div>
+}

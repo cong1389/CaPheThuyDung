@@ -1,0 +1,22 @@
+﻿<!---_BreadCrumb--->
+
+@using App.Aplication
+@using App.Front.Models
+
+@{
+    List<BreadCrumb> breadCrumbs = Model is List<BreadCrumb> ? Model : ViewBag.BreadCrumb as List<BreadCrumb>;
+
+    <div class="gw-breadcrumb clearfix">
+       <ol class="breadcrumb breadcrumb-arrow hidden-sm hidden-xs">
+                <li><a href="@Url.Action("Index", "Home", new {area = ""})" target="_self">@T("TrangChu")</a></li>
+                @if (breadCrumbs.IsAny())
+                {
+                    foreach (var item in breadCrumbs)
+                    {
+                        <li><a class="@(item.Current?"active":"")" href='@item.Url' target="_self">@item.Title</a></li>
+                    }
+                }
+            </ol>
+    </div>
+}
+<!---/_BreadCrumb--->

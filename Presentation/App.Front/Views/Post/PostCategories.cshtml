@@ -1,0 +1,8 @@
+﻿<!---PostCategories-->
+@model IEnumerable<App.Domain.Entities.Data.Post>
+
+
+@{ Html.RenderAction("BannerTop", "Banner", new { menuId = ViewBag.MenuId, title = ViewBag.Title });}
+@Html.Partial("_PostCategory.Post", Model)
+
+<!---/PostCategories-->

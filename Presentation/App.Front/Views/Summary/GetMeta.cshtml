@@ -1,0 +1,24 @@
+﻿<!----GetMeta-->
+
+@*<meta name="keywords" content="@ViewBag.KeyWords" />
+<meta name="description" content="@ViewBag.Description" />
+<meta name="generator" content="" />
+<link rel="canonical" href="@Html.Raw(Request.Url.AbsoluteUri)" />
+<link rel="alternate" hreflang="vi_vn" href="@ViewBag.SiteUrl" />
+<meta name="robots" content="index, follow, noodp" />
+<meta name="googlebot" content="index,archive,follow,noodp" />
+<meta name="msnbot" content="all,index,follow" />
+<meta name="copyright" content="@Utils.CurrentHost" />
+<meta property="og:locale" content="vi_VN">
+<meta property="og:site_name" content="@ViewBag.Title" />
+<meta property="og:title" content="@ViewBag.Title" />
+<meta property="og:description" content="@ViewBag.Description" />*@
+
+<!-- You can use Open Graph tags to customize link previews.-->
+@*<meta property="og:url" content="@ViewBag.ImageBigSize">
+<meta property="og:type" content="website" />
+<meta property="og:image" content="@ViewBag.ImageBigSize" />*@
+<link href="@ViewBag.Favicon" rel="shortcut icon" type="image/x-icon" />
+<!--/You can use Open Graph tags to customize link previews.-->
+
+<!----/GetMeta-->

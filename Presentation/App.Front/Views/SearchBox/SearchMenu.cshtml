@@ -1,0 +1,18 @@
+﻿<!--SearchMenu--->
+@model App.Front.Models.SeachConditions
+
+<div class="search-box">
+	@using (Html.BeginForm("Search", "Menu", FormMethod.Get, new { @class = "search form-inline " }))
+	{
+		<div class="form-group input-serach">
+			@Html.TextBoxFor(model => model.Keywords, new { @class = "search_box", placeholder = T("Search.PlaceHolder") })
+
+		</div>
+		<button id="submit-button" class="pull-right btn-search">
+			<span class="hidden-400">Tìm kiếm</span>
+			<span class="show-400"><i class="fa fa-search" aria-hidden="true"></i></span>
+		</button>
+
+	}
+</div>
+<!--/SearchMenu--->

@@ -1,0 +1,76 @@
+﻿<!--_PostDetail.Discount-->
+@using App.Aplication
+@model IEnumerable<App.Domain.Entities.Data.Post>
+
+<div class="block left-module on-sale">
+	<p class="title_block">Sản phẩm khuyến mãi</p>
+	<div class="block_content product-onsale">
+		<ul class="product-list owl-carousel" data-loop="true" data-nav="false" data-margin="0" data-autoplayTimeout="1000" data-autoplayHoverPause="true" data-items="1" data-autoplay="true">
+
+			@foreach (var post in Model)
+			{
+				<li>
+					<div class="product-container">
+						<div class="left-block">
+							<a href="@Url.Action("PostDetail", "Post", new {seoUrl = post.SeoUrl, area = ""})" title="@post.Title">
+								<img class="img-responsive" alt="@post.Title" src="@post.ImageMediumSize.ValidateImage()" />
+							</a>
+							@if (post.Discount.HasValue & !post.OutOfStock)
+							{
+								<div class="price-percent-reduction2">
+									Sale
+									<br>
+									<strong>-@(post.Discount)%</strong>
+								</div>
+							}
+						</div>
+
+						<div class="right-block">
+							<h5 class="product-name">
+								<a href="@Url.Action("PostDetail", "Post", new {seoUrl = post.SeoUrl, area = ""})">@post.Title</a>
+							</h5>
+							<div class="product-star">
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star-half-o"></i>
+							</div>
+							<div class="content_price">
+								@if (!post.OutOfStock)
+								{
+									<span class="price product-price">
+										@if (post.Price.HasValue && post.Discount.HasValue)
+										{
+											@Html.Raw((post.Price - post.Price * post.Discount / 100).FormatPrice())
+										}
+										else if (post.Price.HasValue && !post.Discount.HasValue)
+										{
+											@Html.Raw(post.Price.FormatPrice())
+										}
+										else
+										{
+											@Html.Raw("LienHeDatHang.Lable")
+										}
+									</span>
+									if (post.Discount.HasValue)
+									{
+										<span class="price old-price">@Html.Raw(post.Price.FormatPrice()) </span>
+									}
+								}
+								else
+								{
+									<h5 class="product-name">
+										<span class="label label-danger">Hết hàng</span>
+									</h5>
+								}
+							</div>
+						</div>
+					</div>
+				</li>
+			}
+		</ul>
+	</div>
+</div>
+
+<!--/_PostDetail.Discount-->

@@ -1,0 +1,37 @@
+﻿<!---ManufacturerHome-->
+@using App.Aplication
+@model IEnumerable<App.Domain.Entities.Data.Manufacturer>
+
+@if (Model.IsAny())
+{
+    <div class='testimonials section nobottommargin nobg'>
+        <h4 class='testimonials_title '>Ý KIẾN KHÁCH HÀNG</h4>
+        <div class="testimonials_content">
+
+            @foreach (var item in Model)
+            {
+                <div class="testimonials-body clearfix">
+                    <div class="left">
+                        <a href="#">
+                            <img data-lazy="@Url.Content("~/" + item.ImageUrl)" src="@Url.Content("~/" + item.ImageUrl)">
+                        </a>
+                    </div>
+                    <div class="testimonials-meta">
+                        <div class="testimonials-quote">
+                            @Html.Raw(item.Description)
+                        </div>
+                        <div class="testimonials-profile">
+                            <h4></h4>
+                            <em class="info"></em>
+                        </div>
+                    </div>
+                </div>
+
+            }
+
+
+        </div>
+    </div>
+}
+
+<!--/-ManufacturerHome-->

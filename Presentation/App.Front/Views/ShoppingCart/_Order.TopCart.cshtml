@@ -1,0 +1,16 @@
+﻿<!----_Order.TopCart-->
+@model App.Front.Models.ShoppingCart.MiniShoppingCartModel
+
+<div class="btn-cart" id="cart-block">
+    <a href="@Url.Action("Cart","ShoppingCart")">Cart</a>
+    <span class="notify notify-right">@(Model.Items.Count())</span>
+    <div class="cart-block">
+        @if (!Model.Items.Any())
+        {
+            <div class="cart-empty">
+                Giỏ hàng của bạn vẫn chưa có sản phẩm nào.
+            </div>
+        }
+    </div>
+</div>
+<!----/_Order.TopCart-->

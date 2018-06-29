@@ -1,0 +1,61 @@
+﻿<!---HomeContact-->
+@model IEnumerable<App.Domain.Entities.GlobalSetting.ContactInformation>
+
+@if (Model != null)
+{
+    var contact = Model.SingleOrDefault(x => x.Type == 1);
+
+    <section id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="no-padding-left col-lg-4">
+                    <h2 class="text-brown3 font-serif no-margin">Liên hệ</h2>
+                    <ul class="text-gray4 margin-top-25 fa-ul">
+
+                        @foreach (var item in Model.Where(x => x.Type == 0))
+                        {
+                            <li class="text-uppercase"><i class="fa-li fa"></i><strong>@item.Title:</strong> </li>
+                            if (!string.IsNullOrEmpty(contact.Address))
+                            {
+                                <li>
+                                    <i class="fa-li fa fa-map-marker"></i>
+                                    <b>
+                                        @contact.Address
+                                    </b>
+                                </li>
+                            }
+                            if (!string.IsNullOrEmpty(contact.Email))
+                            {
+                                <li>
+                                    <i class="fa-li fa fa-map-marker"></i>
+                                    <b>
+                                        @contact.Email
+                                    </b>
+                                </li>
+                            }
+                            if (!string.IsNullOrEmpty(contact.MobilePhone))
+                            {
+                                <li>
+                                    <i class="fa-li fa fa-map-marker"></i>
+                                    <b>
+                                        @contact.MobilePhone
+                                    </b>
+                                </li>
+                            }
+                        }
+
+                    </ul>
+                </div>
+                <div class="no-padding-right margin-top-80 col-lg-8 hidden-xs">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1959.705280135968!2d106.69246898357271!3d10.779833962179588!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f30b82aa849%3A0x3e695b52416a7207!2zMjJhIMSQxrDhu51uZyBWw7UgVsSDbiBU4bqnbiwgcGjGsOG7nW5nIDYsIFF14bqtbiAzLCBI4buTIENow60gTWluaCwgVmlldG5hbQ!5e0!3m2!1sen!2sus!4v1501647105911" class="embed-responsive-item" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+
+
+<!---/HomeContact-->

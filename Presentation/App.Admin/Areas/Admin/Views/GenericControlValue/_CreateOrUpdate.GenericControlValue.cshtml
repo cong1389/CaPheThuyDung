@@ -1,0 +1,58 @@
+﻿<!-----_CreateOrUpdate.GenericControlValue-->
+@using App.Aplication
+@model IEnumerable<App.FakeEntity.GenericControl.ControlValueItemResponse>
+
+@if (Model.IsAny())
+{
+    using (Ajax.BeginForm("Insert", "GenericControlValueItem", new AjaxOptions { UpdateTargetId = "AllTweets" }, new { id = "frmUpdate" }))
+    {
+        @Html.AntiForgeryToken()
+
+        int i = 0, j = 0;
+
+        <div id="AllTweets">
+            <div id="tab_images_uploader_container" class="text-align-reverse margin-bottom-10">
+                <button id="1stButton" type="button" class="btn btn-success"> <i class="fa fa-plus"></i> Save</button>
+            </div>
+
+            @foreach (var controlValueItemResponse in Model)
+            {
+                <div class="form-group">
+                    @Html.Label(controlValueItemResponse.Name, new { @class = "control-label col-md-3" })
+                    <div class="col-md-5">
+
+                        <input type="hidden" name="controlValueItemResponse[@i].GenericControlValueId" value="@controlValueItemResponse.GenericControlValueId" />
+                        <input type="hidden" name="controlValueItemResponse[@i].Name" class="form-control" value="@controlValueItemResponse.Name" />
+                        <input type="text" name="controlValueItemResponse[@i].ValueName" class="form-control" value="@controlValueItemResponse.ValueName" />
+                    </div>
+                </div>
+                i++;
+            }
+        </div>
+    }
+
+    <script>
+    $(document).ready(function () {
+          var form = $('#frmUpdate');
+            $('#1stButton').click(function (event) {
+            var data3 = form.serializeToJSON({ associativeArrays: false });
+            var param = { "param": JSON.stringify(data3),  "entityId": $("#Id").val() };
+            $.ajax({
+                type: "POST",
+                datatype: "html",
+                url: "@Url.Action("Insert", "GenericControlValueItem")",
+                data: param,
+                success: function (response) {
+                    AppCore.handleMessage("Lưu thành công.");
+                }
+            });
+
+        });
+    });
+    </script>
+}
+else
+{
+    @Html.Partial("Message/_SaveBefore")
+}
+<!-----/_CreateOrUpdate.GenericControlValue-->

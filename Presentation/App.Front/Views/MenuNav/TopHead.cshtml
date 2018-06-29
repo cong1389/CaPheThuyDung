@@ -1,0 +1,60 @@
+﻿<!---TopHead-->
+@using App.Aplication
+@using Microsoft.AspNet.Identity
+@model IEnumerable<App.FakeEntity.Menu.MenuNavViewModel>
+
+<div class="top-header">
+	<div class="container">
+
+		@if (Model != null)
+		{
+			<div class="nav-top-links">
+				@{
+					var i = 0;
+					foreach (var lv1 in Model)
+					{
+						<a class="@(i==0?"first-item":"")" href="@Url.Action("GetContent", "Menu", new { menu = lv1.SeoUrl, area = "" })">
+							<img alt="@lv1.MenuName" src="@lv1.ImageSmallSize.ValidateImage()" />@lv1.MenuName
+						</a>
+						i++;
+					}
+				}
+
+			</div>
+		}
+		<div id="user-info-top" class="user-info pull-right">
+			@if (Request.IsAuthenticated)
+			{
+				using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+				{
+					@Html.AntiForgeryToken()
+					<div class="dropdown">
+						<a class="current-open" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
+							<span>Xin chào @User.Identity.GetUserName() </span>
+						</a>
+						<ul class="dropdown-menu mega_dropdown" role="menu">
+							<li><a href='@Url.Action("ChangeInfo", "Account", new {area = ""})'>Đơn hàng của tôi</a></li>
+							<li><a href='@Url.Action("Manage", "User", new {area = ""})'>Tài khoản của tôi</a></li>
+							<li>
+								<a href="javascript:document.getElementById('logoutForm').submit()">Đăng xuất</a>
+							</li>
+						</ul>
+					</div>
+				}
+			}
+			else
+			{
+				<div class="dropdown">
+					<a class="current-open" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
+						<span>Đăng nhập tài khoản</span>
+					</a>
+					<ul class="dropdown-menu mega_dropdown" role="menu">
+						<li><a href='@Url.Action("Login", "User", new {area = ""})'>Đăng nhập</a></li>
+						<li><a href='@Url.Action("Registration", "User", new {area = ""})'>Đăng ký</a></li>
+					</ul>
+				</div>
+			}
+		</div>
+	</div>
+</div>
+<!---/TopHead-->

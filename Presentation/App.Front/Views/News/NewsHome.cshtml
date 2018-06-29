@@ -1,0 +1,42 @@
+﻿<!---NewsHome--->
+@using App.Aplication
+@model IEnumerable<App.Domain.Entities.Data.News>
+
+@if (Model.IsAny())
+{
+    <section id="home-4" style=" padding: 70px 0 50px;background: #fff url(http://cdn.lamantcafe.vn/frontend/themes/lamant/images/home/bg-6.jpg) top no-repeat">
+        <img id="coffee-mass" src="http://cdn.lamantcafe.vn/frontend/themes/lamant/images/home/coffee-mass.png" alt="">
+        <img id="coffee-cup-2" src="http://cdn.lamantcafe.vn/frontend/themes/lamant/images/home/coffee-cup-2.png" alt="">
+        <div class="container">
+            <div class="row">
+                <div class="text-center col-lg-8 col-lg-offset-2 no-padding">
+                    <h2 class="text-white font-serif no-margin">Tin tức - Sự kiện</h2>
+                </div>
+            </div>
+
+            <div class="row margin-top-30 margin-side-15">
+                @foreach (var item in Model)
+                {
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="post-item box-shadow-right">
+                            <a href="@Url.Action("NewsDetail", "News", new {seoUrl = item.SeoUrl, area = ""})" title="@item.Title">
+                                <img class="img-responsive" src="@item.ImageMediumSize.ValidateImage()" alt="@item.Title">
+                            </a>
+                            <div class="background-white padding-30">
+                                <h6 class="text-regular font-utm">
+                                    <a href="@Url.Action("NewsDetail", "News", new {seoUrl = item.SeoUrl, area = ""})" title="@item.Title">@item.Title</a>
+                                </h6>
+                                <p class="text-gray4 margin-top-10 margin-bottom-45">
+                                    @item.ShortDesc
+                                </p>
+                                <a class="post-url font-utm" href="@Url.Action("NewsDetail", "News", new {seoUrl = item.SeoUrl, area = ""})" title="@item.Title">Xem thêm</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+}
+
+<!---/NewsHome--->

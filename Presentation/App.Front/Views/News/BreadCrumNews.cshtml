@@ -1,0 +1,27 @@
+﻿<!---BreadCrumNews-->
+@using App.Aplication
+@model List<App.Domain.Entities.Menu.MenuLink>
+@if (Model.IsAny())
+{
+    <div id="vnt-navation" class="breadcrumb">
+        <div class="wrapper">
+            <div class="navation">
+                <ul class="list-inline text-left">
+                    @foreach (var item in Model)
+                    {
+                        if (item.CurrentVirtualId.Equals(ViewBag.VirtualId))
+                        {
+                            <li class="active"><a href="@Url.Action("GetContent", "Menu", new {menu = item.SeoUrl, area = ""})">@item.MenuName</a></li>
+                        }
+                        else
+                        {
+                            <li class="active"><a href="@Url.Action("GetContent", "Menu", new {menu = item.SeoUrl, area = ""})">@item.MenuName</a></li>
+                        }
+
+                    }                    
+                </ul>
+            </div>
+        </div>
+    </div>
+}
+<!---/BreadCrumNews-->

@@ -1,0 +1,50 @@
+﻿<!---_Footer.Address-->
+
+@using App.Domain.Entities.GlobalSetting
+@model IEnumerable<ContactInformation>
+
+@if (Model != null)
+{
+    var contact = Model.SingleOrDefault(x => x.Type == 1);
+    <div id="trademark-text-box" class="row">
+        <div class="col-sm-12">
+            <ul id="trademark-search-list" class="trademark-list">
+                <li class="trademark-text-tit">@contact.Title :</li>
+                @if (!string.IsNullOrEmpty(contact.Address))
+                {
+                    <li>@T("Address.Lable"): @contact.Address</li>
+                }
+                @if (!string.IsNullOrEmpty(contact.MobilePhone))
+                {
+                    <li>@T("DienThoai.Lable"): @contact.MobilePhone</li>
+                }
+                @if (!string.IsNullOrEmpty(contact.Email))
+                {
+                    <li>Email: @contact.Email</li>
+                }
+            </ul>
+        </div>
+        @foreach (var item in Model.Where(x => x.Type == 0))
+        {
+            <div class="col-sm-12">
+                <ul id="trademark-search-list" class="trademark-list">
+                    <li class="trademark-text-tit">@item.Title :</li>
+                    @if (!string.IsNullOrEmpty(item.Address))
+                    {
+                        <li>@T("Address.Lable"): @item.Address</li>
+                    }
+                    @if (!string.IsNullOrEmpty(item.MobilePhone))
+                    {
+                        <li>@T("DienThoai.Lable"): @item.MobilePhone</li>
+                    }
+                    @if (!string.IsNullOrEmpty(item.Email))
+                    {
+                        <li>Email: @item.Email</li>
+                    }
+                </ul>
+            </div>
+        }
+    </div>
+}
+
+<!---/_Footer.Address-->

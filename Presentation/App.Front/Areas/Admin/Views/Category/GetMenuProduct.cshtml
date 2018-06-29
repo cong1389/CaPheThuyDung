@@ -1,0 +1,12 @@
+﻿<!---GetMenuProduct-->
+
+@model IEnumerable<App.Admin.Helpers.MenuNav>
+
+<div class="scroller form-control height-auto" style="height: 275px;" data-always-visible="1" data-rail-visible="0">
+    <div class="radio-list"> 
+        @Html.Partial("Category/_PartialMenu", Model)
+    </div>
+</div>
+
+
+<!---/GetMenuProduct-->

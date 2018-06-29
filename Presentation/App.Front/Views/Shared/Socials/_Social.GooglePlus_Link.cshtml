@@ -1,0 +1,18 @@
+﻿<!----_Social.GooglePlus_Link-->
+<span id="divGooglePlus"></span>
+
+<script>
+    jQuery(function () {
+        'use strict';
+
+        jQuery.post('@Url.Action("GetSettingSeo", "Summary")')
+            .done(function (data) {
+                var googlePlusLink = data.response.GooglePlusLink;
+                var code = '<a href="' + googlePlusLink +'" class="si-gplus social-icon si-dark si-colored" target="_blank"><i class="fa fa-google-plus"></i><i class="fa fa-google-plus"></i></a>';
+
+                jQuery("#divGooglePlus").html(code);
+                    });
+        })
+
+</script>
+<!----/_Social.GooglePlus_Link-->

@@ -1,0 +1,12 @@
+﻿@using App.Aplication
+@model IEnumerable<App.Domain.Entities.Location.Province>
+<select id="Province" class="search-options">
+    <option value="">Quận/huyện </option>
+    @if (Model.IsAny())
+    {
+        foreach (var item in Model)
+        {
+            <option value="@item.Id">@item.Name</option> 
+        }
+    }
+</select>

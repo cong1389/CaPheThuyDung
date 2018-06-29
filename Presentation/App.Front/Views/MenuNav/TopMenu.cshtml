@@ -1,0 +1,41 @@
+﻿<!----TopMenu ---->
+@using App.Aplication
+@using App.FakeEntity.Menu
+@model IEnumerable<MenuNavViewModel>
+
+@if (Model != null)
+{
+
+    <div id="w2-collapse" class="collapse navbar-collapse">
+        <ul id="w3" class="nav-pills nav">
+            @{
+                var i = 0;
+                foreach (var lv1 in Model)
+                {
+                    <li class="@(lv1.ChildNavMenu.IsAny() ? "dropdown" : "")">
+                        <a class="dropdown-toggle" href="@(lv1.OtherLink = lv1.OtherLink ?? Url.Action("GetContent", "Menu", new {menu = lv1.SeoUrl, area = ""}))" data-hover="dropdown"
+                           data-toggle="dropdown">
+                            @lv1.MenuName
+                            @if (lv1.ChildNavMenu.IsAny())
+                            { 
+                                <span class="caret"></span>
+                            }
+                        </a>
+                        @if (lv1.ChildNavMenu.IsAny())
+                        {
+                            <ul id="w5" class="dropdown-menu">
+                                @foreach (var lv2 in lv1.ChildNavMenu)
+                                {
+                                    <li><a href="@(lv2.OtherLink = lv2.OtherLink ?? Url.Action("GetContent", "Menu", new {menu = lv2.SeoUrl, area = ""}))" title="@lv2.MenuName">@lv2.MenuName</a></li>
+                                }
+                            </ul>
+                        }
+                    </li>
+                    i++;
+                }
+            }
+        </ul>
+    </div>
+
+}
+<!----/TopMenu ---->

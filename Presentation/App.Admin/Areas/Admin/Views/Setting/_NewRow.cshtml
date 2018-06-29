@@ -1,0 +1,81 @@
+﻿@using Resources
+@model App.Domain.Entities.Setting.Setting
+
+<tr>
+	<td>
+		@Html.HiddenFor(m => m.Id)
+	</td>
+	<td>
+		@Html.TextBoxFor(m => m.Name)
+	</td>
+	<td>
+		@Html.TextBoxFor(m => m.Value, new { @class = "col-sm-12" })
+	</td>
+
+	<td>
+		<ul class="record-toolbar">
+			<li class="edit-button btn btn-default btn-sm hide" title="@FormUI.Edit">
+				<i class="fa fa-edit"></i>@FormUI.Edit
+			</li>
+			<li class="btnAddRecord btn btn-default btn-sm" title="@FormUI.Save">
+				<i class="fa fa-save"></i>@FormUI.Save
+			</li>
+			<li class="btnCancel btn btn-default btn-sm" title="@FormUI.Cancel">
+				<i class="fa fa-ban"></i>@FormUI.Cancel
+			</li>
+		</ul>
+	</td>
+</tr>
+
+<script>
+
+    $(".btnAddRecord").on("click", function () {
+        var row = $(this).closest("tr");
+        var record = getRecord(row);
+
+        $.ajax({
+            url: '@Url.Action("CreateOrSave","Setting")',
+            data: JSON.stringify(record),
+            type: 'POST',
+            contentType: 'application/json; charset=utf-8',
+			success: function (response) {
+				if (!response.success) {
+					AppCore.handleMessage(response.message);
+				} else {
+					location.reload();
+					tr.find('.edit-mode, .display-mode').toggle();
+				}
+			},error: function (request, status, error)
+            {
+	            AppCore.handleMessage(request.responseText);
+            }
+		});
+
+        //webGridHubClient.server.saveRecord(record);
+        $("td", row).each(function () {
+            var cell = $(this, row);
+            var inputValue = $("input", cell);
+            $(".cell-value", cell).text(inputValue.val());
+        });
+        $(".record-toolbar li", row).toggleClass("hide");
+        $("input, select, textarea", row).toggleClass("hide");
+        $(".cell-value", row).toggleClass("hide");
+    });
+
+    function getRecord(row) {
+        return {
+            id: row.find("#hddId").val(),
+            name: row.find(":nth-child(2)").find("input").val().trim(),
+            value: row.find(":nth-child(3)").find("input").val().trim()
+        };
+    };
+
+    $(".btnCancel").on("click", function () {
+        var row = $(this).closest("tr");
+        $(".record-toolbar li", row).toggleClass("hide");
+        $(".cell-value", row).toggleClass("hide");
+        $("input, select, textarea", row).toggleClass("hide");
+        row.remove();
+    });
+
+</script>

@@ -1,0 +1,141 @@
+﻿<div class="page-head">
+    <div id="sticky_toolbar" class="container-fluid">
+        @if (ViewBag.Toolbar != null)
+        {
+            <div id="toolbar-box" class="page-toolbar" data-container="@ViewContext.RouteData.Values["controller"]">
+                <ul class="list-inline">
+                    @foreach (var item in (string[])ViewBag.Toolbar)
+                {
+                    switch (item)
+                    {
+                        case "Create":
+                                <li>
+                                    <a href="@Url.Action("Create")" class="icon-btn btn blue skip">
+                                        <i class="fa fa-plus"></i>
+                                        <div> Tạo mới </div>
+                                    </a>
+                                </li>
+                                break;
+                            case "Save":
+                                <li>
+                                    <a data-command="app-save" role="button" class="icon-btn btn blue">
+                                        <i class="fa fa-plus"></i>
+                                        <div> Lưu </div>
+                                    </a>
+                                </li>
+                                break;
+                            case "SaveNew":
+                                <li>
+                                    <a data-command="app-save" href="@Url.Action("Create")" class="icon-btn btn green-meadow">
+                                        <i class="fa fa-plus"></i>
+                                        <div> Lưu & Tạo </div>
+                                    </a>
+                                </li>
+                                break;
+                            case "Back":
+                                <li>
+                                    <a href="@Url.Action("Index")" class="icon-btn btn blue-hoki skip">
+                                        <i class="fa fa-reply"></i>
+                                        <div> Back </div>
+                                    </a>
+                                </li>
+                                break;
+                            case "Delete":
+                                <li>
+                                    <a data-command="app-batch" command-name="delete" href="@Url.Action("Delete")" class="icon-btn btn red">
+                                        <i class="fa fa-remove"></i>
+                                        <div> Xóa </div>
+                                    </a>
+                                </li>
+                                break;
+                            case "DeleteOne":
+                                <li>
+                                    <a data-command="app-batchone" command-name="deleteone" href="@Url.Action("DeleteOne",new { id = ViewContext.RouteData.Values["id"], returnUrl = Request["ReturnUrl"]})" class="icon-btn btn red">
+                                        <i class="fa fa-remove"></i>
+                                        <div> Xóa </div>
+                                    </a>
+                                </li>
+                                break;
+                            case "Edit":
+                                <li>
+                                    <a data-command="app-batch" command-name="edit" href="@Url.Action("Edit")" class="icon-btn btn yellow-crusta">
+                                        <i class="fa fa-edit"></i>
+                                        <div> Sửa </div>
+                                    </a>
+                                </li>
+                                break;
+                            case "EditSave":
+                                <li>
+                                    <a data-command="app-save" class="icon-btn btn yellow-crusta">
+                                        <i class="fa fa-edit"></i>
+                                        <div> Sửa </div>
+                                    </a>
+                                </li>
+                                break;
+                            case "EditPrint":
+                                <li>
+                                    <a data-command="app-save" href="@Url.Action("Edit",new { id = ViewContext.RouteData.Values["id"], returnUrl = Request["ReturnUrl"]})" class="icon-btn btn yellow-crusta">
+                                        <i class="fa fa-edit"></i>
+                                        <div> Sửa & In </div>
+                                    </a>
+                                </li>
+                                break;
+                            case "Approved":
+                                <li>
+                                    <a data-command="app-batch" href="@Url.Action("Approved", new { value = 1 })" class="icon-btn btn green">
+                                        <i class="fa fa-check-circle"></i>
+                                        <div> Xác nhận </div>
+                                    </a>
+                                </li>
+                                break;
+                            case "UnApproved":
+                                <li>
+                                    <a data-command="app-batch" href="@Url.Action("UnApproved", new { value = 0 })" class="icon-btn btn red-sunglo">
+                                        <i class="fa fa-expeditedssl"></i>
+                                        <div> Huỷ </div>
+                                    </a>
+                                </li>
+                                break;
+                            case "Export":
+                                <li>
+                                    <a data-command="app-export" href="@Url.Action("Export")" class="skip icon-btn btn green-meadow">
+                                        <i class="fa fa-cloud-download"></i>
+                                        <div> Xuất file </div>
+                                    </a>
+                                </li>
+                                break;
+                            case "Reset":
+                                <li>
+                                    <a data-command="app-reset" href="@Url.Action("Index")" class="icon-btn btn yellow-mint">
+                                        <i class="fa fa-ban"></i>
+                                        <div> Reset </div>
+                                    </a>
+                                </li>
+                                break;
+                            case "Cancel":
+                                <li>
+                                    <a data-command="app-confirm" href="@(Request["returnUrl"] ?? Url.Action("Index"))" class="icon-btn btn red-sunglo">
+                                        <i class="fa fa-remove"></i>
+                                        <div> Hủy </div>
+                                    </a>
+                                </li>
+                                break;
+                            case "Home":
+                                <li>
+                                    <a data-command="app-confirm" href="@(Request["returnUrl"] ?? Url.Action("Index","Home"))" class="icon-btn btn red-sunglo">
+                                        <i class="fa fa-remove"></i>
+                                        <div> Hủy </div>
+                                    </a>
+                                </li>
+                                break;
+                            case "Divider":
+                                <li><div class="divider"></div></li>
+                                break;
+                        }
+                    }
+                </ul>
+            </div>
+        }
+
+    </div>
+</div>

@@ -1,0 +1,72 @@
+﻿@using App.Aplication
+@model IEnumerable<App.FakeEntity.Menu.MenuNavViewModel>
+@if (Model.IsAny())
+{
+    <div class="nav-tools">
+        <div class="tools-wrapper">
+            <div class="image-tools">
+                <ul class="list-unstyled">
+                    <li>
+                        <div class="item-img">
+                            <img src="/images/logo-nav.png" alt="Sửa chữa thông minh" />
+                        </div>
+                    </li>
+                    @foreach (var item in Model)
+                    {
+                        <li class="child-1">
+                            <div class="item-tool">
+                                <img src="@Url.Content("~/" + item.IconBar)" alt="@item.MenuName" />
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div class="text-tools">
+                <ul class="list-unstyled">
+                    <li>
+                        <div class="text-tool">
+                            <h2>Sửa chữa thông minh</h2>
+                            <small class="text-right">ThienPhatTienGiang.com</small>
+                        </div>
+                    </li>
+
+                    @foreach (var item in Model)
+                    {
+                        if (item.ChildNavMenu.IsAny())
+                        {
+                            <li>
+                                <div class="text-tool">
+                                    <a href="@Url.Action("GetContent", "Menu", new {menu = item.SeoUrl, area = ""})">
+                                        @item.MenuName
+                                    </a>
+                                </div>
+                                @if (item.ChildNavMenu.IsAny())
+                                {
+                                    <ul class="list-unstyled">
+                                        @foreach (var sub in item.ChildNavMenu)
+                                        {
+                                            <li>
+                                                <a href="@Url.Action("GetContent", "Menu", new {menu = sub.SeoUrl, area = ""})">@sub.MenuName</a>
+                                                @if (sub.ChildNavMenu.IsAny())
+                                                {
+                                                    <ul class="list-unstyled">
+                                                        @foreach (var child in sub.ChildNavMenu)
+                                                        {
+                                                            <li>
+                                                                <a href="@Url.Action("GetContent", "Menu", new {menu = child.SeoUrl, area = ""})">@child.MenuName</a>
+                                                            </li>
+                                                        }
+                                                    </ul>
+                                                } 
+                                            </li>
+                                        }
+                                    </ul>
+                                }
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+}

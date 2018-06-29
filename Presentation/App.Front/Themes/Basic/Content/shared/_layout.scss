@@ -1,0 +1,571 @@
+﻿/*Common styles
+*/
+//@extend-elements
+//original selectors
+//.nav-top-links, .language, .currency, .user-info, .support-link, .top-bar-social
+%nav-top-links {
+    width: auto;
+    display: inline-block;
+    line-height: 34px;
+}
+//@extend-elements
+//original selectors
+//.header-top-right .homeslider .bx-controls-direction .bx-prev, .header-top-right .homeslider .bx-controls-direction .bx-next
+%slide__button-direction {
+    background: $color_radical_red_approx;
+    text-indent: 0 !important;
+    color: $white;
+    font-size: 15px;
+    text-align: center;
+    line-height: 32px;
+    //vendor-prefix found
+    //-moz-transition: all 0.45s ease
+    //vendor-prefix found
+    //-webkit-transition: all 0.45s ease
+    //vendor-prefix found
+    //-o-transition: all 0.45s ease
+    //vendor-prefix found
+    //-ms-transition: all 0.45s ease
+    //Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
+    transition: all 0.45s ease;
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+    //vendor-prefix found
+    //-ms-transform: translateY(-50%)
+    //vendor-prefix found
+    //-webkit-transform: translateY(-50%)
+    //Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+    transform: translateY(-50%);
+}
+
+body {
+    font-family: $font_0, $font_1;
+    font-size: 14px;
+    overflow-x: hidden;
+    //vendor-prefix found
+    //-webkit-font-smoothing: antialiased
+    &.is-ontop {
+        margin-top: 53px;
+    }
+}
+
+h1 {
+    font-size: 44px;
+}
+
+h2 {
+    font-size: 20px;
+}
+
+h3 {
+    font-size: 18px;
+}
+
+a {
+    color: $color_storm_dust_approx;
+
+    &:hover {
+        color: $color_radical_red_approx;
+        text-decoration: none;
+        //Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
+        transition: all 0.25s;
+    }
+
+    &:focus {
+        text-decoration: none;
+    }
+}
+
+.fa {
+    line-height: inherit;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.alignleft {
+    float: left;
+}
+
+.alignright {
+    float: right;
+}
+
+.btn-fb-login {
+    width: 65px;
+    height: 22px;
+    //background: $url_0 no-repeat;
+    display: inline-block;
+    margin-top: 5px;
+    font-size: 0;
+    border: none !important;
+}
+
+.button {
+    padding: 10px 20px;
+    border: 1px solid $color_gray_nurse_approx;
+    background: $color_storm_dust_approx;
+    color: $white;
+
+    &:hover {
+        background: $color_radical_red_approx;
+        border: 1px solid $color_radical_red_approx;
+    }
+
+    .fa {
+        line-height: inherit;
+    }
+}
+
+.button-sm {
+    padding: 5px 10px;
+}
+
+.input {
+    //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+    border-radius: 0;
+    border: 1px solid $color_gray_nurse_approx;
+    //vendor-prefix found
+    //-webkit-box-shadow: inherit
+    //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+    box-shadow: inherit;
+}
+
+img {
+    &.alignleft {
+        margin: 0 20px 15px 0;
+    }
+
+    &.alignright {
+        margin: 0 0 15px 20px;
+    }
+}
+
+
+.loader {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: $white $url_1 50% 50% no-repeat;
+}
+
+.clearfix:before {
+    content: "";
+    display: table;
+}
+
+/*
+   Header
+*/
+.top-header {
+    background: #f6f6f6;
+    //fonts
+    $font_0: FontAwesome;
+
+
+
+    img {
+        display: inline-block;
+        vertical-align: middle;
+        margin-top: -3px;
+        margin-right: 5px;
+    }
+
+    a {
+        border-right: 1px solid $color_bon_jour_approx;
+        padding-right: 10px;
+        margin-left: 10px;
+
+        &.first-item {
+            margin-left: 0;
+        }
+
+        &.current-open:after {
+            content: "\f107";
+            font-family: $font_0;
+            font-size: 17px;
+            vertical-align: 0;
+            padding-left: 15px;
+            font-weight: bold;
+        }
+    }
+
+    .dropdown {
+        width: auto;
+        display: inline-block;
+
+        &.open > .dropdown-menu {
+            //Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+            transform: translateY(0px);
+            //vendor-prefix found
+            //-webkit-transform: translateY(0px)
+            //vendor-prefix found
+            //-o-transform: translateY(0px)
+            //vendor-prefix found
+            //-ms-transform: translateY(0px)
+            //vendor-prefix found
+            //-khtml-transform: translateY(0px)
+            opacity: 1;
+            z-index: 2;
+            visibility: inherit;
+        }
+    }
+
+    .dropdown-menu {
+        //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+        border-radius: 0;
+        border: none;
+        top: 100%;
+        left: 0;
+        border-top: 2px solid $color_radical_red_approx;
+        //Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
+        transition: all 0.4s ease-out 0s;
+        //vendor-prefix found
+        //-webkit-transition: all 0.4s ease-out 0s
+        //vendor-prefix found
+        //-o-transition: all 0.4s ease-out 0s
+        //vendor-prefix found
+        //-ms-transition: all 0.4s ease-out 0s
+        opacity: 0;
+        display: block;
+        //Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+        transform: translateY(50px);
+        //vendor-prefix found
+        //-webkit-transform: translateY(50px)
+        //vendor-prefix found
+        //-o-transform: translateY(50px)
+        //vendor-prefix found
+        //-ms-transform: translateY(50px)
+        //vendor-prefix found
+        //-khtml-transform: translateY(50px)
+        z-index: 0;
+        visibility: hidden;
+
+        a {
+            border: none;
+            margin: 0;
+            padding: 5px 10px;
+        }
+    }
+
+    .nav-top-links {
+        @extend %nav-top-links;
+    }
+
+    .language {
+        @extend %nav-top-links;
+    }
+
+    .currency {
+        @extend %nav-top-links;
+    }
+
+    .user-info {
+        @extend %slide__button-direction;
+    }
+
+    .support-link {
+        @extend %slide__button-direction;
+    }
+
+    .top-bar-social {
+        @extend %slide__button-direction;
+
+        a {
+            border: none;
+            padding: 0;
+            color: $color_mountain_mist_approx;
+            font-size: 14px;
+        }
+
+        .fa {
+            line-height: inherit;
+        }
+    }
+}
+
+/*Slide*/
+
+
+
+//original selectors
+//.header-top-right .homeslider .bx-wrapper .bx-pager, .bx-wrapper .bx-controls-auto
+%extend_2 {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    text-align: right;
+    padding-right: 25px;
+}
+
+//original selectors
+//.header-top-right .homeslider .bx-wrapper .bx-pager.bx-default-pager a:hover, .header-top-right .homeslider .bx-wrapper .bx-pager.bx-default-pager a.active
+%extend_3 {
+    background: $color_radical_red_approx;
+    color: $white;
+    border: 1px solid $white;
+}
+
+.gw-slide {
+
+    .header-top-right {
+        margin-left: -15px;
+        padding: 0;
+
+        .homeslider {
+            width: 100%;
+            float: left;
+
+            img {
+                width: 100%;
+                height: auto;
+            }
+
+            .bx-wrapper {
+                -moz-box-shadow: none;
+                -webkit-box-shadow: none;
+                box-shadow: none;
+                border: 5px solid #fff;
+                background: #fff;
+
+                .bx-viewport {
+                    //vendor-prefix found
+                    //-moz-box-shadow: 0
+                    //vendor-prefix found
+                    //-webkit-box-shadow: 0
+                    //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+                    box-shadow: none;
+                    border: 0;
+                    left: 0;
+                    background: $white;
+                }
+
+                .bx-pager {
+                    @extend %extend_2;
+
+                    .bx-pager-item {
+                        width: 20px;
+                        height: 20px;
+                        //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+                        border-radius: 90%;
+                        margin-right: 5px;
+                        line-height: 20px;
+
+                        a {
+                            width: 100%;
+                            height: 100%;
+                            float: left;
+                            background: transparent;
+                            margin: 0;
+                            padding: 0;
+                            text-align: center;
+                            text-indent: 0;
+                            //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+                            border-radius: 90%;
+                            color: $color_storm_dust_approx;
+                            border: 1px solid $color_mountain_mist_approx;
+                            padding-left: 1px;
+                        }
+                    }
+
+                    &.bx-default-pager a {
+                        &:hover {
+                            @extend %extend_3;
+                        }
+
+                        &.active {
+                            @extend %extend_3;
+                        }
+                    }
+                }
+
+                &:hover .bx-prev {
+                    display: block;
+                }
+            }
+
+            .bx-controls-direction {
+                .bx-prev {
+                    @extend %slide__button-direction;
+                    left: 50%;
+
+                    &:hover {
+                        opacity: 0.8;
+                    }
+                }
+
+                .bx-next {
+                    @extend %slide__button-direction;
+                    right: 50%;
+
+                    &:hover {
+                        opacity: 0.8;
+                    }
+                }
+            }
+
+            &:hover .bx-controls-direction {
+                .bx-next {
+                    right: 10px;
+                    opacity: 1;
+                    visibility: inherit;
+                }
+
+                .bx-prev {
+                    left: 10px;
+                    opacity: 1;
+                    visibility: inherit;
+                }
+            }
+        }
+
+        .header-banner {
+            width: 26%;
+            float: right;
+
+            img {
+                width: 100%;
+                height: auto;
+            }
+        }
+    }
+
+    .bx-wrapper {
+        margin: 0;
+
+        .bx-controls-auto {
+            @extend %extend_2;
+        }
+
+        .bx-loading {
+            min-height: 50px;
+            background: $url_bx_loader center center no-repeat $white;
+        }
+
+        &:hover .bx-next {
+            display: block;
+        }
+    }
+}
+/*
+    Breadcrumb
+*/
+.gw-breadcrumb {
+    .breadcrumb {
+        background: none;
+        padding: 0;
+        margin: 0;
+        padding-bottom: 17px;
+        line-height: normal;
+
+        > li {
+            display: inline-block;
+        }
+
+
+        a, > li + li:before, > .active, li:last-child {
+            color: $text-color;
+            font-weight: normal;
+        }
+
+        > li + li:before {
+            padding: 0 0px;
+            content: "/\00a0";
+        }
+    }
+}
+
+/*
+    Footer
+*/
+.gw-footer {
+    background: #eaeaea;
+    margin-top: 60px;
+
+    &__introduce-box {
+        margin-top: 40px;
+
+        &--introduce-title {
+            text-transform: uppercase;
+            font-size: 16px;
+            list-style: none;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        &--introduce-list {
+            padding-left: 16px;
+            list-style: inherit;
+
+            li {
+                padding-top: 2px;
+                padding-bottom: 2px;
+            }
+        }
+
+        &--mail-box {
+            margin-bottom: 20px;
+
+            input {
+                height: 30px;
+                background: #fff;
+                width: 100%;
+                padding-left: 10px;
+            }
+
+            .btn {
+                font-weight: bold;
+                color: #ffffff;
+                height: 30px;
+                border-radius: 0;
+                background: #ff3366;
+                border: none;
+                outline: none;
+
+                :hover {
+                    color: #ffffff;
+                    background: #6b6540 !important;
+                    transition: 0.3s;
+                }
+            }
+        }
+    }
+
+    &__menu-box {
+        border-top: 1px solid #E1E1E1;
+        margin-top: 10px;
+        padding-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .footer-menu-list {
+        list-style: none;
+        text-align: center;
+        margin-bottom: 5px;
+
+        li {
+            display: inline;
+            padding: 0 7px 0 5px;
+            border-right: 1px solid #0066cc;
+
+            a {
+                color: #0066cc;
+
+                :hover {
+                    text-decoration: underline;
+                    transition: all 0.3s;
+                    color: #4c311d;
+                }
+            }
+
+            :last-child {
+                border-right: none;
+            }
+        }
+    }
+}

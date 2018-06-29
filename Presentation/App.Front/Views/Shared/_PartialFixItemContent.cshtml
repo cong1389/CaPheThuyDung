@@ -1,0 +1,106 @@
+﻿<!--_PartialFixItemContent--->
+@using App.Aplication
+@model IEnumerable<App.Domain.Entities.Data.Post>
+
+@if (Model.IsAny())
+{
+    <div id="mega_tab2_tab_605_0" class="owl-carousel-style2 owl-carousel first_owl_hover_ff3300 first_owl_color_hover_ tab-pane fade in active">
+
+        @foreach (var item in Model)
+        {
+            <div class="product-container product product-5  item-animation">
+                <div class="left-block">
+                    <div class="product-image-container">
+                        <a class="product_img_link" href="@Url.Action("PostDetail","Post", new {seoUrl =item.SeoUrl,area=""})" title="Printed Dress" itemprop="url">
+                            <img class="replace-2x img-responsive" src="@item.ImageMediumSize.ValidateImage()" alt="Printed Dress" title="Printed Dress" itemprop="image" width="260" height="305" />
+                        </a>
+                        <div class="group-price">
+                        </div>
+                    </div>
+                    <div class="btn-actions">
+                        <a title="Add to Wishlist" class="heart first_background_hover_ff3300 first_before_color_hover_ addToWishlist wishlistProd_3" href="#" data-rel="3" onclick="WishlistCart('wishlist_block_list', 'add', '3', false, 1); return false;"></a>
+
+                        <a class="add_to_compare compare first_background_hover_ff3300 first_before_color_hover_" href="home/3-printed-dress.html" data-id-product="3">Add to Compare</a>
+                        <a class="quick-view search first_background_hover_ff3300 first_before_color_hover_" href="home/3-printed-dress.html" data-rel="home/3-printed-dress.html">
+                            <span>Quick view</span>
+                        </a>
+
+                    </div>
+                    <div class="add-to-cart  first_background_rgb_ff3300 first_background_hover_ff3300 first_color_">
+                        <a class="ajax_add_to_cart_button " href="quick-order.html?add=1&amp;id_product=3&amp;token=29cd3d607c389bf4202bd90f1d110441" data-rel="nofollow" title="Add to cart" data-id-product="3" data-minimal_quantity="1">
+                            <span>Add to cart</span>
+                        </a>
+                    </div>
+
+                </div>
+                <div class="price-percent-reduction-container">
+                </div>
+                <div class="right-block">
+
+                    <h5 class="name" itemprop="name">
+                        <a class="product-name mainLinkColor" href="@Url.Action("PostDetail","Post", new {seoUrl =item.SeoUrl,area=""})" title="Cooking Tools" itemprop="url">
+                            @item.Title
+                        </a>
+                    </h5>
+                    <div class="content_price">
+
+                        <span class="price product-price price_color pull-left">
+                            @if (item.Price.HasValue && item.Discount.HasValue)
+                            {
+                                @Html.Raw((item.Price - item.Price * item.Discount / 100).FormatPrice())
+                            }
+                            else if (item.Price.HasValue && !item.Discount.HasValue)
+                            {
+                                @Html.Raw(item.Price.FormatPrice())
+                            }
+                            else
+                            {
+                              @T("LienHeDatHang.Lable")
+                            }
+                        </span>
+                        @if (item.Discount.HasValue)
+                        {
+                            <span class="old-price product-price">
+                                @Html.Raw(item.Price.FormatPrice())
+                            </span>                           
+                        }
+
+
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="info-orther">
+                        <div class="button-container">
+                            <a class="button lnk_view btn btn-default" href="http://kute-themes.com/prestashop/kuteshop/option4/en/home/70-cooking-tools.html" title="View">
+                                <span>More</span>
+                            </a>
+                        </div>
+                        <div class="product-flags">
+                            <span class="discount">Reduced price!</span>
+                        </div>
+                        <div>Item Code: demo_17</div>
+
+                        <span class="availability">
+                            Availability:
+                            <span class=" label-success">
+                                In Stock
+                            </span>
+                        </span>
+                        <p class="product-desc" itemprop="description">
+                            Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
+
+
+
+
+
+    </div>
+
+    <script type="text/javascript" src="/assets/themes/kuteshop/js/global.js"></script>
+}
+
+<!--/_PartialFixItemContent--->

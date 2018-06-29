@@ -1,0 +1,118 @@
+﻿<!---_CreateOrUpdate--->
+@using App.Domain.Common
+@using Resources
+@model App.FakeEntity.SeoGlobal.SettingSeoGlobalViewModel
+
+<div class="form-horizontal">
+    <div class="form-body">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger col-md-offset-3" })
+		
+	    <div class="form-group">
+		    @Html.LabelFor(model => model.Status, new { @class = "control-label col-md-3" })
+		    <div class="col-md-8">
+			    <div class="radio-list">
+				    <label class="radio-inline">
+					    @Html.RadioButtonFor(x => x.Status, (int)Status.Enable , new {@checked="checked"}) @FormUI.Active
+				    </label>
+				    <label class="radio-inline">
+					    @Html.RadioButtonFor(x => x.Status, (int)Status.Disable) @FormUI.InActive
+				    </label>
+			    </div>
+			    @Html.ValidationMessageFor(model => model.Status, "", new { @class = "help-block" })
+		    </div>
+	    </div>
+
+	    <div class="form-group">
+            @Html.LabelFor(model => model.FbLink, new { @class = "control-label col-md-3" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.FbLink, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.FbLink, "", new { @class = "help-block" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.GooglePlusLink, new { @class = "control-label col-md-3" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.GooglePlusLink, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.GooglePlusLink, "", new { @class = "help-block" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TwitterLink, new { @class = "control-label col-md-3" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.TwitterLink, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TwitterLink, "", new { @class = "help-block" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PinterestLink, new { @class = "control-label col-md-3" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.PinterestLink, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PinterestLink, "", new { @class = "help-block" })
+            </div>
+        </div>
+
+	    <div class="form-group">
+		    @Html.LabelFor(model => model.YoutubeLink, new { @class = "control-label col-md-3" })
+		    <div class="col-md-8">
+			    @Html.TextBoxFor(model => model.YoutubeLink, new { @class = "form-control" })
+			    @Html.ValidationMessageFor(model => model.YoutubeLink, "", new { @class = "help-block" })
+		    </div>
+	    </div>
+	    <hr />
+	    <div class="form-group">
+            @Html.LabelFor(model => model.FbAppId, new { @class = "control-label col-md-3" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.FbAppId, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.FbAppId, "", new { @class = "help-block" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.FbAdminsId, new { @class = "control-label col-md-3" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.FbAdminsId, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.FbAdminsId, "", new { @class = "help-block" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.MetaTagMasterTool, new { @class = "control-label col-md-3" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.MetaTagMasterTool, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MetaTagMasterTool, "", new { @class = "help-block" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.PublisherGooglePlus, new { @class = "control-label col-md-3" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.PublisherGooglePlus, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PublisherGooglePlus, "", new { @class = "help-block" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.SnippetGoogleAnalytics, new { @class = "control-label col-md-3" })
+            <div class="col-md-8">
+                @Html.TextAreaFor(model => model.SnippetGoogleAnalytics, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.SnippetGoogleAnalytics, "", new { @class = "help-block" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.GoogleRetargetSnippet, new { @class = "control-label col-md-3" })
+            <div class="col-md-8">
+                @Html.TextAreaFor(model => model.GoogleRetargetSnippet, new { @class = "form-control ckeditor" })
+                @Html.ValidationMessageFor(model => model.GoogleRetargetSnippet, "", new { @class = "help-block" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.FacebookRetargetSnippet, new { @class = "control-label col-md-3" })
+            <div class="col-md-8">
+                @Html.TextAreaFor(model => model.FacebookRetargetSnippet, new { @class = "form-control ckeditor" })
+                @Html.ValidationMessageFor(model => model.FacebookRetargetSnippet, "", new { @class = "help-block" })
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!---/_CreateOrUpdate--->

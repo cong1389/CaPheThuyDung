@@ -1,0 +1,71 @@
+﻿<!---_Checkout.Cart-->
+@using App.Aplication
+@model App.Front.Models.ShoppingCart.MiniShoppingCartModel
+
+@if (Model != null)
+{
+	<div id="left_column" class="checkout-cart">
+		<div class="block left-module">
+			<p class="title_block">Đơn hàng</p>
+			<div class="block_content">
+				<div class="">
+					
+					<div class="cart-items">
+						@foreach (var product in Model.Items)
+						{
+							var selectedProduct = Model.ShoppingCarts.FirstOrDefault(x => x.PostId == product.Id);
+
+							<div class="list_item cart-item">
+								<div class="col-sm-6">
+									<div class="product-thumbnail-wrapper">
+										<img class="product-thumbnail-image" src="@product.ImageSmallSize.ValidateImage()" alt="@product.Title">
+									</div>
+									<span class="product-thumbnail-quantity" aria-hidden="true">
+										@selectedProduct.Quantity
+									</span>
+								</div>
+								<div class="col-sm-6 price">
+									@if (selectedProduct.CustomerEnteredPrice != 0)
+									{
+										@Html.Raw(selectedProduct.CustomerEnteredPrice.FormatPrice())
+									}
+									else
+									{
+										@Html.Raw("LienHeDatHang.Lable")
+									}
+								</div>
+								<div class="col-sm-12 cart-item-title"> @product.Title</div>
+
+
+							</div>
+						}
+
+					</div>
+					<div class="total-price">
+						Tạm tính <label>@Html.Raw(Model.SubTotal.FormatPrice())</label>
+					</div>
+					<div class="shiping-price hidden">
+						Phí vận chuyển <label>0</label>
+					</div>
+					<a class="btn-coupon btn-arrow hidden" href="javascript:void(0);"><span></span>Sử dụng mã giảm giá </a>
+					<div class="coupon hidden"><a class="remove-coupon">Xóa</a> <span></span> <label></label></div>
+					<div class="use-coupon hidden">
+						<div class="form-group">
+							<input type="hidden" id="discount-apply" name="discount-apply">
+							<input name="discount.code" class="couponcode" placeholder="Nhập mã giảm giá">
+							<a class="btn-submit-coupon">Sử dụng</a>
+							<a class="continue-coupon ">Tiếp tục sử dụng</a>
+							<a class="cancel-coupon">Hủy</a>
+						</div>
+					</div>
+					<div class="total-checkout">
+						Tổng cộng <label> @Html.Raw(Model.SubTotal.FormatPrice())</label>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+}
+
+
+<!---/_Checkout.Cart-->

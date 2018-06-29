@@ -1,0 +1,34 @@
+﻿<!--GetHomeProduct----->
+@using App.Domain.Entities.Menu
+@model App.Domain.Entities.Data.StaticContent
+@if (Model != null)
+{
+    <div id="vnt-home-my-product" class="lazyloading">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div id="vnt-slide-product1">
+                        <div class="item">
+                            <div class="img"><img src="/Images/slide-ion2.jpg" /></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div id="vnt-slide-product2">
+                        <div class="item">
+                            <div class="img"><img src="/Images/slide-ion2.jpg" /></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 content">
+                    <div class="row">
+                        <div class="title">@Model.Title</div>
+                        <div class="cont">@Html.Raw(Model.ShortDesc)</div>
+                        <a class="view" href="@Url.Action("GetContent","Menu",new { menu= ViewBag.objMenuLinkProduct!=null? ((MenuLink)ViewBag.objMenuLinkProduct).SeoUrl: "",area="" })"><span>@T("XemSanPham")</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<!--/GetHomeProduct----->

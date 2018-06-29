@@ -1,0 +1,53 @@
+﻿<!----Complete-->
+@model App.Domain.Orders.Order
+
+@{
+	ViewBag.Title = "Thank you";
+}
+
+<div class="container complete">
+	<div class="container clearfix" id="columns">
+		<div class="page-content page-order checkout-page">
+			<div class="panel panel-default success">
+				<div class="panel-body">
+					<div class="row row-style-6">
+						<div class="col-lg-4 col-md-3 visible-lg-block visible-md-block">
+							<img src="/Areas/Admin/images/checkout-complete-carticon.png" height="178" width="195" class="img-responsive" alt="Image">
+						</div>
+						<div class="col-lg-8 col-md-9">
+							<h3>@T("Checkout.ThankYou")</h3>
+
+							<!-- BEGIN ORDER INFO -->
+							<p>Mã số đơn hàng của bạn: </p>
+							<div class="well well-sm">
+								@Model.Id 
+							</div>
+							<p>Bạn có thể xem lại <a href="@Url.Action("Details", "Order", new { id = Model.Id })">đơn hàng của tôi</a></p>
+							<p>
+								<img src="/Themes/Basic/Content/images/ico2.png" height="25" width="30" alt="">
+								Hàng được giao sớm nhất đến tay quý khách.
+							</p>
+							<!-- END ORDER INFO -->
+
+							<p>
+								Thông tin chi tiết về đơn hàng đã được gửi đến địa chỉ mail quý khách. Nếu
+								không tìm thấy vui lòng kiểm tra trong hộp thư <strong>Spam</strong> hoặc <strong>Junk Folder</strong>.
+							</p>
+							<div class="alert alert-success no-icon" role="alert">
+								<p>
+									Nhằm giúp việc xử lý đơn hàng nhanh hơn nữa, chúng tôi sẽ không gọi điện cho bạn để
+									xác nhận đơn hàng.
+								</p>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+<!----/Complete-->

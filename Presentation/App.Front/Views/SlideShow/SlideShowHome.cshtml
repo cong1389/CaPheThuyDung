@@ -1,0 +1,28 @@
+﻿<!--SlideShowHome -->
+@using App.Aplication
+@model IEnumerable<App.Domain.Entities.Slide.SlideShow>
+@if (Model.IsAny())
+{
+    <section id="home-1">
+        <div id="w0" class="owl-carousel-wrapper">
+            <div class="owl-carousel">
+                @foreach (var item in Model)
+                {
+                    <div>
+                        <a href="@item.WebsiteLink" alt="@item.Title">
+                            <img src="@item.ImgPath.ValidateImage()" alt="@item.Title">
+                        </a>
+                        <div class="h2 text-uppercase">
+                            <a href="@item.WebsiteLink"
+                               title="HỘI THẢO VÀ KẾT NỐI NGÀY 10/05/2018 TẠI HÀ NỘI ">@Html.Raw(item.Description)</a>
+                            <br />
+                            <a class="hidden-xs btn btn-lamant" href="@item.WebsiteLink" title="@item.Title">Xem thêm</a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+}
+
+<!--/SlideShowHome -->

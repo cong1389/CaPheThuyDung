@@ -1,0 +1,26 @@
+﻿<ul class="feeds">
+    @foreach (var item in Model)
+    {
+        <li>
+            <a href="@Url.Action("Edit", "News", new {id = item.Id})">
+                <div class="col1">
+                    <div class="cont">
+                        <div class="cont-col1">
+                            <div class="label label-sm label-info">
+                                <i class="fa fa-check"></i>
+                            </div>
+                        </div>
+                        <div class="cont-col2">
+                            <div class="desc">
+                                @item.Title
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col2">
+                    <div data-livestamp="@string.Format("{0:MM/dd/yyy HH:mm:ss}",item.CreatedDate)" class="date"></div>
+                </div>
+            </a>
+        </li>
+    }
+</ul>

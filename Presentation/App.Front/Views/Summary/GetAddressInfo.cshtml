@@ -1,0 +1,36 @@
+﻿
+<!---GetAddressInfo-->
+@model App.Domain.Entities.GlobalSetting.ContactInformation
+@if (Model != null)
+{
+    <div class="row1">
+        <div class="topbar-left">
+            <ul class="list-inline topaddr">
+                <li>
+                    <span class=""><i class="fa  fa-home"></i></span><span class="topbar">
+                        @Model.Address
+                    </span>
+                </li>
+                <li>
+                    <span class="topbar-label">
+                        <span class=""><i class="fa fa-mobile"></i></span>
+                        <span class="topbar">
+                           @Model.Hotline
+                        </span>
+                    </span>
+                    <span class="topbar-label">
+                        <span class=""><i class="fa fa-phone"></i></span>
+                        <span class="topbar">
+                          @Model.MobilePhone
+                        </span>
+                    </span>
+                    <span class=""><i class="fa  fa-envelope-o"></i></span><span class="topbar">
+                       @Model.Email
+                    </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+}
+
+<!---GetAddressInfo-->

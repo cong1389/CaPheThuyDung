@@ -1,0 +1,32 @@
+﻿@using App.Front.Models
+
+@{
+    ViewBag.Title = "Manage Account";
+}
+<div class="columns-container">
+    <div class="container login-shop" id="columns">
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="layout-page">
+
+                @if (ViewBag.HasLocalPassword)
+                {
+                    @Html.Partial("_ChangePasswordPartial")
+                }
+                else
+                {
+                    @Html.Partial("_SetPasswordPartial")
+                }
+
+                <section id="externalLogins">
+                    @*@Html.Action("RemoveAccountList")*@
+                    @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { Action = "LinkLogin", ReturnUrl = ViewBag.ReturnUrl })
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

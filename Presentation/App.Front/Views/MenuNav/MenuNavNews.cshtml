@@ -1,0 +1,29 @@
+﻿<!----MenuNavNews-->
+@using App.Aplication
+@model IEnumerable<App.FakeEntity.Menu.MenuNavViewModel>
+
+@if (Model.IsAny())
+{
+    <div class="block left-module">
+        <p class="title_block">@T("DanhMuc")</p>
+        <div class="block_content">
+            <!-- layered -->
+            <div class="layered layered-category">
+                <div class="layered-content">
+                    <ul class="tree-menu">
+                        @foreach (var item in Model)
+                        {
+                            <li><span></span><a href="@Url.Action("GetContent", "Menu", new {menu = item.SeoUrl, area = ""})">@item.MenuName</a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <!-- ./layered -->
+        </div>
+    </div>
+
+
+
+}
+
+<!----/MenuNavNews-->

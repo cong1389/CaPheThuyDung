@@ -1,0 +1,114 @@
+﻿<!---Plugin-->
+
+@using App.Aplication
+@using App.Core.Extensions
+@using App.FakeEntity.Plugins
+@using App.Framework.Utilities
+@model App.Admin.Areas.Model.Plugins.LocalPluginsModel
+@{
+    ViewBag.Title = "Plugin";
+}
+@section style
+{
+    <link href="@Url.FakePathAdmin("assets/pages/css/search.min.css")" rel="stylesheet" />
+
+}
+<div class="search-page search-content-4" id="divPlugins">
+
+    <div class="search-table table-responsive">
+        <table class="table table-bordered table-striped table-condensed">
+
+            <tbody>
+                @foreach (var g in Model.Groups.OrderBy(x => x.Key))
+                {
+                    @PluginList(g.Value)
+                }
+
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+@helper PluginList(IEnumerable<PluginModel> plugins)
+{
+    foreach (var plugin in plugins)
+    {
+        <tr class="module-item@(!plugin.Installed ? " inactive" : "")" data-system-name="@plugin.SystemName" data-friendly-name="@plugin.FriendlyName">
+            <td class="table-status">
+                <a href="javascript:;">
+                    <img src="@plugin.IconUrl.ValidateImage()">
+                </a>
+            </td>
+            <td class="table-desc">
+                @plugin.SystemName
+            </td>
+            <td class="table-title">
+                <h3>
+                    <a href="javascript:;">@plugin.FriendlyName</a>
+                </h3>
+                <p>
+                    Version:
+                    <a href="javascript:;">@plugin.Version</a> -
+                    @if (plugin.Author.HasValue())
+                    {
+                        <span class="font-grey-cascade"><i class="fa fa-external-link"></i><a href="@plugin.Author" target="PluginWebsiteWnd">Author</a></span>
+                    }
+                    @if (plugin.Url.HasValue())
+                    {
+                        <span class="font-grey-cascade"><i class="fa fa-external-link"></i><a href="@plugin.Url" target="PluginWebsiteWnd">Website</a></span>
+                    }
+
+                </p>
+            </td>
+            <td class="table-desc"> @plugin.Description </td>
+            <td class="table-download">
+                @if (plugin.Installed)
+                {
+                    <button type="button" attr-data="1" id="unplugins-form" class="btn default ">
+                        Gỏ bỏ
+                    </button>
+                }
+                else
+                {
+                    <button type="button" attr-data="1" id="plugins-form" class="btn green">
+                        Cài đặt
+                    </button>
+                }
+            </td>
+        </tr>
+    }
+}
+<script>
+	$("#plugins-form").on('click', function (e) {
+
+		var el = $(this),
+			systemName = el.closest(".module-item").data("system-name");
+	    
+	    excuteTask(systemName,null);
+    });
+
+	$("#unplugins-form").on('click', function (e) {
+
+	    var el = $(this),
+	        systemName = el.closest(".module-item").data("system-name");
+	    
+	    excuteTask(null,systemName);
+	});
+
+    var excuteTask= function(install,uninstall) {
+
+        $.post('@Url.Action("ExecuteTask", "Plugin")',
+            { "pluginToInstall": install, "pluginsToUninstall": uninstall },
+            function () {
+                App.blockUI({
+                    target: '#divPlugins',
+                    boxed: true
+                });
+            }).done(function (data) {
+                window.location.reload();
+            });
+    }
+
+</script>
+<!---/Plugin-->

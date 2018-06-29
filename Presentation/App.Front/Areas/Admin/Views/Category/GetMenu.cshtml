@@ -1,0 +1,14 @@
+﻿@model IEnumerable<App.Admin.Helpers.MenuNav>
+<div class="scroller" style="height: 200px;" data-always-visible="1" data-rail-visible="0">
+    <div class="radio-list">
+        <ul class="list-unstyled">
+            <li>
+                <label class="radio">
+                    <input type="radio" id="Category" name="Category" value="" />None
+                </label>
+            </li>
+        </ul>
+        @Html.Partial("Category/_PartialCategory", Model)
+    </div>
+</div>
+

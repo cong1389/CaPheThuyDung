@@ -1,0 +1,58 @@
+﻿<!---PostRelative2--->
+@using App.Aplication
+@model IEnumerable<App.Domain.Entities.Data.Post>
+@if (Model.IsAny())
+{
+	<div class="page-product-box">
+		<h3 class="heading">Có thể bạn quan tâm</h3>
+		<ul class="product-list owl-carousel" data-dots="false" data-loop="true" data-nav="true" data-margin="30" data-autoplayTimeout="1000" data-autoplayHoverPause="true" data-responsive='{"0":{"items":1},"600":{"items":3},"1000":{"items":3}}'>
+			@foreach (var post in Model)
+			{
+				<li>
+					<div class="product-container">
+						<div class="left-block">
+							<a href="@Url.Action("PostDetail", "Post", new {seoUrl = post.SeoUrl, area = ""})">
+								<img class="img-responsive" alt="@post.Title" src="@post.ImageMediumSize.ValidateImage()" />
+							</a>
+						</div>
+						<div class="right-block">
+							<h5 class="product-name">
+								<a href="@Url.Action("PostDetail", "Post", new {seoUrl = post.SeoUrl, area = ""})">@post.Title</a>
+							</h5>
+							<div class="content_price">
+								@if (!post.OutOfStock)
+								{
+									<span class="price product-price">
+										@if (post.Price.HasValue && post.Discount.HasValue)
+										{
+											@Html.Raw((post.Price - post.Price * post.Discount / 100).FormatPrice())
+										}
+										else if (post.Price.HasValue && !post.Discount.HasValue)
+										{
+											@Html.Raw(post.Price.FormatPrice())
+										}
+										else
+										{
+											@Html.Raw("LienHeDatHang.Lable")
+										}
+									</span>
+									if (post.Discount.HasValue)
+									{
+										<span class="price old-price">@Html.Raw(post.Price.FormatPrice()) </span>
+									}
+								}
+								else
+								{
+									<h5 class="product-name">
+										<span class="label label-danger">Hết hàng</span>
+									</h5>
+								}
+							</div>
+						</div>
+					</div>
+				</li>
+			}
+		</ul>
+	</div>
+}
+<!---/PostRelative--->

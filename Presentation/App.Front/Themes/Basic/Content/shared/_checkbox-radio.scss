@@ -1,0 +1,28 @@
+﻿input[type=radio]:checked + .label-radio {
+    background-position: 0 -20px;
+}
+
+.label-radio {
+    font-weight: bold;
+    background-image: url(//hstatic.net/0/global/design/imgs/radio.png);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    padding-left: 28px;
+    height: 20px;
+    display: inline-block;
+    line-height: 20px;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    font-size: 14px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+input[type=radio] {
+    width: 1px;
+    opacity: 0;
+    margin: 0;
+}

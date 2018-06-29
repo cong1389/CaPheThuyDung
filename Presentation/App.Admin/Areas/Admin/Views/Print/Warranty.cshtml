@@ -1,0 +1,251 @@
+﻿@using App.Framework.Utilities
+@model App.Domain.Entities.Data.Repair
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="@Url.FakePathAdmin("content/plugins/bootstrap/css/bootstrap.min.css")" rel="stylesheet" />
+    <style type="text/css">
+        body {
+            color: #231f20;
+        }
+
+        .bg-bill {
+            position: relative;
+        }
+
+        .bg-print {
+            position: relative;
+        }
+
+        .text {
+            position: absolute;
+            z-index: 999;
+        }
+
+        table p {
+            margin-bottom: 5px;
+        }
+
+        table td {
+            border: 2px solid #3b55a4;
+            padding: 5px;
+            font-size: 16px;
+        }
+
+        span.check {
+            width: 30px;
+            height: 20px;
+            border: 1px solid #78afd8;
+            display: inline-block;
+            text-align: center;
+            font-size: 18px;
+            vertical-align: middle;
+            line-height: 18px;
+        }
+
+        .body-content td {
+            vertical-align: top;
+        }
+
+        @@media print {
+            button#print-btn {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        @if (Model != null)
+        {
+            <div class="bg-bill">
+                <div class="header">
+                    <img src="@Url.Content("~/images/print/warranty-header.png")" style="width: 100%;" />
+                </div>
+                <table style="width: 100%; border: 0 !important;margin:  20px 0">
+                    <tr>
+                        <td style="width: 40%;border: 0 !important">
+                            <p><strong>Tên khách hàng: @Model.CustomerName</strong></p>
+                            <p><strong>Mã số KH: @Model.CustomerCode</strong></p>
+                        </td>
+                        <td style="width: 60%; vertical-align: middle;border: 0 !important">
+                            <p>
+                                <strong style="color: red">
+                                    Từ chối bảo hành các trường hợp rơi vỡ, cháy nổ, rớt nước
+                                </strong>
+                            </p>
+                            <p>
+                                <strong style="color: red">
+                                    Chỉ bảo hành những phần sửa chữa trong “Danh mục sửa chữa”
+                                </strong>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+
+                <table style="width: 100%; border: 2px solid #3b55a4">
+                    <tr class="text-center">
+                        <td>Dòng máy</td>
+                        <td>Tên thiết bị</td>
+                        <td>iMei - Serial number</td>
+                        <td>Danh mục sửa chữa</td>
+                        <td>Thời hạn bảo hành</td>
+                        <td>Chi phí(VNĐ)</td>
+                    </tr>
+                    <tr>
+                        <td>@Model.ModelBrand</td>
+                        <td>@Model.Model</td>
+                        <td>@Model.SerialNumber</td>
+                        <td>
+                            <div style="height: 150px; overflow: hidden;">
+                                @if (!string.IsNullOrEmpty(Model.FixedTags))
+                                {
+                                    var tags = Model.FixedTags.Split(',');
+                                    foreach (var item in tags)
+                                    {
+                                        <p>- @item</p>
+                                    }
+                                }
+                            </div>
+                        </td>
+                        <td>
+                            @if (Model.WarrantyFrom.HasValue)
+                            {
+                                @Html.Raw("Từ " + string.Format("{0:dd/MM/yyyy}", Model.WarrantyFrom))
+                            }
+                            @if (Model.WarrantyFrom.HasValue)
+                            {
+                                @Html.Raw("Đến " + string.Format("{0:dd/MM/yyyy}", Model.WarrantyTo))
+                            }
+                        </td>
+                        <td>
+                            <strong style="color: red">
+                                @if (Model.FixedFee.HasValue)
+                                {
+                                    @Html.Raw(string.Format("{0:0##.### VND}", Model.FixedFee))
+                                }
+                            </strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="5" class="text-right">
+                            Tổng chi phí sửa chữa: 
+                        </td>
+                        <td>
+                           @if (Model.FixedFee.HasValue)
+                            {
+                                <strong style="color: red">
+                                    @Html.Raw(string.Format("{0:0##.### VND}", Model.FixedFee))
+                                </strong>
+                            }
+                        </td>
+                    </tr>
+                </table>
+                <table style="width: 100%; border-top: 0 !important">
+                    <tr class="text-center">
+                        <td style="border-top: 0 !important; width: 25%"><b>Khách hàng</b><br /><i>(Ký,Họ tên)</i></td>
+                        <td style="border-top: 0 !important; width: 25%"><b>Giao trả thiết bị</b><br /><i>(Ký,Họ tên)</i></td>
+                        <td style="border-top: 0 !important; width: 50%"></td>
+                    </tr>
+                    <tr class="text-center">
+                        <td style="vertical-align: top">
+                            <strong>@Model.CustomerName</strong>
+                        </td>
+                        <td>
+                            
+                        </td>
+                        <td>
+                            <p style="color: #78afd8">
+                                Lưu ý: Quý khách vui lòng giữ lại phiếu sau khi nhận lại máy từ nhân viên trả thiết bị. Nếu còn trong thời gian bảo hành mà bị mất phiếu, chúng tôi xin phép không chịu trách nhiệm. Khi đi bảo hành, yêu cầu xuất phiếu này có số iMei của máy trùng với số iMei được ghi trong phiếu. Mọi thắc mắc xin quý khách liên hệ qua hotline:0925.923.923 để được hỗ trợ.
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+                <div class="text-center">
+                    <button type="button" id="print-btn" class="btn btn-primary btn-lg" onclick="window.print();">In phiếu</button>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="bg-bill">
+                <div class="header">
+                    <img src="@Url.Content("~/images/print/warranty-header.png")" style="width: 100%;" />
+                </div>
+                <table style="width: 100%; border: 0 !important">
+                    <tr class="text-center">
+                        <td style="width: 40%;border: 0 !important">
+                            <p><strong>Tên khách hàng:</strong></p>
+                            <p><strong>Mã số KH: </strong></p>
+                        </td>
+                        <td style="width: 60%; vertical-align: middle;border:  0 !important">
+                            <p>
+                                <strong style="color: red">
+                                    Từ chối bảo hành các trường hợp rơi vỡ, cháy nổ, rớt nước
+                                </strong>
+                            </p>
+                            <p>
+                                <strong style="color: red">
+                                    Chỉ bảo hành những phần sửa chữa trong “Danh mục sửa chữa”
+                                </strong>
+                            </p>
+                        </td>
+                    </tr> 
+                </table>
+                <table style="width: 100%; border: 2px solid #3b55a4">
+                    <tr class="text-center">
+                        <td>Dòng máy</td>
+                        <td>Tên thiết bị</td>
+                        <td>iMei - Serial number</td>
+                        <td>Danh mục sửa chữa</td>
+                        <td>Thời hạn bảo hành</td>
+                        <td>Chi phí(VNĐ)</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="5" class="text-right">
+                            Tổng chi phí sửa chữa:
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                </table> 
+                <table style="width: 100%; border-top: 0 !important">
+                    <tr class="text-center">
+                        <td style="border-top: 0 !important; width: 25%"><b>Khách hàng</b><br /><i>(Ký,Họ tên)</i></td>
+                        <td style="border-top: 0 !important; width: 25%"><b>Giao trả thiết bị</b><br /><i>(Ký,Họ tên)</i></td>
+                        <td style="border-top: 0 !important; width: 50%"></td>
+                    </tr>
+                    <tr class="text-center">
+                        <td>
+
+                        </td>
+                        <td></td>
+                        <td>
+                            <p style="color: #78afd8;font-style: italic">
+                                Lưu ý: Quý khách vui lòng giữ lại phiếu sau khi nhận lại máy từ nhân viên trả thiết bị. Nếu còn trong thời gian bảo hành mà bị mất phiếu, chúng tôi xin phép không chịu trách nhiệm. Khi đi bảo hành, yêu cầu xuất phiếu này có số iMei của máy trùng với số iMei được ghi trong phiếu. Mọi thắc mắc xin quý khách liên hệ qua hotline:0925.923.923 để được hỗ trợ.
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+                <div class="text-center">
+                    <button id="print-btn" type="button" class="btn btn-primary btn-lg" onclick="window.print();">In phiếu</button>
+                </div>
+            </div>
+        }
+
+    </div>
+</body>
+</html>

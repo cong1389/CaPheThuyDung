@@ -1,0 +1,14 @@
+﻿<!---_Social.FB_Share-->
+<div id="divFBComment"></div>
+<script>
+
+	jQuery(document).ready(function () {
+		var url = window.location.href;
+
+		//FB comment
+		var fbComment = '<fb:comments href="' + url + '" data-num-posts="10" data-width="900" data-order-by="reverse_time"></fb:comments>';
+		jQuery('#divFBComment').html(fbComment);
+	});
+</script>
+
+<!---_Social.FB_Share-->

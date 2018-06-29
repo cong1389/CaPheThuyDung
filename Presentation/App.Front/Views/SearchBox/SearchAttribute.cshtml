@@ -1,0 +1,47 @@
+﻿<!---SearchAttribute-->
+@using App.Aplication
+@model IEnumerable<App.Domain.Entities.Attribute.Attribute>
+
+@if (Model.IsAny())
+{
+	var attrIds = (List<int>)ViewBag.Attributes;
+	foreach (var item in Model)
+	{
+		<div class="layered_subtitle">@item.AttributeName</div>
+		<div class="layered-content filter-color conten-attr">
+			@if (item.AttributeValues.IsAny())
+			{
+				<div class="attr-items">
+					@foreach (var at in item.AttributeValues.OrderByDescending(x => x.OrderDisplay))
+					{
+						if (!string.IsNullOrEmpty(at.ColorHex))
+						{
+							<div id="color_item" class="item @(attrIds.Exists(x => x == at.Id)?"active":"") ">
+								<div class="select-item">
+									<label>
+										<input id="@at.Id" type="checkbox" name="attr" value="@at.Id" @(attrIds.Exists(x => x == at.Id)?"checked":"") />
+										<span class="bg" style="background-color: @at.ColorHex"></span>
+										<span class="hidden">@at.ValueName</span>
+									</label>
+								</div>
+							</div>
+						}
+						else
+						{
+							<div class="item @(attrIds.Exists(x => x == at.Id)?"active":"")">
+								<div class="select-item size">
+									<label>
+										<input id="@at.Id" type="checkbox" name="attr" value="@at.Id" @(attrIds.Exists(x => x == at.Id)?"checked":"") />
+										<span>@at.ValueName</span>
+									</label>
+								</div>
+							</div>
+						}
+					}
+				</div>
+			}
+		</div>
+		<a rel="nofollow" href="javascript:void(0)" id="showmore" style="display: none">Hiện thêm @item.AttributeName.ToLower()</a>
+	}
+}
+<!---/SearchAttribute-->

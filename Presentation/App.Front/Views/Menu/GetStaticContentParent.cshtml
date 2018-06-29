@@ -1,0 +1,29 @@
+﻿<!--GetStaticContentParent---->
+@using Resources
+@model App.Domain.Entities.Data.StaticContent
+
+@if (Model != null)
+{
+	<div class="columns-container">
+		<div class="container" id="columns">
+			@Html.Partial("_BreadCrumb")
+
+			<div class="center_column col-xs-12 col-sm-12" id="center_column">
+				<h2 class="page-heading">
+					<span class="page-heading-title2">@ViewBag.Title</span>
+				</h2>
+				<div class="content-text clearfix">
+					@Html.Raw(Model.Description)
+				</div>
+			</div>
+		</div>
+	</div>
+}
+else
+{
+	<div class="container">
+		<p class="text-danger">@MessageUI.EmptyData</p>
+	</div>
+
+}
+<!--/GetStaticContentParent---->

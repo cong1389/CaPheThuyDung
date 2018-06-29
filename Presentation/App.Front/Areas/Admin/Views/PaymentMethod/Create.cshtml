@@ -1,0 +1,33 @@
+﻿
+@using Resources
+@model App.FakeEntity.Payments.PaymentMethodViewModel
+@{
+    ViewBag.Title = FormUI.CreateNew;
+    ViewBag.Toolbar = new[] { "Save", "SaveNew", "Divider", "Back" };
+}
+@using (Html.BeginForm("Create", "PaymentMethod", FormMethod.Post, new { data_container = ViewContext.RouteData.Values["controller"], enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    Html.RenderPartial("_CreateOrUpdate", Model);
+} 
+
+@section scripts{
+
+    <script type="text/javascript">
+
+        //Copy value từ tên sản phẩm bỏ vào group SEO
+        function CopyValue() {
+            $("#Locales_0__PaymentMethodSystemName").change(function() {
+                var name = $("#Locales_0__PaymentMethodSystemName").val();
+                if (name != "") {
+                    $("#PaymentMethodSystemName").val(name);
+                }
+            });
+        }
+
+        $(function() {
+            CopyValue();
+        });
+    </script>
+}

@@ -1,0 +1,300 @@
+﻿@using App.Framework.Utilities
+@model App.Domain.Entities.Data.Repair
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="@Url.FakePathAdmin("content/plugins/bootstrap/css/bootstrap.min.css")" rel="stylesheet" />
+    <style  type="text/css">
+        body {
+            color: #78afd8
+        }
+        .bg-bill {
+            position: relative
+        }
+        .bg-print {
+            position: relative;
+        }
+        .text {
+            position: absolute;
+            z-index: 999;
+
+        }
+        table p {
+            margin-bottom: 5px;
+        }
+        table td {
+            border: 2px solid #3b55a4;
+            padding: 5px;
+            font-size: 16px;
+        }
+        span.check {
+            width: 30px;
+            height: 20px;
+            border: 1px solid #78afd8;
+            display: inline-block;
+            text-align: center;
+            font-size: 18px;
+            vertical-align: middle;
+            line-height: 18px;
+        }
+        .body-content td {
+            vertical-align: top
+        }
+       @@media print {
+           button#print-btn {display: none !important;}    
+        }
+    </style> 
+</head>
+<body>
+<div class="container">
+    @if (Model != null)
+    {
+        <div class="bg-bill">
+            <div class="header">
+                <img src="@Url.Content("~/images/print/header-bill.png")" style="width: 100%;"/>
+            </div>
+            <h2 class="text-center" style="font-size: 42px;">Phiếu biên nhận - Receipt</h2>
+            <p>Số (No): @Model.RepairCode</p>
+            <p>Ngày (Date): @String.Format("{0:dd/MM/yyyy}",Model.CreatedDate)</p>
+            <table style="width: 100%; border: 2px solid #3b55a4">
+                <tr class="text-center">
+                    <td>Thông tin khách hàng - Customer Information</td>
+                    <td>Thông tin sản phẩm - Product’s Detail</td>
+                </tr>
+                <tr class="body-content">
+                    <td>
+                        <p>Tên khách hàng - Name :</p>
+                        <p>@Model.CustomerName</p>
+                        <p>Địa chỉ - Address :</p>
+                        <p>@Model.Address</p>
+                        <p>Điện thoại - Tel :</p>
+                        <p>@Model.PhoneNumber</p>
+                        <p>Cửa hàng - Shop :</p>
+                        <p>@Model.StoreName</p>
+                    </td>
+                    <td>
+                        <table style="border: 0 !important;width: 100%">
+                            <tr>
+                                <td style="border: 0 ! important">
+                                    <p> Model :</p>
+                                    <p> Bảo hành - Warranty : <span class="check">x</span>
+                                    </p>
+                                    <p>iMei - Seri Number :</p>
+                                </td>
+                                <td style="border: 0 ! important">
+                                    <p>
+                                        Phụ kiện - Accessories :
+                                    </p>
+                                    @if (!string.IsNullOrEmpty(Model.Accessories))
+                                    {
+                                        var access = Model.Accessories.Split(',');
+                                        foreach (var item in access)
+                                        {
+                                            <p>
+                                                - @item : <span class="check">x</span>
+                                            </p>
+                                        }
+                                    }
+                                </td>
+                            </tr>
+                        </table>
+                        <p>@Model.SerialNumber</p>
+                        <p>Mật khẩu máy - Password :</p>
+                        <p>@Model.PasswordPhone</p>
+                        <p>Apple ID / Google Account :</p>
+                        <p>@Model.AppleId</p>
+                        <p>Password :</p>
+                        <p>@Model.IcloudPassword</p>
+                    </td>
+                </tr>
+                <tr class="text-center">
+                    <td>Tình trạng sản phẩm - Product’s Status</td>
+                    <td>Danh mục sửa chữa - Checking List</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div style="height: 150px; overflow: hidden;">
+                            @Model.PhoneStatus 
+                        </div>
+                    </td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(Model.FixedTags))
+                        {
+                            var tags = Model.FixedTags.Split(',');
+                            foreach (var item in tags)
+                            {
+                                <p>- @item</p>
+                            }
+                        } 
+                    </td>
+                </tr>
+            </table>
+            <table style="width: 100%; border-top: 0 !important">
+                <tr class="text-center">
+                    <td style="border-top: 0 !important; width: 30%">Người nhận<br/>(Receiver’s Signature)</td>
+                    <td style="border-top: 0 !important; width: 40%">Khách hàng xác nhận<br/>(Customer’s Confirmation)</td>
+                    <td style="border-top: 0 !important; width: 30%">Giá tiền dự kiến<br/>(Expected Price)</td>
+                </tr>
+                <tr class="text-center">
+                    <td style="min-height: 50px;">
+
+                    </td>
+                    <td style="position: relative; min-height: 50px;">
+                        <div style="height: 150px; overflow: hidden;">
+                            @if (Model.FixedFee.HasValue)
+                            {
+                                @Html.Raw(string.Format("{0:0##.### VND}", Model.FixedFee))
+                            }
+                            <p style="position: absolute; bottom: 0; left: 0; right: 0">
+                                Khách hàng đã đọc và xác nhận tình trạng máy<br/>
+                                Customer  has read and verified the status of the cellphone
+                            </p>
+                        </div>
+
+                    </td>
+                    <td style="min-height: 50px;">
+
+                    </td>
+                </tr>
+            </table>
+            <table style="width: 100%; border: 0 !important; margin-bottom: 15px;">
+                <tr>
+                    <td style="border: 0 !important">
+                        <p>Quý khách lưu ý :</p>
+                        <p>- Biên Nhận có giá trị trong vòng 30 ngày kể từ ngày nhận máy.</p>
+                        <p>- Chúng tôi không chịu trách nhiệm mất Danh Bạ hoặc Dữ Liệu trong máy của quý khách.</p>
+                    </td>
+                    <td style="border: 0 !important">
+                        <p>Note:</p>
+                        <p>- This receipt will be effective from the signing/receiving date and valid within 30 days.</p>
+                        <p>- The center will not take any responsibity for keeping all private information/contact of the customer</p>
+                    </td>
+                </tr>
+            </table>
+            <div class="text-center">
+                <button type="button" id="print-btn" class="btn btn-primary btn-lg" onclick="window.print();">In phiếu</button>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="bg-bill">
+            <div class="header">
+                <img src="@Url.Content("~/images/print/header-bill.png")" style="width: 100%;"/>
+            </div>
+            <h2 class="text-center" style="font-size: 42px;">Phiếu biên nhận - Receipt</h2>
+            <p>Số (No): </p>
+            <p>Ngày (Date): </p>
+            <table style="width: 100%; border: 2px solid #3b55a4">
+                <tr class="text-center">
+                    <td>Thông tin khách hàng - Customer Information</td>
+                    <td>Thông tin sản phẩm - Product’s Detail</td>
+                </tr>
+                <tr class="body-content">
+                    <td>
+                        <p>Tên khách hàng - Name :</p>
+                        <p>..................................................</p>
+                        <p>Địa chỉ - Address :</p>
+                        <p>..................................................</p>
+                        <p>Điện thoại - Tel :</p>
+                        <p>..................................................</p>
+                        <p>Cửa hàng - Shop :</p>
+                        <p>..................................................</p>
+                    </td>
+                    <td>
+                        <table width="100%" style="border: 0 !important">
+                            <tr>
+                                <td style="border: 0 ! important">
+                                    <p> Model :</p>
+                                    <p> Bảo hành - Warranty : <span class="check">x</span>
+                                    </p>
+                                    <p>iMei - Seri Number :</p>
+                                </td>
+                                <td style="border: 0 ! important">
+                                    <p>
+                                        Phụ kiện - Accessories :
+                                    </p>
+                                    <p>
+                                        - Sim : <span class="check"></span>
+                                    </p>
+                                    <p>
+                                        - Memory Card: : <span class="check"></span>
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                        <p>..........................................................................</p>
+                        <p>Mật khẩu máy - Password :</p>
+                        <p>..................................................</p>
+                        <p>Apple ID / Google Account :</p>
+                        <p>..................................................</p>
+                        <p>Password :</p>
+                        <p>..................................................</p>
+                    </td>
+                </tr>
+                <tr class="text-center">
+                    <td>Tình trạng sản phẩm - Product’s Status</td>
+                    <td>Danh mục sửa chữa - Checking List</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div style="height: 150px; overflow: hidden;"> 
+                        </div>
+                    </td>
+                    <td>
+                       
+                    </td>
+                </tr>
+            </table>
+            <table style="width: 100%; border-top: 0 !important">
+                <tr class="text-center">
+                    <td style="border-top: 0 !important; width: 33.33333%">Người nhận<br/>(Receiver’s Signature)</td>
+                    <td style="border-top: 0 !important; width: 33.33333%">Khách hàng xác nhận<br/>(Customer’s Confirmation)</td>
+                    <td style="border-top: 0 !important; width: 33.33333%">Giá tiền dự kiến><br/>(Expected Price)</td>
+                </tr>
+                <tr class="text-center">
+                    <td style="min-height: 50px;">
+
+                    </td>
+                    <td style="position: relative; min-height: 50px;">
+                        <div style="height: 150px; overflow: hidden;">
+
+                            <p style="position: absolute; bottom: 0; left: 0; right: 0">
+                                Giá tiền dự kiến<br/>
+                                (Expected Price)
+                            </p>
+                        </div> 
+                    </td>
+                    <td style="min-height: 50px;">
+
+                    </td>
+                </tr>
+            </table>
+            <table style="width: 100%; border: 0 !important; margin-bottom: 15px;">
+                <tr>
+                    <td style="border: 0 !important">
+                        <p>Quý khách lưu ý :</p>
+                        <p>- Biên Nhận có giá trị trong vòng 30 ngày kể từ ngày nhận máy.</p>
+                        <p>- Chúng tôi không chịu trách nhiệm mất Danh Bạ hoặc Dữ Liệu trong máy của quý khách.</p>
+                    </td>
+                    <td style="border: 0 !important">
+                        <p>Note:</p>
+                        <p>- This receipt will be effective from the signing/receiving date and valid within 30 days.</p>
+                        <p>- The center will not take any responsibity for keeping all private information/contact of the customer</p>
+                    </td>
+                </tr>
+            </table>
+            <div class="text-center">
+                <button id="print-btn" type="button" class="btn btn-primary btn-lg" onclick="window.print();">In phiếu</button>
+            </div>
+        </div>
+    }
+    
+</div>
+</body>
+</html>

@@ -1,0 +1,102 @@
+﻿<!---Details--->
+@using App.Aplication
+@using App.Domain.Common
+@using App.FakeEntity.Common
+@model App.FakeEntity.Orders.OrderViewModel
+
+<section id="content" class="goweb-order-detail">
+    <div class="page-order checkout-page">
+        <div class="container clearfix">
+
+            <h1 class="title-page"><i class="icon-aothun"></i>Chi tiết đơn hàng #@Model.Id</h1>
+            <div class="title-description"> Ngày đặt: @string.Format("{0: dd/MM/yyyy hh:mm:ss}", Model.CreatedOnUtc)</div>
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <h4>ĐỊA CHỈ NGƯỜI NHẬN</h4>
+                    @RenderAddress(Model)
+                </div>
+                <div class="col-sm-4">
+                    <h4>HÌNH THỨC GIAO HÀNG</h4>
+                    <div class="account-detail user_box">
+                        <div class="fieldset">
+                            <div class="field">
+                                <div class="field-input-wrapper">
+                                    @Model.ShippingMethod
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <h4>PHƯƠNG THỨC THANH TOÁN</h4>
+                    <div class="account-detail user_box">
+                        <div class="fieldset">
+                            <div class="field">
+                                <div class="field-input-wrapper">
+                                    @Model.PaymentMethodSystemName
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <table class="table table-bordered cart cart_summary">
+                <thead>
+                    <tr>
+                        <th>Sản phẩm</th>
+                        <th>Giá</th>
+                        <th>Số lượng</th>
+                        <th>Tổng cộng</th>
+                    </tr>
+                </thead>
+                @foreach (var item in Model.Items)
+                {
+                    <tr>
+                        <td>
+                            <a href="#" title="">@item.PostName </a><br>
+
+                        </td>
+                        <td>@item.UnitPriceInclTax.FormatPrice()</td>
+                        <td> @item.Quantity</td>
+                        <td>@item.SubTotalInclTax.FormatPrice()</td>
+                    </tr>
+                }
+            </table>
+            
+
+            <div class="cart_navigation">
+                <a class="prev-btn" href="@Url.Action("ChangeInfo", "Account")">
+                    Quay lại đơn hàng của tôi
+                </a>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+@helper RenderAddress(App.FakeEntity.Orders.OrderViewModel order)
+    {
+        <div class="account-detail user_box">
+            <div class="fieldset">
+                <div class="field">
+                    <div class="field-input-wrapper">
+                        <strong> @order.CustomerName</strong>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="field-input-wrapper">
+                        <strong>Địa chỉ:</strong>  @order.BillingAddress.Address1
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="field-input-wrapper">
+                        <strong>Số điện thoại:</strong> @order.BillingAddress.PhoneNumber
+                    </div>
+                </div>
+            </div>
+        </div>
+}
+
+<!---/Details--->

@@ -1,0 +1,56 @@
+﻿<!--MailSetting--->
+@using App.Domain.Common
+@using Resources
+@model App.FakeEntity.Language.LanguageFormViewModel
+
+<div class="form-horizontal">
+	<div class="form-body">
+		@Html.ValidationSummary(true, "", new { @class = "text-danger col-md-offset-3" })
+		<div class="form-group">
+			@Html.LabelFor(model => model.LanguageName, new { @class = "control-label col-md-3" })
+			<div class="col-md-5">
+				@Html.TextBoxFor(model => model.LanguageName, new { @class = "form-control" })
+				@Html.ValidationMessageFor(model => model.LanguageName, "", new { @class = "help-block" })
+			</div>
+		</div>
+		<div class="form-group">
+			@Html.LabelFor(model => model.LanguageCode, new { @class = "control-label col-md-3" })
+			<div class="col-md-5">
+				@Html.TextBoxFor(model => model.LanguageCode, new { @class = "form-control" })
+				@Html.ValidationMessageFor(model => model.LanguageCode, "", new { @class = "help-block" })
+			</div>
+		</div>
+		<div class="form-group">
+			@Html.LabelFor(model => model.Status, new { @class = "control-label col-md-3" })
+			<div class="col-md-5">
+				@Html.DropDownList("Status", new List<SelectListItem>
+				{
+					new SelectListItem {Text = FormUI.Active, Value = ((int)Status.Enable).ToString()},
+					new SelectListItem {Text = FormUI.InActive, Value = ((int)Status.Disable).ToString()}
+				}, new { @class = "form-control", id = "Status", name = "Status" })
+				@Html.ValidationMessageFor(model => model.Status, "", new { @class = "help-block" })
+			</div>
+		</div>
+		<div class="form-group">
+			@Html.LabelFor(model => model.File, new { @class = "control-label col-md-3" })
+			<div class="col-md-5">
+				<div class="fileinput fileinput-new" data-provides="fileinput">
+					<div class="input-group input-large">
+						<div class="form-control uneditable-input input-fixed input-medium" data-trigger="fileinput">
+							<i class="fa fa-file fileinput-exists"></i>&nbsp;
+							<span class="fileinput-filename"> </span>
+						</div>
+						<span class="input-group-addon btn default btn-file">
+							<span class="fileinput-new">@FormUI.SelectFile</span>
+							<span class="fileinput-exists"> @FormUI.ChangeFile </span>
+							@Html.TextBoxFor(model => model.File, new { type = "file" })
+						</span>
+						<a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput"> Remove </a>
+					</div>
+				</div>
+				@Html.ValidationMessageFor(model => model.File, "", new { @class = "help-block" })
+			</div>
+		</div>
+	</div>
+</div>
+<!--/MailSetting--->

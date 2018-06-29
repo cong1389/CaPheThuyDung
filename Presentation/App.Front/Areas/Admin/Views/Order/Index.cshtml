@@ -1,0 +1,54 @@
+﻿
+@using Resources
+@model IEnumerable<App.FakeEntity.Orders.OrderViewModel>
+@{
+    ViewBag.Title = FormUI.Order;
+    ViewBag.Toolbar = new[] { "Create", "Edit", "Delete", "Divider", "Reset" };
+}
+
+<table id="@ViewContext.RouteData.Values["controller"]" class="app-grid table table-color table-bordered table-striped table-condensed flip-content table-hover dataTable">
+    <thead class="flip-content">
+        <tr>
+            <th class="text-center"> Số hoá đơn </th>
+            <th class="text-center"> Họ tên </th>
+            <th class="text-center"> Email </th>
+            <th class="text-center"> Ngày tạo hoá đơn </th>
+            <th class="text-center"> Tổng hoá đơn hàng </th>
+
+            <th class="text-center">
+                <input onclick="AppCore.handleCheckAll(this) " type="checkbox">
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Any())
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <a class="highlight0" href="@Url.Action("Edit", new {id = item.Id, ReturnUrl = Request.Url.PathAndQuery})">@item.Id</a>
+                    </td>
+                    <td>@item.CustomerName</td>
+                    <td>@item.CustomerEmail</td>
+                    <td>@item.CreatedOn</td>
+                    <td>@item.OrderTotal</td>
+
+                    <td class="text-center">
+                        <input type="checkbox" value="@item.Id">
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr class="odd">
+                <td class="dataTables_empty text-center" colspan="5" valign="top">
+                    @MessageUI.EmptyData
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@{ Html.RenderPartial("_PageLinks"); }
+

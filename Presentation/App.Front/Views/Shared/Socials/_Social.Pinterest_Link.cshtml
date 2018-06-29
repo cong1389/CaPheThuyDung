@@ -1,0 +1,21 @@
+﻿<!----_Social.Pinterest_Link-->
+<span id="divPinterestLink"></span>
+
+<script>
+    jQuery(function () {
+        'use strict';
+
+        jQuery.post('@Url.Action("GetSettingSeo", "Summary")')
+            .done(function (data) {
+                var pinterestLink = data.response.PinterestLink;
+                if (pinterestLink != null) {
+                    var code = '<a href="' + pinterestLink + '" class="si-pinterest social-icon si-dark si-colored" target="_blank"><i class="fa fa-pinterest"></i><i class="fa fa-pinterest"></i></a>';
+
+                    jQuery("#divPinterestLink").html(code);
+
+                }
+             });
+        })
+
+</script>
+<!----/_Social.Pinterest_Link-->

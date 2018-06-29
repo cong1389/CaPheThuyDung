@@ -1,0 +1,11 @@
+﻿ <!---_Footer.Logo--->
+@using App.Aplication
+@model App.Domain.Entities.GlobalSetting.SystemSetting
+
+@if (Model != null)
+{
+    <a href='@Url.Action("Index", "Home", new { area = "" })'>
+        <img src="@Model.LogoFooterImage.ValidateImage()" alt="@Model.Title" />
+    </a>
+}
+<!---/_Footer.Logo--->

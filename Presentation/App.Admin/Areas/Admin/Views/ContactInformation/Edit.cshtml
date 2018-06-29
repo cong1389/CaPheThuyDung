@@ -1,0 +1,45 @@
+﻿<!---Edit-->
+@using Resources
+@model App.FakeEntity.ContactInformation.ContactInformationViewModel
+@{
+    ViewBag.Title = FormUI.Edit;
+    ViewBag.Toolbar = new[] { "Save", "SaveNew", "Divider", "Back" };
+}
+@using (Html.BeginForm("Edit", "ContactInformation", FormMethod.Post, new { data_container = ViewContext.RouteData.Values["controller"], enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.Id)
+
+    Html.RenderPartial("_CreateOrUpdate", Model);
+}
+@section scripts{
+    <script type="text/javascript">
+        $("#mapmarker").on("click", function () {
+            window.open("@Url.Action("GoogleMap","Utility", new { gLat = Model.Lat, gLag = Model.Lag})", "_blank", "toolbar=yes,scrollbars=yes, resizable=yes, top=100, left=100, width=1200, height=800");
+        });
+
+        //Copy value từ tên sản phẩm bỏ vào group SEO
+        function CopyValue() {
+            $("#Locales_0__Title").change(function () {
+                var name = $("#Locales_0__Title").val();
+                if (name != "") {
+                    $("#Title").val(name);
+                }
+            });
+
+            $("#Locales_0__Address").change(function () {
+                var address = $("#Locales_0__Address").val();
+                if (address != "") {
+                    $("#Address").val(address);
+                }
+            });
+        }
+
+        $(function () {
+            CopyValue();
+        });
+
+    </script>
+}
+
+<!---/Edit-->

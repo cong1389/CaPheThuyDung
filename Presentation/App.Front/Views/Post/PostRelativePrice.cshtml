@@ -1,0 +1,28 @@
+﻿<!---GetNewProductRelative--->
+@using App.Aplication
+@model IEnumerable<App.Domain.Entities.Data.Post>
+@if (Model.IsAny())
+{
+    <div class="list-relative">
+        <h4>Sản phẩm cùng khoảng giá</h4>
+            @foreach (var item in Model)
+            {
+                <div class="col-sm-3">
+                    <div class="relative-content">
+                        <a href="@Url.Action("PostDetail", "Post", new {seoUrl = item.SeoUrl, area = ""})">
+                            <img src="@item.ImageMediumSize.ValidateImage()" alt="@item.Title" />
+                        </a>
+                        <h4>
+                            <a href="@Url.Action("PostDetail", "Post", new {seoUrl = item.SeoUrl, area = ""})">
+                                @item.Title
+                            </a>
+                        </h4>
+                        <strong class="price">@(item.Price.FormatPrice())</strong>
+                    </div>
+                </div>
+            }
+            
+    </div>
+}
+
+<!---/GetNewProductRelative--->

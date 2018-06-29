@@ -1,0 +1,9 @@
+﻿@model App.Domain.Entities.GlobalSetting.ContactInformation
+    @if (Model != null)
+    {
+        <div class="callorder">
+            <p>HOTLINE: <a href="tel:@Model.Hotline">@Model.Hotline</a></p>
+            <p>EMAIL: <a href="mailto:@Model.Email"> @Model.Email</a></p>
+            <p>ĐỊA CHỈ: @Model.Address </p>
+        </div>
+    }

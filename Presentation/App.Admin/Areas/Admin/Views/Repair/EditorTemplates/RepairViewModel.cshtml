@@ -1,0 +1,255 @@
+﻿@{
+    Layout = null;
+}
+@using App.Domain.Common
+@using App.Aplication
+@model App.FakeEntity.Repairs.RepairViewModel
+
+@Html.HiddenFor(x => x.RepairCode)
+@Html.HiddenFor(x => x.CustomerCode)
+<div class="row">
+    <div class="col-sm-4">
+        <div class="form-group">
+            @Html.LabelFor(model => model.RepairCode, new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                <input type="text" value="@Model.RepairCode" class="form-control" disabled="disabled" />
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="form-group">
+            @Html.LabelFor(model => model.CustomerCode, new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                <input type="text" value="@Model.CustomerCode" class="form-control" disabled="disabled" />
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="form-group">
+            @Html.LabelFor(model => model.StoreName, new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.StoreName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.StoreName, "", new { @class = "help-block" })
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-4">
+        <div class="form-group">
+            @Html.LabelFor(model => model.CustomerName, new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.CustomerName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CustomerName, "", new { @class = "help-block" })
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="form-group">
+            @Html.Label("Ngày lập", new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                <input type="text" readonly="readonly" value="@String.Format("{0:dd/MM/yyyy}",DateTime.UtcNow)" class="form-control" />
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="form-group">
+            @Html.LabelFor(model => model.CustomerIdNumber, new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.CustomerIdNumber, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CustomerIdNumber, "", new { @class = "help-block" })
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-4">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Address, new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.Address, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "help-block" })
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="form-group">
+            @Html.LabelFor(model => model.PhoneNumber, new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "help-block" })
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-4">
+        <div class="form-group">
+            @Html.LabelFor(model => model.BrandId, new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.DropDownListFor(x => x.BrandId, new SelectList(ViewBag.Brands, "Id", "Name"), "--Select--", new { @class = "form-control  select2" })
+                @Html.ValidationMessageFor(model => model.BrandId, "", new { @class = "help-block" })
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="form-group">
+            @Html.LabelFor(model => model.ModelBrand, new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.ModelBrand, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ModelBrand, "", new { @class = "help-block" })
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-4">
+        <div class="form-group">
+            @Html.LabelFor(model => model.SerialNumber, new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.SerialNumber, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.SerialNumber, "", new { @class = "help-block" })
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Model, new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.Model, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Model, "", new { @class = "help-block" })
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="form-group">
+            @Html.LabelFor(model => model.Accessories, new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.Accessories, new { @class = "form-control", data_role = "tagsinput" })
+                @Html.ValidationMessageFor(model => model.Accessories, "", new { @class = "help-block" })
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-4">
+        <div class="form-group">
+            @Html.LabelFor(model => model.PasswordPhone, new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.PasswordPhone, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PasswordPhone, "", new { @class = "help-block" })
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="form-group">
+            @Html.LabelFor(model => model.AppleId, new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.AppleId, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.AppleId, "", new { @class = "help-block" })
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="form-group">
+            @Html.LabelFor(model => model.IcloudPassword, new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.IcloudPassword, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.IcloudPassword, "", new { @class = "help-block" })
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-4">
+        <div class="form-group">
+            @Html.LabelFor(model => model.OldWarranty, new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.DropDownListFor(x => x.OldWarranty, new SelectList(new List<SelectListItem>
+                {
+                    new SelectListItem {  Text = "Select...", Value = string.Empty},
+                    new SelectListItem {  Text = "Còn", Value = "1"},
+                    new SelectListItem {  Text = "Hết", Value = "0"}
+                }, "Value", "Text"), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.OldWarranty, "", new { @class = "help-block" })
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="form-group">
+            @Html.LabelFor(model => model.PhoneStatus, new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.PhoneStatus, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PhoneStatus, "", new { @class = "help-block" })
+            </div>
+        </div>
+    </div>
+</div> 
+<div class="row">
+    <div id="fixed_category">
+        @Html.EditorForMany(x => x.RepairItems, x => x.Index)
+    </div>
+</div>
+<div class="row">
+    <div class="form-group">
+        <div class="col-sm-4">
+            <label class="control-label col-md-4">&nbsp;</label>
+            <div class="col-md-8">
+                <a href="javascript:void(0)" id="add_fixed"><i class="fa fa-plus"></i> Thêm hạng mục sửa chữa</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-4">
+        <div class="form-group">
+            <label class="control-label col-md-4">Hình ảnh</label>
+            <div class="col-md-8">
+                <input type="file" name="files[]" id="filer_input_multiple" multiple="multiple">
+            </div>
+        </div>
+    </div>
+</div>
+@if (Model.RepairGalleries.IsAny())
+{
+    <div class="row" style="margin: 15px 0">
+        <div class="col-sm-12 col-lg-offset-1">
+            @foreach (var item in Model.RepairGalleries)
+            {
+                <div class="col-sm-2">
+                    <a href="@Url.Content("/"+item.ImagePath)" class="gallery" rel="ga">
+                        <img src="@item.ImagePath.ValidateImage()" style="width: 100%" />
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+}
+<div class="row">
+    <div class="form-group">
+        <label class="control-label col-md-1">Ghi chú</label>
+        <div class="col-md-11">
+            @Html.TextAreaFor(model => model.Note, new { @class = "form-control ckeditor", rows = 5 })
+            @Html.ValidationMessageFor(model => model.Note, "", new { @class = "help-block" })
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="form-group">
+        @Html.LabelFor(model => model.Status, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="radio-list">
+                <label class="radio-inline">
+                    @Html.RadioButtonFor(x => x.Status, (int)RepairStatus.Checking, new { @checked = "checked" }) Đang kiểm tra
+                </label>
+                <label class="radio-inline">
+                    @Html.RadioButtonFor(x => x.Status, (int)RepairStatus.Processing) Đang sửa
+                </label>
+                <label class="radio-inline">
+                    @Html.RadioButtonFor(x => x.Status, (int)RepairStatus.Done) Hoàn thành
+                </label>
+            </div>
+            @Html.ValidationMessageFor(model => model.Status, "", new { @class = "help-block" })
+        </div>
+    </div>
+</div>

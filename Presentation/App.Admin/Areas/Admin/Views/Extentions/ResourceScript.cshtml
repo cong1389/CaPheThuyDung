@@ -1,0 +1,22 @@
+﻿@using System.Collections
+@using System.Globalization
+@using System.Resources
+@using Resources
+@{
+    Layout = null;
+    ResourceSet resourceSet =FormUI.ResourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
+    ResourceSet resourceMessage = MessageUI.ResourceManager.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
+}
+var Resources = {};
+var Messages = {};
+@foreach (DictionaryEntry res in resourceSet)
+{
+    // Create a property on the javascript object for each text resource
+    @:Resources.@res.Key = "@Html.Raw(
+        HttpUtility.JavaScriptStringEncode(res.Value.ToString()))";
+}
+@foreach (DictionaryEntry res in resourceMessage)
+{
+    @:Messages.@res.Key = "@Html.Raw(
+        HttpUtility.JavaScriptStringEncode(res.Value.ToString()))";
+}

@@ -1,0 +1,16 @@
+﻿<!---Edit-->
+@using Resources
+@model App.FakeEntity.User.RegisterFormViewModel
+@{
+    ViewBag.Title = FormUI.Edit;
+    ViewBag.Toolbar = new[] { "Save", "SaveNew", "Divider", "Back" };
+}
+@using (Html.BeginForm("Edit", "Account", FormMethod.Post, new { data_container = ViewContext.RouteData.Values["controller"] }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.Id)
+	Html.RenderPartial("_CreateOrUpdate", Model);
+
+}
+
+<!---/Edit-->

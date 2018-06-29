@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <base href="/">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    @Html.Partial("_StyleSheet")
+    @Html.Partial("_Scripts")
+    @RenderSection("style", false)
+    <link rel="shortcut icon" href="~/Areas/Admin/Images/favi_admin.ico" />
+</head>
+<body class="page-container-bg-solid page-boxed page-header-menu-fixed"> 
+    @{Html.RenderPartial("_PageHeader");}
+    <!-- END HEADER --> 
+    <div class="page-container">
+        <!-- BEGIN CONTENT -->
+        <div class="page-content-wrapper">
+            @{Html.RenderPartial("_PageTitle");}
+            <!-- BEGIN CONTENT BODY -->
+            <div class="page-content">
+                <div class="container-fluid">
+                    @{ Html.RenderPartial("_BreadCrumb");}
+                    <div class="portlet light" id="blockui_portlet_body">
+                        <div class="portlet-title">
+                            <div class="caption font-dark">
+                                <i class="icon-settings font-dark"></i>
+                                <span class="caption-subject bold uppercase">@ViewBag.Title</span>
+                            </div>
+                            @RenderSection("tools", false)
+                        </div>
+                        <div class="portlet-body flip-scroll">
+                            <div id="system_message" class="alert alert-warning alert-dismissable hide">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                                <span id="system_message_content"></span>
+                            </div>
+                            @*<div ng-view></div>*@
+                            @RenderBody()
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END CONTENT BODY -->
+    </div>
+    <!-- END CONTENT -->
+    <!-- BEGIN INNER FOOTER -->
+    <div class="page-footer">
+        <div class="container">
+            2017 &copy;
+            <a href="" target="_blank">EpmDesign</a>. 
+        </div>
+    </div>
+    <div class="scroll-to-top">
+        <i class="icon-arrow-up"></i>
+    </div>
+    <!-- END INNER FOOTER -->
+    <!-- END FOOTER -->
+    
+    @RenderSection("scripts", required: false)
+    @*@Html.Partial("_AngularScripts")
+    @RenderSection("AngularUiJs", required: false)
+    @RenderSection("AngularJs", required: false)*@
+</body>
+</html>

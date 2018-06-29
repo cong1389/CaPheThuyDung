@@ -1,0 +1,16 @@
+﻿
+@{
+    Html.RenderAction("SlideShowHome", "SlideShow"); 
+    Html.RenderAction("PostHome", "Post", new { MenuId = 15, area = "" });
+}
+
+<section id="home-3" style="background: url(http://cdn.lamantcafe.vn/frontend/themes/lamant/images/home/bg-4.jpg) 50% no-repeat;height: 820px;">
+    <img id="coffee-cup-1" src="http://cdn.lamantcafe.vn/frontend/themes/lamant/images/home/coffee-bean-dry.png" alt="">   
+    <img id="coffee-bean-dry" src="http://cdn.lamantcafe.vn/frontend/themes/lamant/images/home/coffee-cup-1.png" alt="">
+</section>
+
+@{
+    Html.RenderAction("NewsHome", "News", new { area = "" });
+    Html.RenderAction("HomeContact", "Contact", new { area = "" });
+}
+

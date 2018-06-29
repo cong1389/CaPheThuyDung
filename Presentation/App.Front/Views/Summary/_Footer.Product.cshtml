@@ -1,0 +1,21 @@
+﻿<!---_Footer.Product-->
+
+@using App.Aplication
+@using App.Domain.Entities.Data
+@model IEnumerable<Post>
+
+@if (Model != null)
+{
+    foreach (Post item in Model)
+    {
+        <a  href="@Url.Action("PostDetail","Post", new {seoUrl =item.SeoUrl,area=""})" class="fam-projects-widget-thumbnail">
+            <img src="@item.ImageSmallSize.ValidateImage()"  alt="@item.Title" class="attachment-thumbnail size-thumbnail wp-post-image" />
+            <div class="fam-projects-widget-hover">
+                <i class="fa fa-glass"></i>
+            </div>
+        </a>
+    }
+}
+
+<!---/_Footer.Product-->
+

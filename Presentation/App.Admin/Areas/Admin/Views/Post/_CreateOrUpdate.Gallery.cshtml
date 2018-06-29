@@ -1,0 +1,435 @@
+﻿@using Resources
+@model App.FakeEntity.Post.PostViewModel
+
+@if (Model.Id > 0)
+{
+	<div class="alert alert-success margin-bottom-10">
+		<button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+		<i class="fa fa-warning fa-lg"></i> @MessageUI.ErrorTypeImage
+	</div>
+	<div id="tab_images_uploader_container" class="text-align-reverse margin-bottom-10">
+		<a id="tab_images_uploader_pickfiles" href="javascript:;" class="btn btn-success">
+			<i class="fa fa-plus"></i> @FormUI.SelectFile
+		</a>
+		<a id="tab_images_uploader_uploadfiles" href="javascript:;" class="btn btn-primary">
+			<i class="fa fa-share"></i> @FormUI.UploadFiles
+		</a>
+	</div>
+	<div class="row">
+		<div id="tab_images_uploader_filelist" class="col-md-6 col-sm-12"> </div>
+	</div>
+
+	<div class="table-scrollable">
+		<div class="dataTables_scroll">
+			<div class="dataTables_scrollHead">
+				<div class="dataTables_scrollHeadInner">
+					<table class="app-grid table table-color table-bordered table-striped table-condensed flip-content table-hover dataTable" id="sample_editable"></table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+
+		var postGalleryUpload = function () {
+			var e = function () {
+				var e = new plupload.Uploader({
+					runtimes: "html5,flash,silverlight,html4",
+					browse_button: document.getElementById("tab_images_uploader_pickfiles"),
+					container: document.getElementById("tab_images_uploader_container"),
+					url: "@Url.Action("PostGalleryAdd", "Post")",
+					http_method:"POST",
+					multipart_params: {"postId": @Model.Id},
+					filters: {
+						max_file_size: "10mb",
+						mime_types: [{
+							title: "Image files",
+							extensions: "jpg,gif,png"
+						}, {
+							title: "Zip files",
+							extensions: "zip"
+						}]
+					},
+					flash_swf_url: "assets/plugins/plupload/js/Moxie.swf",
+					silverlight_xap_url: "assets/plugins/plupload/js/Moxie.xap",
+					init: {
+						PostInit: function () {
+							$("#tab_images_uploader_filelist").html(""), $("#tab_images_uploader_uploadfiles").click(function () {
+								return e.start(), !1;
+							}), $("#tab_images_uploader_filelist").on("click", ".added-files .remove", function () {
+								e.removeFile($(this).parent(".added-files").attr("id")), $(this).parent(".added-files").remove();
+							});
+						},
+						FilesAdded: function (e, a) {
+							plupload.each(a, function (e) {
+								$("#tab_images_uploader_filelist").append('<div class="alert alert-warning added-files" id="uploaded_file_' + e.id + '">' + e.name + "(" + plupload.formatSize(e.size) + ') <span class="status label label-info"></span>&nbsp;<a href="javascript:;" style="margin-top:-5px" class="remove pull-right btn btn-sm red"><i class="fa fa-times"></i> @FormUI.Delete</a></div>');
+							});
+						},
+						UploadProgress: function (e, a) {
+							$("#uploaded_file_" + a.id + " > .status").html(a.percent + "%");
+						},
+						FileUploaded: function (e, a, t) {
+							var response = $.parseJSON(t.response);
+							if (response.success && true === response.success) {
+								$("#uploaded_file_" + a.id + " > .status").removeClass("label-info").addClass("label-success").html('<i class="fa fa-check"></i> Done');
+							}
+							else $("#uploaded_file_" + a.id + " > .status").removeClass("label-info").addClass("label-danger").html('<i class="fa fa-warning"></i> Failed'), App.alert({
+								type: "danger",
+								message: "One of uploads failed. Please retry.",
+								closeInSeconds: 10,
+								icon: "warning"
+							});
+						},
+						UploadComplete: function (up, files) {
+							tableDatatablesEditable.refresh();
+						},
+						Error: function (e, a) {
+							App.alert({
+								type: "danger",
+								message: a.message,
+								closeInSeconds: 10,
+								icon: "warning"
+							});
+						}
+					}
+				});
+				e.init();
+			};
+			return {
+				init: function() {
+					e();
+				}
+			};
+		}();
+
+		var tableDatatablesEditable = function () {
+			var e = function () {
+
+				function e(e, t) {
+					for (var n = e.fnGetData(t), a = $(">td", t), l = 0, r = a.length; l < r; l++) e.fnUpdate(n[l], t, l, !1);
+					e.fnDraw();
+				}
+
+				function t(e, t) {
+
+					var n = e.fnGetData(t),
+                        a = $(">td", t);
+					a[0].innerHTML = '<input type="hidden" value="' + n.Id +'" />'
+					, a[1].innerHTML = '<a href="' + n.ImageSmallSize + '" class="fancybox-button" data-rel="fancybox-button"><img src= "' + n.ImageSmallSize + '" alt= "" width="80px" /></a > '
+					, a[2].innerHTML = '<input type="text" class="form-control" value="' + n.Title + '">'
+					, a[3].innerHTML = '<i class="fa fa-arrows"></i>'
+					, a[4].innerHTML = '<a class="edit btn btn-default btn-sm " href="">@FormUI.Save</a>|<a class="cancel btn btn-default btn-sm " href="">@FormUI.Cancel</a>';
+					@*, a[5].innerHTML = '<a href="javascript:;" class="delete btn btn-default btn-sm"><span class="md-click-circle md-click-animate" style="height: 100px; width: 100px; top: -37px; left: -21.5px;"></span><i class="fa fa-trash-o"></i> @FormUI.Delete </a>'
+					, a[6].innerHTML = '<input class="checkboxes" type="checkbox" '+ ((n.Status  === 1) ? "checked" : "") + ' data="'+n.Id+'">'
+					, a[7].innerHTML = '<input class="isAvatar" type="radio" name="avatar" '+ ((n.IsAvatar  === 1) ? "checked" : "") + ' data="'+n.Id+'">';*@
+				};
+
+				function editGallery(e, t) {
+					var n = $("input", t);
+					var dataOld = e.fnGetData(t);
+					e.fnUpdate(n[0].value, t, 0, false)
+                    ,e.fnUpdate(dataOld.ImageSmallSize, t, 1, false)
+                    , e.fnUpdate(n[1].value, t, 2, false)
+					, e.fnUpdate('<i class="fa fa-arrows"></i>', t, 3, false)
+                    , e.fnUpdate('<a class="edit btn btn-default btn-sm " href=""><i class="fa fa-edit"></i>@FormUI.Edit</a>', t, 4, false);
+					@* , e.fnUpdate('<a href="javascript:;" class="delete btn btn-default btn-sm"><span class="md-click-circle md-click-animate" style="height: 100px; width: 100px; top: -37px; left: -21.5px;"></span><i class="fa fa-trash-o"></i> @FormUI.Delete </a>', t, 5, false)
+	                , e.fnUpdate('<input class="checkboxes" type="checkbox" '+ ((dataOld.Status  === 1) ? "checked" : "") + ' data="'+dataOld.Id+'">', t, 6, false)
+                	, e.fnUpdate('<input class="isAvatar" type="radio" name="avatar" '+ ((dataOld.IsAvatar  === 1) ? "checked" : "") + ' data="'+dataOld.Id+'">', t, 7, false);*@
+
+					var row = {
+						Id: n[0].value,
+						PostId: @Model.Id,
+						Title: n[1].value,
+						OrderDisplay: n[2].value
+					};
+
+					$.ajax({
+						url: '@Url.Action("PostGalleryEdit", "Post")',
+						data: JSON.stringify(row),
+						type: 'POST',
+						contentType: 'application/json; charset=utf-8',
+						success: function (data) {
+						}
+					});
+				};
+
+				function deleteGallery(e, t) {
+					var deferred = $.Deferred();
+					var n = $("input", t);
+					var row = {
+						postId:  @Model.Id,
+						id:  n[0].value
+					};
+					$.ajax({
+						url: '@Url.Action("DeletePostGallery", "Post")',
+						data: JSON.stringify(row),
+						type: 'POST',
+						contentType: 'application/json; charset=utf-8',
+						success: function(data) {
+							deferred.resolve(data);
+						},
+						error: function() {
+							deferred.reject('error');
+						}
+					});
+					return deferred;
+				};
+
+				function changeStatus(e, t) {
+					var n = $("input", t);
+					var row = {
+						postId:  @Model.Id,
+						id:  n[0].value
+					};
+					$.ajax({
+						url: '@Url.Action("PostGalleryChangeStatus", "Post")',
+						data: JSON.stringify(row),
+						type: 'POST',
+						contentType: 'application/json; charset=utf-8'
+					});
+				};
+
+				function changeAvatar(e, t) {
+					var n = $("input", t);
+					var row = {
+						postId:  @Model.Id,
+						id:  n[0].value
+					};
+					$.ajax({
+						url: '@Url.Action("SetAvatarImage", "Post")',
+						data: JSON.stringify(row),
+						type: 'POST',
+						contentType: 'application/json; charset=utf-8',
+						success: function (data) {tab_images_uploader_uploadfiles
+							$("#postAvatar").attr('src',data.messages);
+						}
+					});
+				};
+
+				function copyClipBoard() {
+					var clipboard = new Clipboard('.bg-clipboard');
+					clipboard.on('success', function(e) {
+						App.notific8('Copy to clipboard', e.text);
+
+						e.clearSelection();
+						clipboard.destroy();
+					});
+				};
+
+				function changeOrder(id,newPosition) {
+					var row = {
+						id:  id,
+						newPosition:  newPosition
+					};
+					$.ajax({
+						url: '@Url.Action("PostGalleryChangeOrder", "Post")',
+						data: JSON.stringify(row),
+						type: 'POST',
+						contentType: 'application/json; charset=utf-8',
+						success: function (data) {
+						}
+					});
+				};
+
+				var a = $("#sample_editable"),
+                    l = a.dataTable({
+                    	autoWidth: false,
+                    	//serverSide: true,
+                    	processing: true,
+                    	bFilter: false,
+	                    bInfo: false,
+                    	ajax: {
+                    		url: "@Url.Action("PostGalleryList", "Post")",
+                    		type: "POST",
+                    		datatype: "json",
+                    		data: {"postId": @Model.Id}
+                    	},
+                    	columns: [
+                            {
+                            	"title": "Id", "data": "Id","class":"hidden",
+                            	"render": function (data, type, full, meta) {
+                            		return '<input type="hidden" value="' + data+'" /> ';
+                            	}
+                            },{
+                            	"title": "@FormUI.Image", "data": "ImageSmallSize", "searchable": false, "width": "70px",
+                            	"render": function (data, type, full, meta) {
+                            		return '<a href="' + full.ImageSmallSize + '" class="fancybox-button" data-rel="fancybox-button" data-clipboard-text="'+full.ImageBigSize+'"><img  src= "' + full.ImageSmallSize + '" alt= "" width="80px"  /></a > ';
+                            	}
+                            },{
+                            	"title": "@FormUI.Title", "data": "Title", "searchable": false, "width": "100px"
+                            }, {
+			                    "title": "@FormUI.OrderDisplay", "data": "OrderDisplay", "searchable": false, "width": "20px"
+			                    ,"render": function (data, type, full, meta) {
+				                    return '<i class="fa fa-arrows"></i>';
+			                    }
+		                    },{
+	                        	"title": "@FormUI.Edit", "data": "PostId",
+	                        	"searchable": false,
+	                        	"sortable": false
+                                ,"width": "100px"
+                                ,"render": function (data, type, full, meta) {
+                                	return '<a class="edit btn btn-default btn-sm " href="javascript:;"><i class="fa fa-edit"></i> @FormUI.Edit </a>';
+                                }
+	                        },{"title": "@FormUI.Delete"
+                                , "width": "40px"
+                                , "data": "PostId"
+                                ,"searchable": false
+                                ,"sortable": false
+                                ,"render": function (data, type, full, meta) {
+                                	return '<a href="javascript:;" class="delete btn btn-default btn-sm" data="'+full.Id+'"><span class="md-click-circle md-click-animate" style="height: 100px; width: 100px; top: -37px; left: -21.5px;"></span><i class="fa fa-trash-o"></i> @FormUI.Delete </a>';
+                                }
+	                        },{
+	                        	"title": "@FormUI.Status"
+	                            , "width": "90px"
+	                            , "data": "Status"
+	                            , "searchable": false
+	                            ,"sortable": false
+	                            , "render": function(data, type, full, meta) {
+	                            	return '<input class="checkboxes" type="checkbox"  '+ ((full.Status  === 1) ? "checked" : "") + ' data="'+full.Id+'">';
+	                            }
+	                        },{
+	                        	"title": "@FormUI.Avatar",
+									"width": "90px",
+									"data": "Status",
+									"searchable": false,
+									"sortable": false,
+									"render": function(data, type, full, meta) {
+										return '<input class="isAvatar" type="radio" name="avatar" ' +
+											((full.IsAvatar === 1) ? "checked" : "") +
+											' data="' +
+											full.Id +
+											'">';
+									}
+								}, {
+									"title": "Copy địa chỉ",
+									"width": "350px",
+									"data": "Status",
+									"searchable": false,
+									"sortable": false,
+									"render": function(data, type, full, meta) {
+										return '<a href="javascript:;" class="btn bg-clipboard btn-default btn-sm" data-clipboard-action="copy" data-clipboard-text="' +
+											AppCore.getBaseurl() +
+											full.ImageBigSize +
+											'"><i class="icon-note"></i> Big size</a> ' +
+											'<a href="javascript:;" class="btn bg-clipboard btn-default btn-sm" data-clipboard-action="copy" data-clipboard-text="' +
+											AppCore.getBaseurl() +
+											full.ImageMediumSize +
+											'"><i class="icon-note"></i> Medium size</a>' +
+											' <a href="javascript:;" class="btn bg-clipboard btn-default btn-sm" data-clipboard-action="copy" data-clipboard-text="' +
+											AppCore.getBaseurl() +
+											full.ImageSmallSize +
+											'"><i class="icon-note"></i> Small size</a>';
+									}
+								}
+							],
+							lengthMenu: [
+								[5, 15, 20, -1],
+								[5, 15, 20, "All"]
+							],
+							pageLength: 20,
+							language: { lengthMenu: " _MENU_ records" },
+							rowReorder: { selector: '.reorder' },
+							columnDefs: [
+								{ orderable: true, className: 'reorder', targets: [3] }, { orderable: false, targets: '_all' }
+								//,{ "Class": "hidden", "targets": [0] }
+							]
+							//,order: [[3, "desc"]]
+
+						}),
+						r = ($("#sample_editable_12_wrapper"), null),
+						o = false;
+					l.on("row-reorder.dt",
+						function(dragEvent, data, nodes) {
+							for (var i = 0, ien = data.length; i < ien; i++) {
+
+								var rowData = table.fnGetData(data[i].node);
+								var id = rowData.Id;
+								var newPosition = data[i].newPosition;
+
+								changeOrder(id, newPosition);
+								l.api().ajax.reload();
+							};
+						});
+					table = l,
+						a.on("click",
+							".delete",
+						function (e) {
+							var t = $(this).parents("tr")[0];
+								AppCore.handleConfirm(function() {
+									$.when(deleteGallery(l, t)).done(function () {
+										l.fnDeleteRow(t);
+										App.unblockUI("body");
+									});
+									
+								},'@MessageUI.ConfirmMessage');
+						}),
+					a.on("click",
+						".cancel",
+						function(t) {
+							table.api().ajax.reload();
+							t.preventDefault(), o ? (l.fnDeleteRow(r), r = null, o = false) : (e(l, r), r = null);
+						}),
+					a.on("click",
+						".edit",
+						function(a) {
+							a.preventDefault(), o = false;
+							var i = $(this).parents("tr")[0];
+
+							null !== r && r !== i
+								? (e(l, r), t(l, i), r = i)
+								: r === i && "@FormUI.Save" === this.innerHTML
+								? (editGallery(l, r), r = null)
+								: (t(l, i), r = i);
+						}),
+					a.on("click",
+						".checkboxes",
+						function() {
+							var t = $(this).parents("tr")[0];
+							changeStatus(l, t);
+						}),
+					a.on("click",
+						".isAvatar",
+						function() {
+							var t = $(this).parents("tr")[0];
+							changeAvatar(l, t);
+						}),
+					a.on("click",
+						".bg-clipboard",
+						function(a) {
+							a.preventDefault();
+							copyClipBoard();
+						});
+			},
+                reload = function () {
+
+                	//tạm thoi nhu vay
+                	//location.reload();
+                	// Example call to reload from original file
+                	//table.ajax.reload();
+                	table.api().ajax.reload();
+
+                };
+			return {
+				init: function () {
+					e();
+				},
+				refresh: function ()
+				{
+					reload();
+				}
+			};
+		}();
+
+		jQuery(document).ready(function () {
+			postGalleryUpload.init();
+
+			tableDatatablesEditable.init();
+		});
+
+	</script>
+}
+else
+{
+	@Html.Partial("Message/_SaveBefore")
+
+}

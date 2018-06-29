@@ -1,0 +1,65 @@
+﻿<!---_OrderSummary-->
+@using App.FakeEntity.Common
+@model  App.Front.Models.ShoppingCart.ShoppingCartModel
+
+<div class="row">
+	<h3 class="checkout-sep">THÔNG TIN KHÁCH HÀNG</h3>
+	<div class="box-border">
+		<ul class="shipping_method">
+			@RenderAddress(Model.OrderReviewData.BillingAddress)
+		</ul>
+	</div>
+
+	<h3 class="checkout-sep">ĐỊA CHỈ GIAO HÀNG</h3>
+	<div class="box-border">
+		<ul class="shipping_method">
+			@RenderAddress(Model.OrderReviewData.ShippingAddress)
+		</ul>
+	</div>
+
+	<h3 class="checkout-sep">HÌNH THỨC GIAO HÀNG</h3>
+	<div class="box-border">
+		<ul class="shipping_method">
+			@Model.OrderReviewData.ShippingMethod
+		</ul>
+	</div>
+
+	<h3 class="checkout-sep">PHƯƠNG THỨC THANH TOÁN</h3>
+	<div class="box-border">
+		<ul class="shipping_method">
+			@Model.OrderReviewData.PaymentMethod
+		</ul>
+	</div>
+
+</div>
+
+@helper RenderAddress(AddressViewModel address)
+	{
+		if (address.FirstName != null)
+		{
+			<li>
+				<label class="lb-method">
+					<strong>  Họ tên:   @address.FirstName  </strong>
+				</label>
+			</li>
+		}
+
+		if (address.Address1 != null)
+		{
+			<li>
+				<label class="lb-method">
+					<strong>Địa chỉ:</strong>     @address.Address1
+				</label>
+			</li>
+		}
+
+		if (address.PhoneNumber != null)
+		{
+			<li>
+				<label class="lb-method">
+					<strong>Số điện thoại:</strong>	@address.PhoneNumber
+				</label>
+			</li>
+		}
+}
+<!---/_OrderSummary-->

@@ -1,0 +1,17 @@
+﻿ <!---_Footer.Menu--->
+@using App.Aplication
+@model App.Domain.Entities.GlobalSetting.SystemSetting
+
+@if (Model != null)
+{
+    <div class="prefooter_one col-xs-12" style='text-align:center;'>
+        <div class="widget clearfix">
+            <a href='@Url.Action("Index", "Home", new { area = "" })' class='footer_logo'>
+                <img src="@Model.LogoFooterImage.ValidateImage()" data-lazyload='@Model.LogoFooterImage.ValidateImage()' alt='@Model.Title' />
+            </a>
+            <p><p>Chuẩn thời trang nam giới</p></p>
+        </div>
+    </div>
+
+}
+<!---/_Footer.Menu--->

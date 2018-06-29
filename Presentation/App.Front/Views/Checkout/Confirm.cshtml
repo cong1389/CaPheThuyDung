@@ -1,0 +1,65 @@
+﻿<!----Confirm-->
+@model App.Front.Models.Checkout.CheckoutConfirmModel
+
+@{
+	ViewBag.Title = "Kiểm tra đơn hàng";
+}
+
+@if (Model != null)
+{
+    using (Html.BeginForm(null, null, FormMethod.Post, new { id = "confirm-order-form" }))
+    {
+        <div class="columns-container ">
+
+            <div class="container clearfix" id="columns">
+                <h2 class="page-heading">
+                    <span class="page-heading-title2">@ViewBag.Title</span>
+                </h2>
+                <div class="page-content page-order checkout-page">
+                    <div class="col-sm-7">
+                        @{
+                            Html.RenderAction("OrderSummary", "ShoppingCart", new { area = "" });
+                        }
+
+                    </div>
+
+                    <div class="col-sm-5">
+                        <div id="divCart"></div>
+                    </div>
+
+                    <div class="cart_navigation">
+                        <a class="prev-btn" href="@Url.Action("PaymentMethod", "Checkout")">Quay lại giao hàng-thanh toán</a>
+
+                        <input type="submit" name="confirm" value="confirm" id="startconfirm" class="hidden" />
+                        <a href="#" class="next-btn" onclick="$('#startconfirm').trigger('click'); return false;">
+                            <span class="btn-content">Hoàn tất đơn hàng</span>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    }
+}
+
+@section renderStyles
+{
+    @*<link rel="stylesheet" href="/assets/global/check_out.css">*@
+    @*<link href="/assets/255/1000074255/1000138323/check_out.css?v=8" rel="stylesheet" type="text/css" media="all" />*@
+}
+
+@section renderJQuery{
+    @*<script src="~/assets/global/jquery.validate.js"></script>*@
+
+    <script>
+        jQuery(function () {
+
+            jQuery.post('@Url.Action("CartByCustomer", "Checkout")')
+                     .done(function (data) {
+                         jQuery("#divCart").html(data.list);
+                     });
+        })
+
+    </script>
+}
+<!----/Confirm-->

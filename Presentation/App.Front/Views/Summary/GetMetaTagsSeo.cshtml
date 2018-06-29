@@ -1,0 +1,21 @@
+﻿@model App.Domain.Entities.GlobalSetting.SettingSeoGlobal
+@if (Model != null)
+{
+    if (!string.IsNullOrEmpty(Model.MetaTagMasterTool))
+    {
+        @Html.Raw(Model.MetaTagMasterTool)
+    }
+    if (!string.IsNullOrEmpty(Model.PublisherGooglePlus))
+    {
+        @Html.Raw(Model.PublisherGooglePlus)
+    }
+    if (!string.IsNullOrEmpty(Model.FbAdminsId))
+    {
+        @Html.Raw(Model.FbAdminsId)
+    }
+    if (!string.IsNullOrEmpty(Model.FbAppId))
+    {
+        <meta property="fb:app_id" content="@Model.FbAppId" />
+
+    }
+}

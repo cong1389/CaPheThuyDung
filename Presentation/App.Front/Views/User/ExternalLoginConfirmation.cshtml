@@ -1,0 +1,46 @@
+﻿<!---ExternalLoginConfirmation-->
+@using App.Aplication.Extensions
+@model App.Front.Models.ExternalLoginConfirmationViewModel
+@{
+    ViewBag.Title = "Đăng ký";
+}
+
+<div class="columns-container">
+    <div class="container login-shop" id="columns">
+        <h2 class="page-heading">
+            <span class="page-heading-title2">@ViewBag.Title</span>
+        </h2>
+        <div class="page-content">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="box-authentication">
+                        @using (Html.BeginForm("ExternalLoginConfirmation", "User", new {ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary()
+
+                            <p>
+                                Bạn đã đăng ký <strong>@ViewBag.LoginProvider</strong>.
+                                Bạn vui lòng nhập tên đăng nhập, email và click button đăng ký để hoàn thành đăng nhập
+                            </p>
+
+                            @Html.LabelFor(mode => mode.UserName)
+                            @Html.TextBoxFor(mode => mode.UserName, new { required = true, @class = "form-control", placeholder = Html.DisplayPlaceHolderFor(m => m.UserName) })
+                            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "required require_symbol" })
+
+                            @Html.LabelFor(mode => mode.Email)
+                            @Html.TextBoxFor(mode => mode.Email, new { required = true, @class = "form-control", placeholder = Html.DisplayPlaceHolderFor(m => m.Email) })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "required require_symbol" })
+
+                            <button class="button"><i class="fa fa-user"></i> @ViewBag.Title</button>
+                        }
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<!---/ExternalLoginConfirmation-->

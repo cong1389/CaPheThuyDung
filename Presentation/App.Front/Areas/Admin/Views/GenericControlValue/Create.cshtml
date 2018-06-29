@@ -1,0 +1,21 @@
+﻿@using App.Framework.Utilities
+@using Resources
+@model App.FakeEntity.GenericControl.GenericControlValueViewModel
+@{
+    ViewBag.Title = FormUI.CreateNew;
+    ViewBag.Toolbar = new[] { "Save", "SaveNew", "Divider", "Back" };
+}
+@using (Html.BeginForm("Create", "GenericControlValue", FormMethod.Post, new { data_container = ViewContext.RouteData.Values["controller"], enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+	Html.RenderPartial("_CreateOrUpdate", Model);
+}
+@section scripts{
+<script src="@Url.FakePathAdmin("scripts/plugins/jquery-minicolors/jquery.minicolors.min.js")"></script>
+<script src="@Url.FakePathAdmin("scripts/components-color-pickers.js")"></script>
+}
+@section style{
+<link href="@Url.FakePathAdmin("content/plugins/jquery-minicolors/jquery.minicolors.css")" rel="stylesheet" />
+}
+

@@ -1,0 +1,24 @@
+﻿
+.login {
+    &__forgot-pass {
+        margin-top: 15px;
+    }
+}
+
+.external-login {
+    &__btn-group {
+        margin-top: 10px;
+    }
+
+    &__or {
+        display: inline-block;
+        vertical-align: middle;
+        margin: 0 10px;
+        text-align: center;
+        color: #797979;
+
+        &:last-child {
+            display: none;
+        }
+    }
+}

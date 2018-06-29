@@ -1,0 +1,140 @@
+﻿
+
+//@extend-elements
+//original selectors
+//#contact input, #contact select, #contact textarea
+%contact-input {
+    //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+    border-radius: 0;
+    border-color: $color_clay_creek_approx;
+    //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+    box-shadow: inherit;
+    outline: 0 none;
+}
+
+
+.gw-contact-shop {
+    margin-top: 20px;
+
+    .content-page {
+        background: #fff !important;
+        max-width: 100%;
+        line-height: 1.5;
+    }
+
+    h1 {
+        font-size: 30px;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: $color_black_marlin_approx;
+    }
+
+    h3 {
+        font-weight: bold;
+        color: $color_clay_creek_approx;
+    }
+
+    p {
+        display: block;
+        margin-bottom: 10px;
+        line-height: 1.5;
+    }
+
+    input {
+        //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+        border-radius: 0;
+        border-color: $color_clay_creek_approx;
+    }
+
+    textarea {
+        //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+        border-radius: 0;
+        border-color: $color_clay_creek_approx;
+    }
+
+    .page-subheading {
+        padding-left: 0;
+        border: none;
+        margin: 14px 0 30px;
+        text-transform: uppercase;
+        font-size: 18px;
+        color: $color_storm_dust_approx;
+    }
+
+    .contact-form-box {
+        padding: 0;
+        margin: 0 0 30px 0;
+
+        label {
+            padding-bottom: 5px;
+        }
+
+        .form-selector {
+            padding-bottom: 25px;
+        }
+    }
+
+    input {
+        @extend %contact-input;
+
+        &:focus {
+            //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+            box-shadow: inherit;
+            outline: 0 none;
+        }
+    }
+
+    select {
+        @extend %contact-input;
+
+        &:focus {
+            //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+            box-shadow: inherit;
+            outline: 0 none;
+        }
+    }
+
+    textarea {
+        @extend %contact-input;
+
+        &:focus {
+            //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+            box-shadow: inherit;
+            outline: 0 none;
+        }
+    }
+
+    #btn-send-contact {
+        font-size: 14px;
+        line-height: 18px;
+        color: $white;
+        font-weight: normal;
+        background: $color_storm_dust_approx;
+        //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+        border-radius: 0;
+        border: none;
+        padding: 10px 25px;
+
+        &:hover {
+            background: $color_radical_red_approx;
+        }
+    }
+
+    .error {
+        color: red;
+        font-size: 12px;
+    }
+
+
+
+    ul.info-address li {
+        display: block;
+        margin-bottom: 10px;
+        line-height: 1.5;
+
+        i {
+            font-size: 15px;
+            color: #958457;
+        }
+    }
+}

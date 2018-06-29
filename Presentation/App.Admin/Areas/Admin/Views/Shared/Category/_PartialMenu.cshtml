@@ -1,0 +1,23 @@
+﻿@using App.Aplication
+@model IEnumerable<App.Admin.Helpers.MenuNav>
+@if (Model.IsAny())
+{
+    foreach (var item in Model)
+    { 
+        <ul class="list-unstyled">
+            <li>
+                <label class="radio">
+                    @if(ViewBag.Selected!=null && item.MenuId ==(int)ViewBag.Selected){
+                        <input type="radio" id="MenuId" name="MenuId" value="@item.MenuId" checked="checked"/>@item.MenuName
+                    }else{
+                        <input type="radio" id="MenuId" name="MenuId" value="@item.MenuId"/>@item.MenuName
+                    }
+                </label>
+                @if (item.ChildNavMenu.IsAny())
+                {
+                    @Html.Partial("Category/_PartialMenu", item.ChildNavMenu)
+                }
+            </li> 
+        </ul>
+    } 
+}

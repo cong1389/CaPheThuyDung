@@ -1,0 +1,12 @@
+﻿<!---_PartialPostItems--->
+@using App.Aplication
+@model IEnumerable<App.Domain.Entities.Data.Post>
+@if (Model.IsAny())
+{
+    var post1 = Model.Where(m => m.Id % 2 == 0 && (m.ProductHot || (m.ProductNew && m.ProductHot))).Take(15);
+    var post2 = Model.Where(m => m.Id % 2 != 0 && (m.ProductHot || (m.ProductNew && m.ProductHot))).Take(15);
+
+    
+
+}
+<!---/_PartialPostItems--->

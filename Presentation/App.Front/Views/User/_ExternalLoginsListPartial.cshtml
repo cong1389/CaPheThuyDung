@@ -1,0 +1,62 @@
+﻿<!---ExternalLoginConfirmation-->
+
+@using Microsoft.Owin.Security
+
+<div class="text-center box-wishlist external-login">
+    <div>Thanh toán đơn hàng trong chỉ một bước với:</div>
+    @{
+        var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+        if (!loginProviders.Any())
+        {
+            <div class="text-info">
+                <p>
+                    There are no external authentication services configured. See <a href="http://go.microsoft.com/fwlink/?LinkId=313242">this article</a>
+                    for details on setting up this ASP.NET application to support logging in via external services.
+                </p>
+            </div>
+        }
+        else
+        {
+            string action = Model.Action;
+            string returnUrl = Model.ReturnUrl;
+            using (Html.BeginForm(action, "User", new { ReturnUrl = returnUrl }))
+            {
+                @Html.AntiForgeryToken()
+              
+                <div class="form-group external-login__btn-group">
+
+                    @foreach (AuthenticationDescription p in loginProviders)
+                    {
+                        string provider = null;
+                        switch (p.Caption.ToLower())
+                        {
+                            case "facebook":
+                                provider = "facebook";
+                                break;
+                            case "google":
+                                provider = "google";
+                                break;
+
+                        }
+
+                        @RenderButtonSocial(provider, p)
+                    }
+
+                </div>
+            }
+        }
+    }
+</div>
+
+@helper RenderButtonSocial(string provider, AuthenticationDescription p)
+    {
+        <button type="submit" class="btn-social btn-social__@(provider)" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">
+            <i class="fa fa-@(provider)"></i>
+            <span>Đăng nhập bằng  @p.AuthenticationType</span>
+        </button>
+
+        <div class="external-login__or">Hoặc</div>
+
+}
+
+<!---/ExternalLoginConfirmation-->

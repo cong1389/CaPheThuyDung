@@ -1,0 +1,30 @@
+﻿@using App.Framework.Utilities
+@{
+    ViewBag.Title = "Access Dined";
+}
+<!-- END PAGE BREADCRUMBS -->
+<!-- BEGIN PAGE CONTENT INNER -->
+<div class="page-content-inner">
+    <div class="row">
+        <div class="col-md-12 page-500">
+            <div class="number font-red"> ERROR </div>
+            <div class="details">
+                <h3>Oops! Bạn không có quyền truy cập vào trang này.</h3>
+                <p>
+                    Vui lòng liên hệ quản trị cao cấp để được cấp quyền truy cập
+                    <br />
+                </p>
+                <p>
+                    <a href="@Url.Action("Index", "Home")" class="btn red btn-outline"> Trở về trang chủ </a>
+                    <a href="@Url.Content(ViewBag.ReturnUrl)" class="btn blue btn-outline"> Trở về trang trước </a> 
+                    <br/>
+                    
+
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+@section style{
+    <link href="@Url.FakePathAdmin("content/global/error.min.css")" rel="stylesheet" />
+}

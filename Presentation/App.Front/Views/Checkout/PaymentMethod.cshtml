@@ -1,0 +1,80 @@
+﻿<!----PaymentMethod-->
+@model App.Front.Models.Checkout.CheckoutPaymentMethodModel
+@{
+	ViewBag.Title = "Thông tin thanh toán";
+}
+
+@if (Model != null)
+{
+    using (Html.BeginForm())
+    {
+        <div class="columns-container ">
+            <div class="container clearfix" id="columns">
+                <div class="page-content page-order checkout-page">
+                    <div class="col-sm-7">
+
+                        @{
+                            Html.RenderAction("ShippingMethod", "Checkout", new { area = "" });
+                        }
+
+                        <div class="row">
+                            <h3 class="checkout-sep">4. Chọn hình thức thanh toán</h3>
+                            <div class="box-border">
+                                <ul class="shipping_method">
+                                    @for (int i = 0; i < Model.PaymentMethods.Count(); i++)
+                                    {
+                                        <li>
+                                            <label class="lb-method">
+                                                <input id="payment_method_id@(Model.PaymentMethods[i].Id)" class="input-method" type="radio" checked="@Model.PaymentMethods[i].Selected" name="payment_method_id" value="@Model.PaymentMethods[i].PaymentMethodSystemName">
+                                                <span class="label-radio"> @Model.PaymentMethods[i].PaymentMethodSystemName</span>
+                                            </label>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+
+	                <div class="col-sm-5">
+		                <div id="divCart"></div>
+	                </div>
+
+                    <div class="cart_navigation">
+                        <a class="prev-btn" href="@Url.Action("BillingAddress", "Checkout")">
+                            Quay lại thông tin giao hàng
+                        </a>
+
+                        <input type="submit" id="nextstep" name="nextstep" class="hidden" />
+                        <a href="#" class="next-btn" onclick="$('#nextstep').trigger('click');return false;">
+                            <span class="btn-content">Đặt mua</span>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    }
+
+}
+@section renderStyles
+{
+    @*<link rel="stylesheet" href="/assets/global/check_out.css">*@
+    @*<link href="/assets/255/1000074255/1000138323/check_out.css?v=8" rel="stylesheet" type="text/css" media="all" />*@
+}
+
+@section renderJQuery{
+
+
+    <script>
+        jQuery(function () {
+
+        jQuery.post('@Url.Action("CartByCustomer", "Checkout")')
+                .done(function (data) {
+                    jQuery("#divCart").html(data.list);
+                });
+        })
+
+    </script>
+}
+<!----/PaymentMethod-->

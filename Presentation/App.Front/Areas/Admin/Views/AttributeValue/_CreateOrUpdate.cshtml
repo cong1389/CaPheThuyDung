@@ -1,0 +1,61 @@
+﻿<!--AttributeValue--->
+@using App.Domain.Common
+@using Resources
+
+@model App.FakeEntity.Attribute.AttributeValueViewModel
+
+<div class="form-horizontal">
+	<div class="form-body">
+		@Html.ValidationSummary(true, "", new { @class = "text-danger col-md-offset-3" })
+		<div class="form-group">
+			@Html.LabelFor(model => model.ValueName, new { @class = "control-label col-md-3" })
+			<div class="col-md-5">
+				@Html.TextBoxFor(model => model.ValueName, new { @class = "form-control" })
+				@Html.ValidationMessageFor(model => model.ValueName, "", new { @class = "help-block" })
+			</div>
+		</div>
+		<div class="form-group">
+			@Html.LabelFor(model => model.AttributeId, new { @class = "control-label col-md-3" })
+			<div class="col-md-5">
+				@Html.DropDownListFor(x => x.AttributeId, new SelectList(ViewBag.Attributes ?? string.Empty, "Id", "AttributeName"), "--Select--", new { @class = "form-control" })
+				@Html.ValidationMessageFor(model => model.OrderDisplay, "", new { @class = "help-block" })
+			</div>
+		</div>
+		<div class="form-group">
+			@Html.LabelFor(model => model.ColorHex, new { @class = "control-label col-md-3" })
+			<div class="col-md-5">
+				@Html.TextBoxFor(model => model.ColorHex, new { @class = "form-control color-picker" })
+				@Html.ValidationMessageFor(model => model.ColorHex, "", new { @class = "help-block" })
+			</div>
+		</div>
+		<div class="form-group">
+			@Html.LabelFor(model => model.OrderDisplay, new { @class = "control-label col-md-3" })
+			<div class="col-md-5">
+				@Html.TextBoxFor(model => model.OrderDisplay, new { @class = "form-control", type = "number" })
+				@Html.ValidationMessageFor(model => model.OrderDisplay, "", new { @class = "help-block" })
+			</div>
+		</div>
+		<div class="form-group">
+			@Html.LabelFor(model => model.Description, new { @class = "control-label col-md-3" })
+			<div class="col-md-5">
+				@Html.TextAreaFor(model => model.Description, new { @class = "form-control", rows = 5 })
+				@Html.ValidationMessageFor(model => model.Description, "", new { @class = "help-block" })
+			</div>
+		</div>
+		<div class="form-group">
+			@Html.LabelFor(model => model.Status, new { @class = "control-label col-md-3" })
+			<div class="col-md-5">
+				<div class="radio-list">
+					<label class="radio-inline">
+						@Html.RadioButtonFor(x => x.Status, (int)Status.Enable, new { @checked = "checked" }) @FormUI.Active
+					</label>
+					<label class="radio-inline">
+						@Html.RadioButtonFor(x => x.Status, (int)Status.Disable) @FormUI.InActive
+					</label>
+				</div>
+				@Html.ValidationMessageFor(model => model.Status, "", new { @class = "help-block" })
+			</div>
+		</div>
+	</div>
+</div>
+<!--/AttributeValue--->

@@ -1,0 +1,38 @@
+﻿<!----_Order.Notification-->
+@using App.Aplication
+@model App.Front.Models.ShoppingCart.MiniShoppingCartModel
+
+@if (Model.Items.IsAny())
+{
+	var product = Model.Items.FirstOrDefault();
+	<div class="row">
+		<div class="col-md-4">
+			<a href="@Url.Action("PostDetail", "Post", new {seoUrl = product.SeoUrl, area = ""})">
+				<img width="70px" src="@product.ImageSmallSize.ValidateImage()" alt="@product.Title" />
+			</a>
+		</div>
+		<div class="col-md-8">
+			<div class="jGrowl-note">
+				<a class="jGrowl-title" href="@Url.Action("PostDetail", "Post", new {seoUrl = product.SeoUrl, area = ""})">@product.Title</a>
+				<ins>
+
+					@{
+						var selectedProduct = Model.ShoppingCarts.FirstOrDefault(x => x.PostId == product.Id);
+
+						if (selectedProduct.CustomerEnteredPrice != 0)
+						{
+							@Html.Raw(selectedProduct.CustomerEnteredPrice.FormatPrice())
+						}
+						else
+						{
+							@T("LienHeDatHang.Lable")
+						}
+					}
+
+				</ins>
+			</div>
+		</div>
+	</div>
+}
+
+<!----/_Order.Notification-->
