@@ -120,6 +120,21 @@ namespace App.Front.Controllers
         [ChildActionOnly]
         public ActionResult GetStaticContent(int menuId, string virtualId, string title)
         {
+            var staticContent = PrepairStaticContent(menuId, virtualId, title);
+
+            return PartialView(staticContent);
+        }
+
+        [ChildActionOnly]
+        public ActionResult GetFixContent(int menuId, string virtualId, string title)
+        {
+            var staticContent = PrepairStaticContent(menuId, virtualId, title);
+
+            return PartialView(staticContent);
+        }
+
+        private App.Domain.Entities.Data.StaticContent PrepairStaticContent(int menuId, string virtualId, string title)
+        {
             var breadCrumbs = new List<BreadCrumb>();
             var virtualIds = virtualId.Split('/');
 
@@ -149,11 +164,11 @@ namespace App.Front.Controllers
             var staticContent = _staticContentService.GetStaticContent(menuId);
             if (staticContent != null)
             {
-                staticContent = staticContent.ToModel();
+                //var viewCount = staticContent;
+                //viewCount.ViewCount = viewCount.ViewCount + 1;
+                //_staticContentService.Update(staticContent);
 
-                var viewCount = staticContent;
-                viewCount.ViewCount = viewCount.ViewCount + 1;
-                _staticContentService.Update(staticContent);
+                staticContent = staticContent.ToModel();
 
                 //Lấy bannerId từ post để hiển thị banner trên post
                 ViewBag.BannerId = staticContent.MenuId;
@@ -162,7 +177,7 @@ namespace App.Front.Controllers
 
             ViewBag.MenuId = menuId;
 
-            return PartialView(staticContent);
+            return staticContent;
         }
 
         public ActionResult GetStaticContentParent(int menuId, string title, string virtualId)
@@ -180,7 +195,7 @@ namespace App.Front.Controllers
             //Convert to localized
             var staticContentLocalized = staticContent.ToModel();
 
-            var menuLinks = _menuLinkService.GetByOptions(id: menuId);
+            var menuLinks = _menuLinkService.GetByOptions(parentId: new List<int> { menuId });
             menuLinks = menuLinks.Select(x => x.ToModel());
 
             if (menuLinks.IsAny())

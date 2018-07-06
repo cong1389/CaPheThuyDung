@@ -7,7 +7,7 @@
 }
 @if (ViewBag.TemplateType != null && ViewBag.TemplateType == (int)TemplateContent.FixItem)
 {
-	@Html.Action("GetStaticContentParent", "Menu", new { menuId = ViewBag.MenuId, virtualId = ViewBag.VirtualId, title = ViewBag.Title, area = ""})
+	@Html.Action("GetFixContent", "Menu", new { menuId = ViewBag.MenuId, virtualId = ViewBag.VirtualId, title = ViewBag.Title, area = ""})
 }
 else
 {

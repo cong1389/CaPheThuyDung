@@ -25,13 +25,7 @@ namespace App.Front.Controllers
         [ChildActionOnly]
         public ActionResult BannerTop(int? menuId, string title)
         {
-            var banners = _bannerService.GetBanners(menuId, (int)Status.Enable, new List<int> { (int)Position.Top });
-            //var banners = _bannerService.FindBy(x =>
-            //    x.MenuId == menuId && x.Status == 1 && x.PageBanner.Position == 1 &&
-            //    (!x.FromDate.HasValue ||
-            //     DbFunctions.DiffHours(x.ToDate.Value, DateTimeOffset.UtcNow.Offset) >= 0) &&
-            //    (!x.ToDate.HasValue ||
-            //     DbFunctions.DiffHours(x.ToDate.Value, DateTimeOffset.UtcNow.Offset) <= 0));
+            var banners = _bannerService.GetBanners(status: (int)Status.Enable, position: new List<int> { (int)Position.Top });
 
             ViewBag.Title = title;
 

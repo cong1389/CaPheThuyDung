@@ -5,7 +5,7 @@
 {
     foreach (var lv1 in Model)
     {
-        <ul class="tree-menu" >
+        <ul class="tree-menu">
 
             <li class="">
                 <span></span>
@@ -22,20 +22,23 @@
                             {
                                 if (products.Any(x => x == child.MenuId))
                                 {
-                                    <li><span></span>
+                                    <li>
+                                        <span></span>
                                         <a href="@Url.Action("GetContent", "Menu", new { area = "", menu = child.SeoUrl })">@child.MenuName</a>
                                     </li>
                                 }
                                 else
                                 {
-                                    <li><span></span>
+                                    <li>
+                                        <span></span>
                                         <a href="@Url.Action("GetContent", "Menu", new { area = "", menu = child.SeoUrl })">@child.MenuName</a>
                                     </li>
                                 }
                             }
                             else
                             {
-                                <li><span></span>
+                                <li>
+                                    <span></span>
                                     <a href="@Url.Action("GetContent", "Menu", new { area = "", menu = child.SeoUrl })">@child.MenuName</a>
                                 </li>
                             }

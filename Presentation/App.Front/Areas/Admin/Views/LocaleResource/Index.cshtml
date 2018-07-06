@@ -197,11 +197,11 @@
 
 	$("#hypCreate").on("click",
 		function() {
-			var data = {"languageId": @ViewBag.LanguageSelected};
+			var param = {"languageId": @ViewBag.LanguageSelected};
 
 			$.ajax({
 				url: '@Url.Action("NewRow", "LocaleResource")',
-				data: data,
+				data: JSON.stringify(param),
 				type: "POST",
 				contentType: 'application/json; charset=utf-8',
 				success: function(response) {

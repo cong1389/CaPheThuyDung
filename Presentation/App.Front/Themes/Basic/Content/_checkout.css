@@ -246,7 +246,23 @@
     padding-top: 11px;
     padding-bottom: 12px; }
   #left_column .block .block_content, .checkout-cart .block .block_content {
-    padding: 10px; }
+    padding: 15px 20px; }
+    #left_column .block .block_content .tree-menu li, .checkout-cart .block .block_content .tree-menu li {
+      line-height: 24px;
+      list-style: none; }
+      #left_column .block .block_content .tree-menu li > span:before, .checkout-cart .block .block_content .tree-menu li > span:before {
+        content: "\f105";
+        font-size: 14px;
+        display: inline-block;
+        text-align: right;
+        color: #666;
+        font-family: "FontAwesome";
+        padding-right: 12px;
+        color: #ccc;
+        font-weight: bold;
+        cursor: pointer; }
+      #left_column .block .block_content .tree-menu li :hover > a, .checkout-cart .block .block_content .tree-menu li :hover > a {
+        color: #ff3366; }
 
 #left_column .cart-items, .checkout-cart .cart-items, #left_column .total-price, .checkout-cart .total-price, #left_column .promotion-name, .checkout-cart .promotion-name {
   border-bottom: 1px solid #eee; }

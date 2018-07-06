@@ -5,7 +5,22 @@
 .goweb-block .product-star {
   color: #ff9900; }
 
-.product-list .price-percent {
+#columns .page-heading {
+  height: 41px;
+  border-bottom: 1px solid #eaeaea;
+  line-height: 40px;
+  position: relative;
+  font-size: 24px;
+  font-weight: bold; }
+  #columns .page-heading .page-heading-title {
+    border-bottom: 3px solid #ff3366;
+    position: absolute;
+    bottom: -1px; }
+
+#columns .content-text {
+  margin-top: 20px; }
+
+.product-list columns .price-percent {
   width: 52px;
   height: 44px;
   background: url(/Themes/Basic/Content/images/price-percent.png) no-repeat center center;

@@ -12,13 +12,13 @@
             <!-- row -->
             <div class="row">
                 <!-- Left colunm -->
-                <div class="column col-xs-12 col-sm-3" id="left_column">
+                @*<div class="column col-xs-12 col-sm-3" id="left_column">
                     @{Html.RenderAction("MenuNavNews", "MenuNav", new { virtualId = ViewBag.VirtualId, area = "" });}
 
-                </div>
+                </div>*@
                 <!-- ./left colunm -->
                 <!-- Center colunm-->
-                <div class="center_column col-xs-12 col-sm-9" id="center_column">
+                <div class="gw-news center_column col-xs-12 col-sm-12" id="center_column">
                     <h2 class="page-heading">
                         <span class="page-heading-title2">@ViewBag.Title</span>
                     </h2>
@@ -29,22 +29,21 @@
                             <li class="post-item">
                                 <article class="entry">
                                     <div class="row">
-                                        <div class="col-sm-5">
+                                        <div class="col-sm-3">
                                             <div class="entry-thumb image-hover2">
                                                 <a href="@Url.Action("NewsDetail", "News", new {seoUrl = item.SeoUrl, area = ""})" title="@item.Title">
                                                     <img src="@item.ImageMediumSize.ValidateImage()" alt="@item.Title">
                                                 </a>
                                             </div>
                                         </div>
-                                        <div class="col-sm-7">
+                                        <div class="col-sm-9">
                                             <div class="entry-ci">
                                                 <h3 class="entry-title">
                                                     <a href="@Url.Action("NewsDetail", "News", new {seoUrl = item.SeoUrl, area = ""})" title="@item.Title">
                                                         @item.Title
                                                     </a>
                                                 </h3>
-                                                <div class="entry-meta-data">
-                                                   
+                                                <div class="entry-meta-data">                                                   
                                                     <span class="date"><i class="fa fa-calendar"></i>  @item.CreatedDate.ToString("dd/MM/yyyy")</span>
                                                 </div>
                                                 

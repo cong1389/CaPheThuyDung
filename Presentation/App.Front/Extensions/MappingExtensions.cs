@@ -33,6 +33,7 @@ namespace App.Front.Extensions
                 Status = entity.Status,
                 SeoUrl = entity.SeoUrl,
                 ImagePath = entity.ImagePath,
+                MenuLink = entity.MenuLink,
 
                 Title = entity.GetLocalized(x => x.Title, entity.Id),
                 ShortDesc = entity.GetLocalized(x => x.ShortDesc, entity.Id),

@@ -1,29 +1,57 @@
 ﻿<!--GetStaticContentParent---->
 @using Resources
+@using App.Aplication
 @model App.Domain.Entities.Data.StaticContent
+@using App.Domain.Entities.Menu
 
 @if (Model != null)
 {
-	<div class="columns-container">
-		<div class="container" id="columns">
-			@Html.Partial("_BreadCrumb")
+    <div class="row">
+        <div class="center_column col-xs-12 col-sm-12" id="center_column">
+            <!-- page heading-->
+            <h2 class="page-heading">
+                <span class="page-heading-title">@ViewBag.Title</span>
+            </h2>
+            <!-- Content page -->
+            <div class="content-text clearfix">
+                @Html.Raw(Model.Description)
 
-			<div class="center_column col-xs-12 col-sm-12" id="center_column">
-				<h2 class="page-heading">
-					<span class="page-heading-title2">@ViewBag.Title</span>
-				</h2>
-				<div class="content-text clearfix">
-					@Html.Raw(Model.Description)
-				</div>
-			</div>
-		</div>
-	</div>
+            </div>
+            <!-- ./Content page -->
+        </div>
+    </div>
+
+
+    if (ViewBag.ListItems != null)
+    {
+        <ul class="row product-list grid filter">
+            @foreach (var item in (IEnumerable<MenuLink>)ViewBag.ListItems)
+            {
+                <li class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="product-container">
+                        <div class="left-block">
+                            <a href="@Url.Action("GetContent", "Menu", new {menu = item.SeoUrl, area = ""})" title="@item.MenuName">
+                                <img class="img-responsive" alt="@item.MenuName" src="@item.ImageMediumSize.ValidateImage()" />
+                            </a>
+
+                        </div>
+                        <div class="right-block">
+                            <h5 class="product-name">
+                                <a href="@Url.Action("GetContent", "Menu", new {menu = item.SeoUrl, area = ""})">@item.MenuName</a>
+                            </h5>
+
+
+                        </div>
+                    </div>
+                </li>
+            }
+        </ul>
+    }
 }
 else
 {
-	<div class="container">
-		<p class="text-danger">@MessageUI.EmptyData</p>
-	</div>
-
+    <div class="container">
+        <p class="text-danger">@MessageUI.EmptyData</p>
+    </div>
 }
 <!--/GetStaticContentParent---->

@@ -9,7 +9,7 @@
             <div class="row products-list">
                 @foreach (var post in Model)
                 {
-                    <div class="product-item col-sm-6 col-xl-4 text-center">
+                    <div class="product-item col-sm-3 col-xl-2 text-center">
                         <a href="@Url.Action("PostDetail", "Post", new {seoUrl = post.SeoUrl, area = ""})" title="@post.Title">
                             <img class="img-responsive" alt="@post.Title" src="@post.ImageMediumSize.ValidateImage()">
                         </a>

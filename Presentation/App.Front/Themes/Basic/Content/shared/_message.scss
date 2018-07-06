@@ -6,3 +6,28 @@
     line-height: 60px;
     font-size: 30px;
 }
+
+.gw-msg-empty {
+    background: #f6f6f6;
+    border: 1px solid #eaeaea;
+    padding: 19px 0;
+    font-size: 12px;
+    margin-top: 20px;
+    float: left;
+    width: 100%;
+
+    .service-item{
+        padding-left: 35px;       
+        overflow: hidden;
+
+        :last-child {
+            border-right: none;
+        }
+
+        .icon {
+            width: 40px;
+            height: 40px;
+            float: left;
+        }
+    }
+}

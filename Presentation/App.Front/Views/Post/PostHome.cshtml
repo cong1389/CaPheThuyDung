@@ -21,9 +21,11 @@
                     </div>
                 </div>
             </div>
+
+            <div id="divIntroInHome"></div>
             <div class="row text-center margin-top-25">
                 <div class="col-xs-12">
-                    <a class="btn btn-lamant" href="thoi-trang.html">Xem tất cả</a>
+                    <a class="btn btn-lamant" href="san-pham-1.html">Xem tất cả</a>
                 </div>
             </div>
         </div>
@@ -40,11 +42,64 @@ else
 @helper RenderPostBlock(Post post)
 {
     <div class="product-item text-center">
-        <a href="@Url.Action("PostDetail", "Post" , new {seoUrl=post.SeoUrl, area="" })" title="@post.Title">
-            <img class="img-responsive" src="@post.ImageMediumSize.ValidateImage()" alt="">
-        </a><h6 class="text-uppercase text-regular font-serif">
+        <div class="product-item__img">
+            <a href="@Url.Action("PostDetail", "Post" , new {seoUrl=post.SeoUrl, area="" })" title="@post.Title">
+                <img class="img-responsive" src="@post.ImageMediumSize.ValidateImage()" alt="">
+            </a>
+        </div>
+
+        <h6 class="text-uppercase text-regular font-serif">
             <a href="@Url.Action("PostDetail", "Post", new {seoUrl = post.SeoUrl, area = ""})" title="@post.Title">@post.Title</a>
         </h6>
+         @if (post.Discount.HasValue && !post.OutOfStock)
+                        {
+                            <span class="price-percent">
+                                Sale
+                                <br>
+                                - @Html.Raw(post.Discount.FormatPersent())
+                            </span>
+                        }
+                        <div class="content_price">
+                            @if (!post.OutOfStock)
+                            {
+                                <span class="price product-price">
+                                    @if (post.Price.HasValue && post.Discount.HasValue)
+                                    {
+                                        @Html.Raw((post.Price - post.Price * post.Discount / 100).FormatPrice())
+                                    }
+                                    else if (post.Price.HasValue && !post.Discount.HasValue)
+                                    {
+                                        @Html.Raw(post.Price.FormatPrice())
+                                    }
+                                    else
+                                    {
+                                        @Html.Raw("LienHeDatHang.Lable")
+                                    }
+                                </span>
+                                if (post.Discount.HasValue)
+                                {
+                                    <span class="price old-price">@Html.Raw(post.Price.FormatPrice()) </span>
+                                }
+                            }
+                            else
+                            {
+                                <h5 class="product-name">
+                                    <span class="label label-danger">Hết hàng</span>
+                                </h5>
+                            }
+                        </div>
     </div>
 }
+
+<script>
+     jQuery(function () {
+
+         jQuery.post('@Url.Action("GetIntro", "Summary")'
+             , {"MenuId":14} )
+          .done(function (data) {
+              jQuery("#divIntroInHome").html(data.list);
+          });
+    })
+</script>
+
 <!----/PostHome-->

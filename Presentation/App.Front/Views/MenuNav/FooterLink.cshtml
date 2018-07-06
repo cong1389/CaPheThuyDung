@@ -7,9 +7,9 @@
 {
     foreach (MenuNavViewModel lv1 in Model)
     {
-        <div id="col-1" class="col-xs-3 col-md-3 padding-top-10-xs padding-top-10-sm">
+        <div id="col-1" class="col-xs-6 col-md-6 padding-top-10-xs padding-top-10-sm links">
 
-            <h6><a href="@Url.Action("GetContent", "Menu", new {menu = lv1.SeoUrl, area = ""})"> @lv1.MenuName</a></h6>
+            <h6 class="title"><a href="@Url.Action("GetContent", "Menu", new {menu = lv1.SeoUrl, area = ""})"> @lv1.MenuName</a></h6>
             <ul class="list-unstyled no-padding margin-bottom-15">
                 @foreach (var lv2 in lv1.ChildNavMenu)
                 {

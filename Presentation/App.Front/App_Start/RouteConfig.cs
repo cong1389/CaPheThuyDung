@@ -46,7 +46,7 @@ namespace App.Front
             routes.MapRoute(null, "quan-huyen", new { controller = "Summary", action = "GetDistrictByProvinceId" }, new[] { "App.Front.Controllers" });
             routes.MapRoute("tim-kiem", "tim-kiem", new { controller = "Menu", action = "Search" }, new[] { "App.Front.Controllers" });
 
-            routes.MapRoute(null, "under-construction.html", new { controller = "Home", action = "UnderConstruction" }, new[] { "App.Front.Controllers" });
+            routes.MapRoute(null, "prepare-index.html", new { controller = "Home", action = "Index" }, new[] { "App.Front.Controllers" });
 
             routes.MapRoute(null, "cart", new { controller = "ShoppingCart", action = "Cart" }, new[] { "App.Front.Controllers" });
 
@@ -76,13 +76,6 @@ namespace App.Front
             routes.MapRoute("Default", "{controller}/{action}/{id}"
               , new { controller = "Home", action = "Index", id = UrlParameter.Optional }
               , new[] { "App.Front.Controllers" });
-
-           
-
-            //routes.MapRoute(null, "{id}-cttstct.html",
-            //  new { controller = "StaticContent", action = "ContentDetail", id = UrlParameter.Optional },
-            //  new[] { "App.Front.Controllers" });
-
         }
         
     }

@@ -1,0 +1,176 @@
+﻿.gw-news {
+    .blog-posts {
+        .post-item {
+            padding-bottom: 20px;
+            padding-top: 20px;
+            border-bottom: 1px solid #eaeaea;
+            border-top: 1px solid #eaeaea;
+            margin-top: -1px;
+            list-style: none;
+
+            .entry-meta-data {
+                padding: 5px 0;
+                color: #666;
+                font-size: 13px;
+
+                span {
+                    margin-right: 5px;
+                }
+            }
+
+            .entry-excerpt {
+                text-align: justify;
+            }
+
+            .entry-more {
+                margin-top: 15px;
+
+                a {
+                    border: 1px solid #eaeaea;
+                    padding: 10px 12px;
+                    background: #eee;
+                }
+            }
+        }
+    }
+
+    .image-hover2 {
+        a {
+            position: relative;
+            display: table;
+            width: 100%;
+        }
+
+        a:after {
+            overflow: hidden;
+            position: absolute;
+            top: 0;
+            content: "";
+            z-index: 100;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0;
+            pointer-events: none;
+            -webkit-transition: all 0.3s ease 0s;
+            -o-transition: all 0.3s ease 0s;
+            transition: all 0.3s ease 0s;
+            background-color: rgba(0, 0, 0, 0.3);
+            -webkit-transform: scale(0);
+            -ms-transform: scale(0);
+            transform: scale(0);
+            z-index: 1;
+        }
+
+        a:hover:after {
+            visibility: visible;
+            opacity: 0.8;
+            -webkit-transform: scale(1);
+            -ms-transform: scale(1);
+            transform: scale(1);
+        }
+    }
+}
+
+.gw-news-detail {
+    .page-heading {
+        font-size: 16px;
+        font-weight: bold;
+        height: 41px;
+        border-bottom: 1px solid #eaeaea;
+        line-height: 40px;
+        position: relative;
+    }
+
+    .entry-meta-data {
+        padding: 10px 0;
+        color: #666;
+    }
+}
+
+.gw-news-related {
+    .image-hover2 a {
+        position: relative;
+        display: table;
+        width: 100%;
+    }
+
+    .image-hover2 a:hover:before {
+        opacity: 1;
+    }
+
+    .image-hover2 a:before {
+        font: normal normal normal 18px/1 FontAwesome;
+        content: "\f002";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: 2;
+        color: #fff;
+        ms-transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%);
+        ms-transform: translateX(-50%);
+        -webkit-transform: translateX(-50%);
+        transform: translateX(-50%);
+        opacity: 0;
+        -webkit-transition: opacity 0.3s ease 0s;
+        -o-transition: opacity 0.3s ease 0s;
+        transition: opacity 0.3s ease 0s;
+    }
+
+    .image-hover2 a:hover:after {
+        visibility: visible;
+        opacity: 0.8;
+        -webkit-transform: scale(1);
+        -ms-transform: scale(1);
+        transform: scale(1);
+    }
+
+    .image-hover2 a:after {
+        overflow: hidden;
+        position: absolute;
+        top: 0;
+        content: "";
+        z-index: 100;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        opacity: 0;
+        pointer-events: none;
+        -webkit-transition: all 0.3s ease 0s;
+        -o-transition: all 0.3s ease 0s;
+        transition: all 0.3s ease 0s;
+        background-color: rgba(0, 0, 0, 0.3);
+        -webkit-transform: scale(0);
+        -ms-transform: scale(0);
+        transform: scale(0);
+        z-index: 1;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    .related-posts {
+        margin-top: 20px;
+
+        .entry-ci {
+            margin-top: 10px;
+        }
+
+        .entry-title {
+            font-size: 14px;
+        }
+
+        .entry-meta-data {
+            color: #999;
+            font-size: 13px;
+            margin-top: 10px;
+        }
+    }
+}

@@ -27,11 +27,9 @@ namespace App.Front.Controllers
         public ActionResult Index()
         {
             var systemSetting = _systemSettingService.GetEnableOrDisable();
-            var systemSettingLocalize = systemSetting.ToModel();
-
-            //var systemSetting = _systemSettingService.Get(x => x.Status == 1, true);
-            if (systemSettingLocalize != null)
+            if (systemSetting != null)
             {
+                var systemSettingLocalize = systemSetting.ToModel();
                 ViewBag.Title = systemSettingLocalize.MetaTitle ?? systemSettingLocalize.Title;
                 ViewBag.KeyWords = systemSettingLocalize.MetaKeywords;
                 ViewBag.SiteUrl = Url.Action("Index", "Home", new { area = "" });
@@ -39,14 +37,17 @@ namespace App.Front.Controllers
                 ViewBag.Image = Url.Content(string.Concat("~/", systemSettingLocalize.LogoImage));
                 ViewBag.Favicon = Url.Content(string.Concat("~/", systemSettingLocalize.FaviconImage));
 
-                if (systemSettingLocalize.MaintanceSite)
+                if (systemSettingLocalize.MaintanceSite && Aplication.Utils.IsHomePage() && !HttpContext.Request.RawUrl.Contains("prepare-index.html"))
                 {
                     return RedirectToAction("UnderConstruction");
+                }
+                else
+                {
+                    RedirectToAction("Index");
                 }
             }
 
             return View();
         }
-
     }
 }

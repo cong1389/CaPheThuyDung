@@ -60,7 +60,7 @@ namespace App.Front
             bundles.Add(new StyleBundle("~/bundles/content_theme").Include(
                 "~/Themes/Basic/Content/theme.min.css"));
             bundles.Add(new ScriptBundle("~/bundles/script_theme").Include(
-                "~/Themes/Basic/Scripts/goweb*"));
+                "~/Themes/Basic/Scripts/goweb.*"));
 
             //TODO
             BundleTable.EnableOptimizations = true;

@@ -3656,7 +3656,8 @@ a {
 }
 
     a, a:focus, a:hover {
-        text-decoration: none
+        text-decoration: none;
+        overflow: hidden;
     }
 
         a:focus, a:hover {
@@ -3718,7 +3719,7 @@ hr {
     font-family: inherit;
     font-weight: 700;
     line-height: 1.1;
-    color: inherit
+    color: inherit;
 }
 
     .h1 .small, .h1 small, .h2 .small, .h2 small, .h3 .small, .h3 small, .h4 .small, .h4 small, .h5 .small, .h5 small, .h6 .small, .h6 small, h1 .small, h1 small, h2 .small, h2 small, h3 .small, h3 small, h4 .small, h4 small, h5 .small, h5 small, h6 .small, h6 small {
@@ -3728,8 +3729,9 @@ hr {
     }
 
 .h1, .h2, .h3, h1, h2, h3 {
-    margin-top: 24px;
-    margin-bottom: 12px
+    /* margin-top: 24px; */
+    /* margin-bottom: 12px; */
+    margin: 0px;
 }
 
     .h1 .small, .h1 small, .h2 .small, .h2 small, .h3 .small, .h3 small, h1 .small, h1 small, h2 .small, h2 small, h3 .small, h3 small {
@@ -3754,7 +3756,7 @@ hr {
 }
 
 .h3, h3 {
-    font-size: 24px
+    font-size: 24px;
 }
 
 .h4, h4 {
@@ -17975,8 +17977,8 @@ button.close {
 
 @font-face {
     font-family: utmGodsWord;
-    src: url(../../../frontend/themes/lamant/fonts/utm_gods_wordr-webfont.eot);
-    src: url(../../../frontend/themes/lamant/fonts/utm_gods_wordr-webfont.eot?#iefix) format("embedded-opentype"),url(../../../frontend/themes/lamant/fonts/utm_gods_wordr-webfont.woff2) format("woff2"),url(../../../frontend/themes/lamant/fonts/utm_gods_wordr-webfont.woff) format("woff"),url(../../../frontend/themes/lamant/fonts/utm_gods_wordr-webfont.svg#utm_gods_wordregular) format("svg");
+    src: url(/assets/frontend/themes/lamant/fonts/utm_gods_wordr-webfont.eot);
+    src: url(/assets/frontend/themes/lamant/fonts/utm_gods_wordr-webfont.eot?#iefix) format("embedded-opentype"),url(/assets/frontend/themes/lamant/fonts/utm_gods_wordr-webfont.woff2) format("woff2"),url(/assets/frontend/themes/lamant/fonts/utm_gods_wordr-webfont.woff) format("woff"),url(/assets/frontend/themes/lamant/fonts/utm_gods_wordr-webfont.svg#utm_gods_wordregular) format("svg");
     font-weight: 400;
     font-style: normal
 }
@@ -18059,7 +18061,7 @@ body > header .navbar .navbar-header .navbar-brand {
 @media (max-width: 575px),(min-width:576px) and (max-width:767px) {
     body > header .navbar ul.nav > li {
         float: none;
-        text-align: right
+        text-align: left;
     }
 }
 
@@ -18094,7 +18096,7 @@ body > header .navbar ul.nav > li a {
 
 @media (min-width: 1200px) {
     body > header .navbar ul.nav > li a {
-        padding: 0 20px
+        padding: 0 10px;
     }
 }
 
@@ -18127,7 +18129,8 @@ body > header .navbar ul.nav > li ul.dropdown-menu {
         float: none;
         margin-right: 20px;
         position: static;
-        text-align: right
+        text-align: left;
+        /* left: 34px; */
     }
 }
 
@@ -18170,10 +18173,10 @@ body img.img-responsive {
 
 body .price {
     border-radius: 1.5em;
-    background-image: url(/assets/images/bg-yellow.jpg);
+    background-image: url(//assets/images/bg-yellow.jpg);
     /* color: #736145; */
     display: inline-block;
-    font-size: 1.5em;
+    font-size: 15px;
     /* line-height: 2em; */
     padding: 0 29px;
 }
@@ -18182,28 +18185,50 @@ body .products-list .product-item {
     color: #736145;
     /* margin-top: 40px; */
     /* margin-bottom: 50px; */
-    background: #ddd;
-    margin: 10px;
+    /* background: #ddd; */
+    margin: 1px;
     padding: 10px;
     border-radius: 5px;
+    border: 1px solid #eaeaea;
+    overflow: hidden;
+    padding-bottom: 5px;
+}
+#home-4 .post-item{
+	    position: relative;
+    overflow: hidden;
+    padding: 5px 5px 0;
+	    border: 1px solid #958457
 }
 
-    body .products-list .product-item h6 {
-        font-size: 1.5em;
-        height: 3em;
-        line-height: 1.5em
-    }
-
-body .post-item h6 {
-    font-size: 1.25em;
-    height: 2.4em;
-    line-height: 1.2em;
-    overflow: hidden
+body .products-list .product-item .product-item__img{
+	    position: relative;
+    overflow: hidden;
+    padding: 5px 5px 0;
 }
 
-body .post-item p {
-    height: 4.5em
+body .products-list .product-item:hover{
+	    border: 1px solid #958457;
 }
+body .products-list .product-item a img,.post-item a img
+{
+	    transition: all 0.5s;
+    webkit-transform: scale(1,1);
+    -moz-transform: scale(1,1);
+    -o-transform: scale(1,1);
+    transform: scale(1,1);
+    margin: 0 auto;
+}
+body .products-list .product-item a img:hover,.post-item a img:hover {
+    -webkit-transform: scale(1.2,1.2);
+    -webkit-transform-origin: top right;
+    -moz-transform: scale(1.2,1.2);
+    -moz-transform-origin: top right;
+    -o-transform: scale(1.2,1.2);
+    -o-transform-origin: top right;
+    transform: scale(1.2,1.2);
+    transform-origin: top right;
+}
+
 
 body .box-content {
     background-color: #fff;
@@ -18271,67 +18296,67 @@ body.site-view section h2, body.site-view section h3 {
     }
 }
 
-body.site-view.page-story section#about-1 {
-    background: url(../../../frontend/themes/lamant/images/about/bg-2.jpg) 50% no-repeat
+ section#about-1 {
+    background: url(/assets/images/about/bg-2.jpg) 50% no-repeat
 }
 
 @media (max-width: 575px),(min-width:576px) and (max-width:767px) {
-    body.site-view.page-story section#about-1 {
+     section#about-1 {
         padding-top: 15px;
         padding-bottom: 15px
     }
 
-        body.site-view.page-story section#about-1 .box-left h2 {
+         section#about-1 .box-left h2 {
             padding: 15px
         }
 
-        body.site-view.page-story section#about-1 .box-left .box-content {
+         section#about-1 .box-left .box-content {
             border: 1px solid #d6b763;
             border-top: 0
         }
 }
 
 @media (min-width: 768px) and (max-width:991px),(min-width:992px) and (max-width:1199px),(min-width:1200px) {
-    body.site-view.page-story section#about-1 {
+     section#about-1 {
         height: 780px
     }
 
-        body.site-view.page-story section#about-1 .box-left {
+         section#about-1 .box-left {
             padding: 0
         }
 
-            body.site-view.page-story section#about-1 .box-left h2 {
+             section#about-1 .box-left h2 {
                 padding: 50px 100px
             }
 }
 
-body.site-view.page-story section#about-1 .box-left h2 {
-    background: url(../../../frontend/themes/lamant/images/bg-yellow.jpg) top
+ section#about-1 .box-left h2 {
+    background: url(/assets/images/bg-yellow.jpg) top
 }
 
-body.site-view.page-story section#about-2 {
-    background: url(../../../frontend/themes/lamant/images/about/bg-3.jpg) 50% no-repeat
+ section#about-2 {
+    background: url(/assets/images/about/bg-3.jpg) 50% no-repeat
 }
 
 @media (max-width: 575px),(min-width:576px) and (max-width:767px) {
-    body.site-view.page-story section#about-2 {
+     section#about-2 {
         padding-top: 15px;
         padding-bottom: 15px
     }
 
-        body.site-view.page-story section#about-2 .box-content, body.site-view.page-story section#about-2 h2 {
+         section#about-2 .box-content,  section#about-2 h2 {
             margin: 0;
             padding: 15px
         }
 
-        body.site-view.page-story section#about-2 .box-content {
+         section#about-2 .box-content {
             border: 1px solid #b0b94e;
             border-top: 0
         }
 }
 
 @media (min-width: 768px) and (max-width:991px),(min-width:992px) and (max-width:1199px),(min-width:1200px) {
-    body.site-view.page-story section#about-2 {
+     section#about-2 {
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
@@ -18345,94 +18370,94 @@ body.site-view.page-story section#about-2 {
         height: 860px
     }
 
-        body.site-view.page-story section#about-2 .box-right .box-content {
+         section#about-2 .box-right .box-content {
             position: relative
         }
 
-            body.site-view.page-story section#about-2 .box-right .box-content #branch {
+             section#about-2 .box-right .box-content #branch {
                 position: absolute;
                 top: -77px
             }
 }
 
 @media (min-width: 992px) and (max-width:1199px),(min-width:1200px) {
-    body.site-view.page-story section#about-2 .box-left h2 {
+     section#about-2 .box-left h2 {
         margin: 0 15px 0 100px;
         padding: 50px 40px
     }
 
-    body.site-view.page-story section#about-2 .box-right .box-content {
+     section#about-2 .box-right .box-content {
         margin: 70px 100px 0 -85px;
         padding: 95px 50px 60px 120px
     }
 
-        body.site-view.page-story section#about-2 .box-right .box-content #branch {
+         section#about-2 .box-right .box-content #branch {
             left: -125px
         }
 }
 
 @media (min-width: 768px) and (max-width:991px) {
-    body.site-view.page-story section#about-2 .box-left h2 {
+     section#about-2 .box-left h2 {
         margin: 0;
         padding: 50px
     }
 
-    body.site-view.page-story section#about-2 .box-right .box-content {
+     section#about-2 .box-right .box-content {
         margin: 0
     }
 
-        body.site-view.page-story section#about-2 .box-right .box-content #branch {
+         section#about-2 .box-right .box-content #branch {
             left: -220px
         }
 }
 
-body.site-view.page-story section#about-2 .box-left h2 {
-    background: url(../../../frontend/themes/lamant/images/bg-green.jpg) top
+ section#about-2 .box-left h2 {
+    background: url(/assets/images/bg-green.jpg) top
 }
 
-body.site-view.page-story section#about-3 {
-    background: url(../../../frontend/themes/lamant/images/about/bg-4.jpg) 50% no-repeat;
+ section#about-3 {
+    background: url(/assets/images/about/bg-4.jpg) 50% no-repeat;
     background-size: cover
 }
 
 @media (min-width: 768px) and (max-width:991px) {
-    body.site-view.page-story section#about-3 {
+     section#about-3 {
         height: 520px
     }
 
-        body.site-view.page-story section#about-3 #coffee-bean-dry {
+         section#about-3 #coffee-bean-dry {
             top: -280px
         }
 }
 
 @media (min-width: 992px) and (max-width:1199px) {
-    body.site-view.page-story section#about-3 {
+     section#about-3 {
         height: 660px
     }
 
-        body.site-view.page-story section#about-3 #coffee-bean-dry {
+         section#about-3 #coffee-bean-dry {
             top: -200px
         }
 }
 
 @media (min-width: 1200px) {
-    body.site-view.page-story section#about-3 {
+     section#about-3 {
         height: 820px
     }
 
-        body.site-view.page-story section#about-3 #coffee-bean-dry {
+         section#about-3 #coffee-bean-dry {
             top: -50px
         }
 }
 
-body.site-view.page-story section#about-3 #coffee-cup-1 {
+ section#about-3 #coffee-cup-1 {
     position: absolute;
     bottom: 15px;
     left: 50%;
     margin-left: -176px
 }
 
-body.site-view.page-story section#about-3 #coffee-bean-dry {
+ section#about-3 #coffee-bean-dry {
     position: absolute;
     left: 50%;
     margin-left: -342px
@@ -18637,7 +18662,7 @@ body.site-index section#home-2 {
         }
 
 body.site-index section#home-3 {
-    background: url(../../../frontend/themes/lamant/images/home/bg-4.jpg) 50% no-repeat;
+    background: url(/assets/images/home/bg-4.jpg) 50% no-repeat;
     height: 820px
 }
 
@@ -18657,7 +18682,7 @@ body.site-index section#home-3 {
 
 body.site-index section#home-4 {
     padding: 70px 0 50px;
-    background: #fff url(../../../frontend/themes/lamant/images/home/bg-6.jpg) top no-repeat
+    background: #fff url(/assets/images/home/bg-6.jpg) top no-repeat
 }
 
 @media (max-width: 575px),(min-width:576px) and (max-width:767px),(min-width:768px) and (max-width:991px) {
@@ -18681,9 +18706,12 @@ body.site-index section#home-4 {
 }
 
 body.site-index section#home-4 h6 {
-    font-size: 1.25em;
+    /* font-size: 20px; */
+    /* line-height: 1.2em; */
+    /* min-height: 2.4em; */
+    font-size: 20px;
     line-height: 1.2em;
-    min-height: 2.4em
+    min-height: 2.4em;
 }
 
 @media (max-width: 575px),(min-width:576px) and (max-width:767px),(min-width:768px) and (max-width:991px) {
@@ -18738,7 +18766,7 @@ body.product-detail h1, body.product-detail h2 {
 }
 
 body.product-detail .product-thumb {
-    background: url(../../../frontend/themes/lamant/images/bg-product-thumb.png) 50% no-repeat;
+    background: url(/assets/images/bg-product-thumb.png) 50% no-repeat;
     background-size: contain
 }
 
@@ -18767,7 +18795,7 @@ body.product-index section {
 
 @media (max-width: 575px),(min-width:576px) and (max-width:767px),(min-width:768px) and (max-width:991px) {
     body.product-index section#products-1 {
-        background: url(../../../frontend/themes/lamant/images/products.jpg) no-repeat 50%;
+        background: url(/assets/images/products.jpg) no-repeat 50%;
         background-size: cover
     }
 }
@@ -18799,67 +18827,67 @@ body.product-index section h2 {
     }
 
 @media (min-width: 768px) and (max-width:991px) {
-    body.site-view.page-story section .img-border {
+     section .img-border {
         margin-top: 60px;
         margin-bottom: 30px
     }
 }
 
 @media (max-width: 575px),(min-width:576px) and (max-width:767px) {
-    body.site-view.page-story section .img-border {
+     section .img-border {
         margin-bottom: 30px
     }
 }
 
-body.site-view.page-story section#story-2 {
-    background: #f9f9f9 url(../../../frontend/themes/lamant/images/bg-area.png) 60px no-repeat;
+ section#story-2 {
+    background: #f9f9f9 url(/assets/images/bg-area.png) 60px no-repeat;
     background-size: contain
 }
 
 @media (min-width: 992px) and (max-width:1199px),(min-width:1200px) {
-    body.site-view.page-story section#story-2 .img-border {
+     section#story-2 .img-border {
         float: right
     }
 }
 
 @media (min-width: 992px) and (max-width:1199px),(min-width:1200px) {
-    body.site-view.page-story section#story-3 {
+     section#story-3 {
         height: 730px
     }
 
-        body.site-view.page-story section#story-3 #img-coffee-cup {
+         section#story-3 #img-coffee-cup {
             margin-top: -120px
         }
 }
 
-body.site-view.page-story section#technology-1 {
+ section#technology-1 {
     padding-bottom: 125px
 }
 
 @media (max-width: 575px),(min-width:576px) and (max-width:767px),(min-width:768px) and (max-width:991px) {
-    body.site-view.page-story section#technology-1 {
+     section#technology-1 {
         padding-top: 50px
     }
 }
 
 @media (min-width: 992px) and (max-width:1199px),(min-width:1200px) {
-    body.site-view.page-story section#technology-1 {
+     section#technology-1 {
         padding-top: 300px
     }
 }
 
-body.site-view.page-story section#technology-1 .container {
+ section#technology-1 .container {
     position: relative
 }
 
-    body.site-view.page-story section#technology-1 .container #bg-square {
-        background-image: url(../../../frontend/themes/lamant/images/bg-yellow.jpg);
+     section#technology-1 .container #bg-square {
+        background-image: url(/assets/images/bg-yellow.jpg);
         background-size: cover;
         position: absolute
     }
 
 @media (min-width: 992px) and (max-width:1199px) {
-    body.site-view.page-story section#technology-1 .container #bg-square {
+     section#technology-1 .container #bg-square {
         height: 625px;
         width: 975px;
         top: -252px;
@@ -18868,7 +18896,7 @@ body.site-view.page-story section#technology-1 .container {
 }
 
 @media (min-width: 1200px) {
-    body.site-view.page-story section#technology-1 .container #bg-square {
+     section#technology-1 .container #bg-square {
         height: 680px;
         width: 975px;
         top: -252px;
@@ -18877,57 +18905,57 @@ body.site-view.page-story section#technology-1 .container {
 }
 
 @media (max-width: 575px),(min-width:576px) and (max-width:767px),(min-width:768px) and (max-width:991px) {
-    body.site-view.page-story section#technology-1 .container .story-gallery .owl-nav {
+     section#technology-1 .container .story-gallery .owl-nav {
         display: none
     }
 }
 
-body.site-view.page-story section#technology-1 .container .box-content {
+ section#technology-1 .container .box-content {
     position: relative;
     z-index: 2
 }
 
 @media (max-width: 575px),(min-width:576px) and (max-width:767px),(min-width:768px) and (max-width:991px) {
-    body.site-view.page-story section#technology-1 .container .box-content {
+     section#technology-1 .container .box-content {
         padding: 30px
     }
 }
 
 @media (min-width: 992px) and (max-width:1199px),(min-width:1200px) {
-    body.site-view.page-story section#technology-1 .container .box-content {
+     section#technology-1 .container .box-content {
         margin: -200px 0 0 -90px;
         padding: 60px 55px
     }
 }
 
-body.site-view.page-story section#technology-1 .container #coffee-beans-leaves {
+ section#technology-1 .container #coffee-beans-leaves {
     position: absolute;
     bottom: -85px;
     right: 145px
 }
 
-body.site-view.page-story section#technology-2 {
+ section#technology-2 {
     background-color: #f9f9f9
 }
 
 @media (min-width: 992px) and (max-width:1199px),(min-width:1200px) {
-    body.site-view.page-story section#technology-2 {
+     section#technology-2 {
         height: 500px
     }
 }
 
-body.site-view.page-story section#technology-2 #img-expert {
+ section#technology-2 #img-expert {
     margin-left: 0
 }
 
 @media (min-width: 992px) and (max-width:1199px) {
-    body.site-view.page-story section#technology-2 #img-expert {
+     section#technology-2 #img-expert {
         margin-top: -38px
     }
 }
 
 @media (min-width: 1200px) {
-    body.site-view.page-story section#technology-2 #img-expert {
+     section#technology-2 #img-expert {
         margin-top: -72px
     }
 }
@@ -18935,11 +18963,12 @@ body.site-view.page-story section#technology-2 #img-expert {
 footer {
     border-top: 2px solid #dab754;
     color: #707070;
-    font-size: 14px
+    font-size: 14px;
+    margin-top: 15px;
 }
 
     footer a {
-        color: #959595
+        color: #333333;
     }
 
         footer a:hover {
@@ -19124,10 +19153,29 @@ footer {
         -webkit-touch-callout: none
     }
 
-        .owl-carousel .owl-item img {
+       .gw-banner-top .owl-item img {
             display: block;
-            width: 100%
+            width: 100%;
+            object-fit: fill;
+            width: 380px;
+            height: 233px;
+            /* max-height: 250px; */
         }
+		.product-list img:not(.left-block){
+			display: block;
+			width: 100%;
+			object-fit: fill;
+			width: 328px;
+			/* height: 328px; */
+			/* max-height: 173px; */
+		}
+		.left-block img{
+			display: block;
+			width: 100%;
+			object-fit: fill;
+			width: 328px;
+			height: 255px !important;
+		}
 
     .owl-carousel .owl-dots.disabled, .owl-carousel .owl-nav.disabled {
         display: none
@@ -19419,3 +19467,34 @@ footer {
             .owl-carousel-wrapper .owl-carousel .owl-dots .owl-dot span:hover {
                 background: #736145
             }
+
+			body .products-list .product-item h6 {
+				font-size: 15px;
+				height: 2.5em;
+				line-height: 1em;
+				font-weight: 500;
+			}
+			#w1 h6 {
+				font-size: 20px !important;
+				height: 2.5em;
+				line-height: 1em;
+				font-weight: 500;
+			}
+.gw-banner-top
+{
+	    padding: 5px 0px;
+}
+
+.site-index  .text-brown3{
+        margin-top: 25px;
+}
+
+.footer-column .links h6.title {
+    display: block;
+    font-weight: bold;
+    font-size: 16px;
+    color: #333333;
+    text-transform: uppercase;
+    margin-top: 12px;
+    margin-bottom: 15px;
+}

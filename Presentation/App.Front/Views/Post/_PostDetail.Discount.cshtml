@@ -29,13 +29,7 @@
 							<h5 class="product-name">
 								<a href="@Url.Action("PostDetail", "Post", new {seoUrl = post.SeoUrl, area = ""})">@post.Title</a>
 							</h5>
-							<div class="product-star">
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star-half-o"></i>
-							</div>
+							
 							<div class="content_price">
 								@if (!post.OutOfStock)
 								{

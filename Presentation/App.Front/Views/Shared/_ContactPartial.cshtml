@@ -4,9 +4,9 @@
 {
     var contact = Model.SingleOrDefault(x => x.Type == 1);
 
-    <h3>Chúng tôi ở đây</h3>
+    <h3 class="page-subheading">Chúng tôi ở đây</h3>
     <hr class="line-right">
-    <h3 class="name-company">@contact.Title</h3>
+    <h3 class="page-subheading">@contact.Title</h3>
     <ul class="info-address">
         @if (!string.IsNullOrEmpty(contact.Address))
         {
