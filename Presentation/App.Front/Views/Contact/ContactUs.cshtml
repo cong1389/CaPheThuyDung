@@ -4,6 +4,8 @@
 @model App.Front.Models.ContactForm
 
 @{
+    Html.RenderAction("BannerTop", "Banner", new { menuId = ViewBag.BannerId, title = ViewBag.Title });
+
     <div class="columns-container" id="contact">
         <div class="container gw-contact-shop" id="columns">
            

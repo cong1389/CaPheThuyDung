@@ -9,49 +9,51 @@
             <div class="row products-list">
                 @foreach (var post in Model)
                 {
-                    <div class="product-item col-sm-3 col-xl-2 text-center">
-                        <a href="@Url.Action("PostDetail", "Post", new {seoUrl = post.SeoUrl, area = ""})" title="@post.Title">
-                            <img class="img-responsive" alt="@post.Title" src="@post.ImageMediumSize.ValidateImage()">
-                        </a>
-                        <h6 class="text-uppercase text-regular font-serif">
-                            <a href="@Url.Action("PostDetail", "Post", new {seoUrl = post.SeoUrl, area = ""})" alt="@post.Title">@post.Title</a>
-                        </h6>
-                        @if (post.Discount.HasValue && !post.OutOfStock)
-                        {
-                            <span class="price-percent">
-                                Sale
-                                <br>
-                                - @Html.Raw(post.Discount.FormatPersent())
-                            </span>
-                        }
-                        <div class="content_price">
-                            @if (!post.OutOfStock)
+                    <div class="col-sm-3 col-xl-4">
+                        <div class="product-item text-center">
+                            <a href="@Url.Action("PostDetail", "Post", new {seoUrl = post.SeoUrl, area = ""})" title="@post.Title">
+                                <img class="img-responsive" alt="@post.Title" src="@post.ImageMediumSize.ValidateImage()">
+                            </a>
+                            <h6 class="text-uppercase text-regular font-serif">
+                                <a href="@Url.Action("PostDetail", "Post", new {seoUrl = post.SeoUrl, area = ""})" alt="@post.Title">@post.Title</a>
+                            </h6>
+                            @if (post.Discount.HasValue && !post.OutOfStock)
                             {
-                                <span class="price product-price">
-                                    @if (post.Price.HasValue && post.Discount.HasValue)
-                                    {
-                                        @Html.Raw((post.Price - post.Price * post.Discount / 100).FormatPrice())
-                                    }
-                                    else if (post.Price.HasValue && !post.Discount.HasValue)
-                                    {
-                                        @Html.Raw(post.Price.FormatPrice())
-                                    }
-                                    else
-                                    {
-                                        @Html.Raw("LienHeDatHang.Lable")
-                                    }
+                                <span class="price-percent">
+                                    Sale
+                                    <br>
+                                    - @Html.Raw(post.Discount.FormatPersent())
                                 </span>
-                                if (post.Discount.HasValue)
+                            }
+                            <div class="content_price">
+                                @if (!post.OutOfStock)
                                 {
-                                    <span class="price old-price">@Html.Raw(post.Price.FormatPrice()) </span>
+                                    <span class="price product-price">
+                                        @if (post.Price.HasValue && post.Discount.HasValue)
+                                        {
+                                            @Html.Raw((post.Price - post.Price * post.Discount / 100).FormatPrice())
+                                        }
+                                        else if (post.Price.HasValue && !post.Discount.HasValue)
+                                        {
+                                            @Html.Raw(post.Price.FormatPrice())
+                                        }
+                                        else
+                                        {
+                                            @Html.Raw("LienHeDatHang.Lable")
+                                        }
+                                    </span>
+                                    if (post.Discount.HasValue)
+                                    {
+                                        <span class="price old-price">@Html.Raw(post.Price.FormatPrice()) </span>
+                                    }
                                 }
-                            }
-                            else
-                            {
-                                <h5 class="product-name">
-                                    <span class="label label-danger">Hết hàng</span>
-                                </h5>
-                            }
+                                else
+                                {
+                                    <h5 class="product-name">
+                                        <span class="label label-danger">Hết hàng</span>
+                                    </h5>
+                                }
+                            </div>
                         </div>
                     </div>
                 }
