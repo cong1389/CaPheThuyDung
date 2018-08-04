@@ -12,7 +12,7 @@
 
                         @foreach (var contact in Model)
                         {
-                            <li class="text-uppercase"><i class="fa-li fa fa-diamond"></i><strong>@contact.Title:</strong> </li>
+                            <li class="text-uppercase"><i class="fa-li fa fa-diamond"></i><strong>@contact.Title</strong> </li>
                             if (!string.IsNullOrEmpty(contact.Address))
                             {
                                 <li>
@@ -37,6 +37,15 @@
                                     <i class="fa-li fa fa-map-marker"></i>
                                     <b>
                                         @contact.MobilePhone
+                                    </b>
+                                </li>
+                            }
+                            if (!string.IsNullOrEmpty(contact.Hotline))
+                            {
+                                <li>
+                                    <i class="fa-li fa fa-map-marker"></i>
+                                    <b>
+                                        @contact.Hotline
                                     </b>
                                 </li>
                             }

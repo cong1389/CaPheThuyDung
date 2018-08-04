@@ -3,7 +3,9 @@
  * For licensing, see LICENSE.html or http://ckeditor.com/license
  */
 
-CKEDITOR.editorConfig = function(config) {
+CKEDITOR.editorConfig = function (config) {
+    config.allowedContent = true;
+
     // Define changes to default configuration here. For example:
     config.skin = "moonocolor";
     //config.skin = 'office2013';

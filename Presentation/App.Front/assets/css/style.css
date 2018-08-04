@@ -18246,7 +18246,7 @@ body .products-list .product-item a img,.post-item a img
 	    transform: scale(1,1);
 	    margin: 0 auto;
 	    /* width: 172px; */
-	    height: 210px;
+	    /* height: 210px; */
 }
 body .products-list .product-item a img:hover,.post-item a img:hover {
     -webkit-transform: scale(1.2,1.2);
@@ -19202,13 +19202,13 @@ footer {
         }
 		.product-list img:not(.left-block){
 			display: block;
-			width: 100%;
+			/* width: 100%; */
 			object-fit: fill;
-			width: 328px;
+			/* width: 328px; */
 			/* height: 328px; */
-			/* max-height: 173px; */
+			height: 300px;
 			/* width: 172px; */
-			height: 210px;
+			/* height: 210px; */
 		}
 		.left-block img{
 			display: block;

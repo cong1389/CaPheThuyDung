@@ -281,7 +281,6 @@
     <Content Include="Areas\Admin\Views\ShippingMethod\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\ShippingMethod\_CreateOrUpdate.cshtml" />
     <Content Include="Areas\Admin\Views\Plugin\Index.cshtml" />
-    <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\Admin_Front.pubxml" />
   </ItemGroup>
   <ItemGroup>
